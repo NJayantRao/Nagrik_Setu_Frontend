@@ -3,3 +3,20 @@
 body {
   margin: 0;
 }
+
+.dropdown::after{
+    content:"" ;
+    background-color: #dcdde1;
+    position: absolute;
+    height: 2px;
+    width: 100%;
+    transform: scaleX(0);
+    bottom: 0;
+    left: 0; 
+    transition: transform 0.2s ease-in-out;
+}
+.dropdown:hover::after{
+  
+    content:"" ;
+    transform: scaleX(1);
+}
