@@ -1,15 +1,21 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Navbar from "../components/Navbar"
 import { Eye,EyeOff } from 'lucide-react';
 import axios from "axios"
+import { useNavigate } from "react-router-dom";
+import { UserDataContext } from "../context/UserContext";
 
 function UserSignUpPage(){
-    const [name,setName]= useState("")
-    const [email,setEmail]= useState("")
-    const [password,setPassword]= useState("")
-    const [address,setAddress]= useState("")
-    const [phone,setPhone]= useState("")
+
+    const {setName,setEmail,setPassword,setAddress,setPhone,name,email,password,address,phone,uniqueId}= useContext(UserDataContext)
+    // const [name,setName]= useState("")
+    // const [email,setEmail]= useState("")
+    // const [password,setPassword]= useState("")
+    // const [address,setAddress]= useState("")
+    // const [phone,setPhone]= useState("")
     const [showPassword,setShowPassword]= useState(false)
+
+    const navigate= useNavigate()
 
     async function submitHandler(e){
         e.preventDefault()
@@ -18,7 +24,14 @@ function UserSignUpPage(){
             const response= await axios.post("http://localhost:3000/api/v1/user/signup",{
                 name,email,password,phone,address
             },{withCredentials:true})
-            console.log(response.data);
+            const token= response.data.token;
+            console.log(response.data.token);
+
+            localStorage.setItem("token",JSON.stringify(token))
+
+            setTimeout(() => {
+                navigate("/user/profile")
+            }, 5000);
 
         } catch (error) {
             console.log(error);
@@ -37,6 +50,10 @@ function UserSignUpPage(){
         }
         fetchData()
     },[])
+
+    // useEffect(()=>{
+
+    // },[])
     return(
         <div className=" bg-[#e0e7ff] flex justify-center items-center p-3 max-h-screen">
            <div className=" bg-[#f8fafc] p-3 w-1/3 flex justify-center flex-col gap-3 shadow-2xl rounded-2xl  border-indigo-200 border-3">
@@ -111,8 +128,8 @@ function UserSignUpPage(){
                     }} 
                     required/>
                 </div>
-                <div className="w-full flex justify-center mt-0.5">
-                    <button type="submit" className="bg-blue-600 p-2 w-1/3 rounded-full text-xl text-white hover:scale-105 hover:cursor-pointer hover:bg-blue-700 hover:ease-in-out">SIGN IN</button>
+                <div className="w-full flex justify-center mt-0.5 p-2">
+                    <button type="submit" className="bg-blue-600 p-2 w-1/2 rounded-full text-xl text-white font-bold hover:scale-105 hover:cursor-pointer hover:bg-blue-700 hover:ease-in-out">Sign Up</button>
                 </div>
             </form>
            </div>

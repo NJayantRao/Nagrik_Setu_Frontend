@@ -24,10 +24,10 @@ function Navbar(){
                 <Button />
                 <div className="w-60 absolute bg-gray-200 right-0 text-lg flex flex-col gap-2 rounded-md shadow-lg p-5 text-black hover:cursor-pointer" style={{display:isLoginClicked?"block":"none"}}>
                     <div className=" hover:bg-gray-100 px-3 py-1" onClick={(e)=>{
-                        navigate("/usersignup")
+                        navigate("/user/login")
                     }}>User Login</div>
                     <div className=" hover:bg-gray-100 px-3 py-1"onClick={(e)=>{
-                        navigate("/adminsignup")
+                        navigate("/admin/signup")
                     }}>Admin Login</div>
                     <div className=" hover:bg-gray-100 px-3 py-1" >Staff Login</div>
                 </div>
