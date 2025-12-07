@@ -35,7 +35,7 @@ function AdminProfile(){
     },[])
     return(
         <div className="h-screen w-full">
-            <h1 className="text-6xl absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-bold">Hello</h1>
+            <h1 className="text-6xl absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-bold">Hello From Admin</h1>
             <div>
                     <ul>
                         <li>{`${name}`}</li>

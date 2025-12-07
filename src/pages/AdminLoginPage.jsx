@@ -81,7 +81,7 @@ function AdminLoginPage(){
                 <div className="font-semibold text-gray-600 text-base flex justify-between items-center p-2">
                    <div className="flex gap-2"><input type="checkbox" name="Remember" id="Remember" /><h2>Remember Me</h2></div>
                    <div><h2 className="hover:text-gray-700 hover:font-bold hover:cursor-pointer" onClick={()=>{
-                    navigate("/user/forgotPassword")
+                    navigate("/admin/forgotPassword")
                    }}>Forgot Password?</h2></div>
                 </div>
                 <div className="w-full flex justify-center mt-0.5">

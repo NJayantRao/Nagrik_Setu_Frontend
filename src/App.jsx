@@ -11,7 +11,9 @@ import UserProfile from "./pages/userprofile"
 import AdminProfile from "./pages/AdminProfile"
 import UserLoginPage from "./pages/UserLoginPage"
 import UserForgotPassword from "./pages/UserForgotpassword"
+import AdminForgotPassword from "./pages/AdminForgotPassword"
 import UserResetPassword from "./pages/UserResetPassword"
+import AdminResetPassword from "./pages/AdminResetPassword"
 import AdminLoginPage from "./pages/AdminLoginPage"
 
 function App(){
@@ -30,7 +32,9 @@ function App(){
             <Route path="/user/login" element={<UserLoginPage />}></Route>
             <Route path="/admin/login" element={<AdminLoginPage />}></Route>
             <Route path="/user/forgotPassword" element={<UserForgotPassword />}></Route>
+            <Route path="/admin/forgotPassword" element={<AdminForgotPassword />}></Route>
             <Route path="/user/resetPassword" element={<UserResetPassword />}></Route>
+            <Route path="/admin/resetPassword" element={<AdminResetPassword />}></Route>
             <Route path="/" element={<Home />}></Route>
           </Route>
           <Route element={<NoNavbarLayout />}>
