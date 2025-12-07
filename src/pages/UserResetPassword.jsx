@@ -1,0 +1,108 @@
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { UserDataContext } from "../context/UserContext";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { Eye,EyeOff } from "lucide-react";
+import Loader from "../components/loader";
+
+function UserResetPassword(){
+    const navigate= useNavigate()
+    const {setUniqueId,uniqueId,password,setPassword,}= useContext(UserDataContext)
+    const [loading,setLoading]= useState(false)
+    const [isLoading,setIsLoading]= useState(false)
+    const [otp,setOtp]= useState("")
+    const [showPassword,setShowPassword]= useState(false)
+
+
+    const notify = () =>
+    toast.success("OTP Sent to Registered E-Mail!", {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      theme: "colored",
+      style: {
+        background: "#4f46e5",
+        color: "#fff",
+        fontWeight: "600",
+        borderRadius: "10px",
+      },
+    });
+
+
+    async function submitHandler(e){
+        e.preventDefault()
+        setIsLoading(false)
+        setOtp("")
+        setPassword("")
+        setIsLoading(true)
+
+        setTimeout(() => {
+             navigate("/user/profile")
+        }, 3000);
+        // console.log(uniqueId);
+    }
+
+    useEffect(()=>{
+        notify()
+    },[])
+    if(isLoading){
+        return(
+            <Loader/>
+        )
+    }
+    return(
+        <div className=" bg-[#e0e7ff] flex justify-center items-center p-5 max-h-screen">
+
+       {/* Global Settings */}
+       <ToastContainer 
+         position="top-center"
+         theme="dark"
+         newestOnTop
+         closeOnClick
+       />
+           <div className=" bg-[#f8fafc] p-3 w-1/3 flex justify-center flex-col gap-3 shadow-2xl rounded-2xl  border-indigo-200 border-3">
+            <div className="text-center text-3xl font-semibold"><h1>Reset Password</h1></div>
+            <form className="flex flex-col gap-5 w-full p-3" onSubmit={(e)=>{
+                submitHandler(e)
+            }}>
+                <div className="font-semibold text-gray-600 text-lg">
+                    Enter OTP
+                    <input type="text" placeholder="123456" name="otp" 
+                    className={` py-2 px-4 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${otp?"bg-[#e0e7ff]":"bg-gray-200"}`} 
+                    value={otp} 
+                    maxLength={6}
+                    minLength={6}
+                    onChange={(e)=>{
+                        setOtp(e.target.value);
+                        //console.log(uniqueId);
+                    }} 
+                    required/>
+                </div>
+                <div className="font-semibold text-gray-600 text-lg ">
+                    Enter New Password
+                    <div className="relative">
+                        <input type={`${showPassword?"text":"password"}`} placeholder="Enter New Password" name="password" className={` py-2 px-4 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${password?"bg-[#e8f0ff]":"bg-gray-200"}`} 
+                    value={password} 
+                    onChange={(e)=>{
+                        setPassword(e.target.value);
+                        //console.log(password);
+                    }} 
+                    minLength={8}
+                    maxLength={20}
+                    required />
+                   <div className="absolute right-3 top-1/2 -translate-y-1/2 hover:cursor-pointer" onClick={()=>{
+                    setShowPassword(!showPassword)
+                   }}>{showPassword?<Eye/>:<EyeOff/>}</div>
+                    </div>
+                </div>
+                <div className="w-full flex justify-center mt-0.5">
+                    <button type="submit" className="bg-blue-600 p-2 w-1/2 rounded-full text-xl text-white font-bold hover:scale-105 hover:cursor-pointer hover:bg-blue-700 hover:ease-in-out">Reset Password</button>
+                </div>
+            </form>
+           </div>
+        </div>
+    )
+}
+
+export default UserResetPassword

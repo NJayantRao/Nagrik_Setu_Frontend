@@ -10,6 +10,7 @@ import { UserDataContext } from "./context/UserContext"
 import UserProfile from "./pages/userprofile"
 import UserLoginPage from "./pages/UserLoginPage"
 import UserForgotPassword from "./pages/UserForgotpassword"
+import UserResetPassword from "./pages/UserResetPassword"
 
 function App(){
   const {setIsLoginClicked,isLoginClicked}= useContext(UserDataContext)
@@ -26,6 +27,7 @@ function App(){
             <Route path="/admin/signup" element={<AdminSignUpPage />}></Route>
             <Route path="/user/login" element={<UserLoginPage />}></Route>
             <Route path="/user/forgotPassword" element={<UserForgotPassword />}></Route>
+            <Route path="/user/resetPassword" element={<UserResetPassword />}></Route>
             <Route path="/" element={<Home />}></Route>
           </Route>
           <Route element={<NoNavbarLayout />}>
