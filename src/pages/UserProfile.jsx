@@ -3,6 +3,9 @@ import Navbar from "../components/Navbar"
 import { Eye,EyeOff } from 'lucide-react';
 import axios from "axios"
 import { useNavigate } from "react-router-dom";
+import Topbar from "../components/Topbar";
+import Sidebar from "../components/Sidebar";
+import UserMain from "../components/UserMain";
 
 function UserProfile(){
     const navigate= useNavigate()
@@ -34,18 +37,12 @@ function UserProfile(){
         fetchUserInfo();
     },[])
     return(
-        <div className="h-screen w-full">
-            <h1 className="text-6xl absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-bold">Hello</h1>
-            <div>
-                    <ul>
-                        <li>{`${name}`}</li>
-                        <li>{`${name}`}</li>
-                        <li>{`${name}`}</li>
-                        <li>{`${name}`}</li>
-                        <li>{`${name}`}</li>
-                        <li>{`${name}`}</li>
-                    </ul>
-                </div>
+        <div className="h-screen w-full overflow-hidden ">
+            <Topbar />
+           <div className="flex ">
+             <Sidebar />
+            <UserMain />
+           </div>
         </div>
     )
 }
