@@ -5,7 +5,7 @@ import { Eye,EyeOff } from "lucide-react";
 import Loader from "../components/loader";
 import axios from "axios";
 
-function UserLoginPage(){
+function AdminLoginPage(){
     const navigate= useNavigate()
     const {setUniqueId,setPassword,name,email,password,address,phone,uniqueId}= useContext(UserDataContext)
     const [showPassword,setShowPassword]= useState(false)
@@ -28,12 +28,13 @@ function UserLoginPage(){
 
             setTimeout(() => {
                 setIsLoading(false)
-                navigate("/user/profile")
+                navigate("/admin/profile")
             }, 3000);
             
         } catch (error) {
             console.log(error);
             setIsLoading(false)
+            navigate("/admin/profile")
         }
     }
 
@@ -45,13 +46,13 @@ function UserLoginPage(){
     return(
         <div className=" bg-[#e0e7ff] flex justify-center items-center p-5 max-h-screen">
            <div className=" bg-[#f8fafc] p-3 w-1/3 flex justify-center flex-col gap-3 shadow-2xl rounded-2xl  border-indigo-200 border-3">
-            <div className="text-center text-3xl font-semibold"><h1>Login</h1></div>
+            <div className="text-center text-3xl font-semibold"><h1>Admin Login</h1></div>
             <form className="flex flex-col gap-2 w-full" onSubmit={(e)=>{
                 submitHandler(e)
             }}>
                 <div className="font-semibold text-gray-600 text-lg">
                     Unique ID
-                    <input type="text" placeholder="CIV-XYZA-12345678" name="uniqueId" 
+                    <input type="text" placeholder="ADM-XYZA-12345678" name="uniqueId" 
                     className={` py-2 px-4 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${uniqueId?"bg-[#e0e7ff]":"bg-gray-200"}`} 
                     value={uniqueId} 
                     onChange={(e)=>{
@@ -84,16 +85,7 @@ function UserLoginPage(){
                    }}>Forgot Password?</h2></div>
                 </div>
                 <div className="w-full flex justify-center mt-0.5">
-                    <button type="submit" className="bg-blue-600 p-2 w-1/2 rounded-full text-xl text-white font-bold hover:scale-105 hover:cursor-pointer hover:bg-blue-700 hover:ease-in-out" onClick={()=>{
-                        
-                    }}>Login</button>
-                </div>
-                 <div className="font-semibold text-gray-600 text-sm flex justify-between items-center p-2">
-                   <div className="flex justify-center gap-1 text-center w-full text-base">
-                        <div><h2>Don't have an Account? <span className="font-bold text-gray-700 hover:cursor-pointer" onClick={()=>{
-                            navigate("/user/signup")
-                        }}>Sign Up</span></h2></div>
-                    </div>
+                    <button type="submit" className="bg-blue-600 p-2 w-1/2 rounded-full text-xl text-white font-bold hover:scale-105 hover:cursor-pointer hover:bg-blue-700 hover:ease-in-out">Login</button>
                 </div>
             </form>
            </div>
@@ -101,4 +93,4 @@ function UserLoginPage(){
     )
 }
 
-export default UserLoginPage
+export default AdminLoginPage

@@ -6,21 +6,21 @@ import { UserDataContext } from "../context/UserContext"
 
 function Home(){
   const navigate= useNavigate()
-  const [isLoading,setIsLoading]= useState(false)
+  // const [isLoading,setIsLoading]= useState(false)
   
-  useEffect(()=>{
-    const timer= setTimeout(() => {
-    setIsLoading(true)
-  }, 2000);
+  // useEffect(()=>{
+  //   const timer= setTimeout(() => {
+  //   setIsLoading(true)
+  // }, 2000);
 
-  return () => clearTimeout(timer)
-  },[])
+  // return () => clearTimeout(timer)
+  // },[])
 
-   if(!isLoading){
-    return(
-      <Loader />
-    )
-  }
+  //  if(!isLoading){
+  //   return(
+  //     <Loader />
+  //   )
+  // }
 
   return(
     <div>

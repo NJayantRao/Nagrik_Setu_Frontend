@@ -28,7 +28,7 @@ function Navbar(){
                         navigate("/user/login")
                     }}>User Login</div>
                     <div className=" hover:bg-gray-100 px-3 py-1"onClick={(e)=>{
-                        navigate("/admin/signup")
+                        navigate("/admin/login")
                     }}>Admin Login</div>
                     <div className=" hover:bg-gray-100 px-3 py-1" >Staff Login</div>
                 </div>
