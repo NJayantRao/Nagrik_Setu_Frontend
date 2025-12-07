@@ -9,6 +9,7 @@ import { useContext } from "react"
 import { UserDataContext } from "./context/UserContext"
 import UserProfile from "./pages/userprofile"
 import UserLoginPage from "./pages/UserLoginPage"
+import UserForgotPassword from "./pages/UserForgotpassword"
 
 function App(){
   const {setIsLoginClicked,isLoginClicked}= useContext(UserDataContext)
@@ -24,6 +25,7 @@ function App(){
             <Route path="/user/signup" element={<UserSignUpPage />}></Route>
             <Route path="/admin/signup" element={<AdminSignUpPage />}></Route>
             <Route path="/user/login" element={<UserLoginPage />}></Route>
+            <Route path="/user/forgotPassword" element={<UserForgotPassword />}></Route>
             <Route path="/" element={<Home />}></Route>
           </Route>
           <Route element={<NoNavbarLayout />}>
