@@ -4,36 +4,64 @@ import { UserDataContext } from "../context/UserContext";
 import { Eye,EyeOff } from "lucide-react";
 import Loader from "../components/loader";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 function UserLoginPage(){
     const navigate= useNavigate()
-    const {setUniqueId,setPassword,name,email,password,address,phone,uniqueId}= useContext(UserDataContext)
+    const {uniqueToken,setUniqueToken,setPassword,name,email,password,address,phone}= useContext(UserDataContext)
     const [showPassword,setShowPassword]= useState(false)
     const [isLoading,setIsLoading]= useState(false)
 
+        const notify = (err) =>{
+            toast.error(err, {
+      position: "top-center",
+      autoClose: 3000,
+      hideProgressBar: false,
+      theme: "colored",
+      style: {
+        background: "#dc2626",   // red-600
+        color: "#fff",
+        fontWeight: "600",
+        borderRadius: "10px",
+      },
+    });
+        }
+
     async function submitHandler(e){
         e.preventDefault()
-        console.log(uniqueId,password);
-        setIsLoading(true)
+        console.log(uniqueToken,password);
         try {
-            const response= await axios.post("http://localhost:3000/api/v1/user/login",{
-                uniqueId,password
+            const response= await axios.post(`${import.meta.env.VITE_LOCAL_URL}/user/login`,{
+                uniqueToken,password
             },{withCredentials:true})
+            setIsLoading(true)
             const token= response.data.token;
             console.log(response.data.token);
 
             localStorage.setItem("token",JSON.stringify(token))
-            setUniqueId("")
-            setPassword("")
 
             setTimeout(() => {
                 setIsLoading(false)
                 navigate("/user/profile")
             }, 3000);
-            
+            setUniqueToken("")
+            setPassword("")
         } catch (error) {
             console.log(error);
-            setIsLoading(false)
+            // setIsLoading(false)
+            if(error.response?.status === 401){
+                notify(error.response.data)
+                setUniqueToken("")
+                setPassword("")
+                setTimeout(() => {
+                    navigate("/user/signup")
+                }, 4000);
+            } else if(error.response?.status === 402){
+                notify(error.response.data)
+            }else{
+                console.log(error);
+                
+            }
         }
     }
 
@@ -52,11 +80,11 @@ function UserLoginPage(){
                 <div className="font-semibold text-gray-600 text-lg">
                     Unique ID
                     <input type="text" placeholder="CIV-XYZA-12345678" name="uniqueId" 
-                    className={` py-2 px-4 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${uniqueId?"bg-[#e0e7ff]":"bg-gray-200"}`} 
-                    value={uniqueId} 
+                    className={` py-2 px-4 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${uniqueToken?"bg-[#e0e7ff]":"bg-gray-200"}`} 
+                    value={uniqueToken} 
                     onChange={(e)=>{
-                        setUniqueId(e.target.value);
-                        //console.log(uniqueId);
+                        setUniqueToken(e.target.value);
+                        //console.log(uniqueToken);
                     }} 
                     required/>
                 </div>

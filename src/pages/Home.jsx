@@ -31,7 +31,6 @@ function Home(){
     </div>
   )
 }
-
 export default Home
 
 // import React from 'react';

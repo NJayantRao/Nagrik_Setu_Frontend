@@ -4,37 +4,59 @@ import { Eye,EyeOff } from 'lucide-react';
 import axios from "axios"
 import { useNavigate } from "react-router-dom";
 import { UserDataContext } from "../context/UserContext";
+import { toast } from "react-toastify";
+import Loader from "../components/loader";
 
 function UserSignUpPage(){
 
-    const {setName,setEmail,setPassword,setAddress,setPhone,name,email,password,address,phone,uniqueId}= useContext(UserDataContext)
-    // const [name,setName]= useState("")
-    // const [email,setEmail]= useState("")
-    // const [password,setPassword]= useState("")
-    // const [address,setAddress]= useState("")
-    // const [phone,setPhone]= useState("")
+    const {setName,setEmail,setPassword,setAddress,setPhone,name,email,password,address,phone}= useContext(UserDataContext)
     const [showPassword,setShowPassword]= useState(false)
+    const [isLoading,setIsLoading]= useState(false)
 
     const navigate= useNavigate()
+    const notify = (err) =>{
+        toast.error(err, {
+  position: "top-center",
+  autoClose: 3000,
+  hideProgressBar: false,
+  theme: "colored",
+  style: {
+    background: "#dc2626",   // red-600
+    color: "#fff",
+    fontWeight: "600",
+    borderRadius: "10px",
+  },
+});
+    }
 
     async function submitHandler(e){
         e.preventDefault()
         console.log(name,email,password,address,phone);
         try {
-            const response= await axios.post("http://localhost:3000/api/v1/user/signup",{
+            const response= await axios.post(`${import.meta.env.VITE_LOCAL_URL}/user/signup`,{
                 name,email,password,phone,address
             },{withCredentials:true})
+            setIsLoading(true)
             const token= response.data.token;
             console.log(response.data.token);
 
             localStorage.setItem("token",JSON.stringify(token))
 
             setTimeout(() => {
+                setIsLoading(false)
                 navigate("/user/profile")
-            }, 5000);
+            }, 3000);
 
         } catch (error) {
             console.log(error);
+            if(error.response?.status === 400){
+                notify(error.response.data)
+                setTimeout(() => {
+                    navigate("/user/login")
+                }, 4000);
+            }else{
+                console.log(error);
+            }
         }
         setName("")
         setEmail("")
@@ -54,6 +76,12 @@ function UserSignUpPage(){
     // useEffect(()=>{
 
     // },[])
+    if(isLoading){
+        return(
+            <Loader />
+        )
+    }
+
     return(
         <div className=" bg-[#e0e7ff] flex justify-center items-center p-3 max-h-screen">
            <div className=" bg-[#f8fafc] p-3 w-1/3 flex justify-center flex-col gap-3 shadow-2xl rounded-2xl  border-indigo-200 border-3">

@@ -15,16 +15,24 @@ import AdminForgotPassword from "./pages/AdminForgotPassword"
 import UserResetPassword from "./pages/UserResetPassword"
 import AdminResetPassword from "./pages/AdminResetPassword"
 import AdminLoginPage from "./pages/AdminLoginPage"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App(){
   const {setIsLoginClicked,isLoginClicked}= useContext(UserDataContext)
   return(
     <div className="h-screen w-full bg-[#e0e7ff] relative" onClick={()=>{
-    
       if(isLoginClicked){
         setIsLoginClicked(!isLoginClicked)
       }
     }}>
+      {/* Global Settings */}
+       <ToastContainer 
+         position="top-center"
+         theme="light"
+         newestOnTop
+         closeOnClick
+       />
         <Routes>
           <Route element={<NavbarLayout />}>
             <Route path="/user/signup" element={<UserSignUpPage />}></Route>

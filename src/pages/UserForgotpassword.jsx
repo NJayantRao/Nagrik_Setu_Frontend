@@ -1,22 +1,50 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserDataContext } from "../context/UserContext";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 function UserForgotPassword(){
     const navigate= useNavigate()
-    const {setUniqueId,uniqueId}= useContext(UserDataContext)
+    const {setUniqueToken,uniqueToken}= useContext(UserDataContext)
     const [loading,setLoading]= useState(false)
+    const notify = (err) =>{
+                toast.error(err, {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          theme: "colored",
+          style: {
+            background: "#dc2626",   // red-600
+            color: "#fff",
+            fontWeight: "600",
+            borderRadius: "10px",
+          },
+        });
+    }
 
     async function submitHandler(e){
         e.preventDefault()
-        setLoading(true)
-
+        try {
+            setLoading(true)
+        const response= await axios.post(`${import.meta.env.VITE_LOCAL_URL}/user/forgotPassword`,{uniqueToken})
+        
+        setUniqueToken("")
         setTimeout(() => {
             setLoading(false)
             navigate("/user/resetPassword")
         }, 3000);
         // console.log(uniqueId);
-        setUniqueId("")
+        } catch (error) {
+            if(error.response?.status === 401){
+                console.log(error);
+                notify(error.response.data)
+                setLoading(false)
+            }else{
+                console.log(error);
+            }
+            
+        }
     }
     return(
         <div className=" bg-[#e0e7ff] flex justify-center items-center p-5 max-h-screen">
@@ -28,11 +56,11 @@ function UserForgotPassword(){
                 <div className="font-semibold text-gray-600 text-lg">
                     Enter Your Unique ID
                     <input type="text" placeholder="CIV-XYZA-12345678" name="uniqueId" 
-                    className={` py-2 px-4 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${uniqueId?"bg-[#e0e7ff]":"bg-gray-200"}`} 
-                    value={uniqueId} 
+                    className={` py-2 px-4 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${uniqueToken?"bg-[#e0e7ff]":"bg-gray-200"}`} 
+                    value={uniqueToken} 
                     onChange={(e)=>{
-                        setUniqueId(e.target.value);
-                        //console.log(uniqueId);
+                        setUniqueToken(e.target.value);
+                        //console.log(uniqueToken);
                     }} 
                     required/>
                 </div>
