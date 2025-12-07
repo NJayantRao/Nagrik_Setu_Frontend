@@ -1,38 +1,66 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserDataContext } from "../context/UserContext";
+import axios from "axios";
+import { toast } from "react-toastify";
+import {AdminDataContext} from "../context/AdminContext";
 
-function UserForgotPassword(){
+function AdminForgotPassword(){
     const navigate= useNavigate()
-    const {setUniqueId,uniqueId}= useContext(UserDataContext)
+    const {adminUniqueId,setAdminUniqueId}= useContext(AdminDataContext)
     const [loading,setLoading]= useState(false)
+    const notify = (err) =>{
+                toast.error(err, {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: false,
+          theme: "colored",
+          style: {
+            background: "#dc2626",   // red-600
+            color: "#fff",
+            fontWeight: "600",
+            borderRadius: "10px",
+          },
+        });
+    }
 
     async function submitHandler(e){
         e.preventDefault()
-        setLoading(true)
-
+        try {
+            setLoading(true)
+        const response= await axios.post(`${import.meta.env.VITE_LOCAL_URL}/admin/forgotPassword`,{uniqueId:adminUniqueId})
+        
+        setAdminUniqueId("")
         setTimeout(() => {
             setLoading(false)
             navigate("/admin/resetPassword")
         }, 3000);
-        // console.log(uniqueId);
-        setUniqueId("")
+        // console.log(adminUniqueId);
+        } catch (error) {
+            if(error.response?.status === 401){
+                console.log(error);
+                notify(error.response.data)
+                setLoading(false)
+            }else{
+                console.log(error);
+            }
+            
+        }
     }
     return(
         <div className=" bg-[#e0e7ff] flex justify-center items-center p-5 max-h-screen">
            <div className=" bg-[#f8fafc] p-3 w-1/3 flex justify-center flex-col gap-3 shadow-2xl rounded-2xl  border-indigo-200 border-3">
-            <div className="text-center text-3xl font-semibold"><h1>Admin Forgot Password</h1></div>
+            <div className="text-center text-3xl font-semibold"><h1>Forgot Password</h1></div>
             <form className="flex flex-col gap-5 w-full p-3" onSubmit={(e)=>{
                 submitHandler(e)
             }}>
                 <div className="font-semibold text-gray-600 text-lg">
-                    Enter Unique ID
+                    Enter Your Unique ID
                     <input type="text" placeholder="ADM-XYZA-12345678" name="uniqueId" 
-                    className={` py-2 px-4 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${uniqueId?"bg-[#e0e7ff]":"bg-gray-200"}`} 
-                    value={uniqueId} 
+                    className={` py-2 px-4 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${adminUniqueId?"bg-[#e0e7ff]":"bg-gray-200"}`} 
+                    value={adminUniqueId} 
                     onChange={(e)=>{
-                        setUniqueId(e.target.value);
-                        //console.log(uniqueId);
+                        setAdminUniqueId(e.target.value);
+                        //console.log(uniqueToken);
                     }} 
                     required/>
                 </div>
@@ -45,4 +73,4 @@ function UserForgotPassword(){
     )
 }
 
-export default UserForgotPassword
+export default AdminForgotPassword

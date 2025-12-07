@@ -63,9 +63,9 @@ function UserResetPassword(){
             if(error.response?.status === 401){
                 console.log(error);
                 notify(error.response.data,"error")
-            }
+            }else{
             console.log(error);
-            
+            }
         }
     }
 

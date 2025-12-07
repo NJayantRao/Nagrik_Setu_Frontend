@@ -56,11 +56,8 @@ function UserLoginPage(){
                 setTimeout(() => {
                     navigate("/user/signup")
                 }, 4000);
-            } else if(error.response?.status === 402){
-                notify(error.response.data)
             }else{
                 console.log(error);
-                
             }
         }
     }
@@ -112,9 +109,7 @@ function UserLoginPage(){
                    }}>Forgot Password?</h2></div>
                 </div>
                 <div className="w-full flex justify-center mt-0.5">
-                    <button type="submit" className="bg-blue-600 p-2 w-1/2 rounded-full text-xl text-white font-bold hover:scale-105 hover:cursor-pointer hover:bg-blue-700 hover:ease-in-out" onClick={()=>{
-                        
-                    }}>Login</button>
+                    <button type="submit" className="bg-blue-600 p-2 w-1/2 rounded-full text-xl text-white font-bold hover:scale-105 hover:cursor-pointer hover:bg-blue-700 hover:ease-in-out">Login</button>
                 </div>
                  <div className="font-semibold text-gray-600 text-sm flex justify-between items-center p-2">
                    <div className="flex justify-center gap-1 text-center w-full text-base">
