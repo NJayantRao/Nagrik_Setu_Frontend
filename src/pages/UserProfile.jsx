@@ -90,10 +90,10 @@ function UserProfile(){
     fetchComplaintsInfo();
 }, []);
 
-    if(errorStatus === 401){
+    if(errorStatus === (401 || 500)){
         return(
             <div>
-            <h1 className="text-6xl absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-bold">{errorStatus} - {errorMsg}</h1>
+            <h1 className="text-5xl absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-bold ">{errorStatus} - {errorMsg}</h1>
         </div>
         )
     }

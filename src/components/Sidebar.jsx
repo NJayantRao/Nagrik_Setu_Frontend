@@ -31,11 +31,15 @@ function Sidebar({email,uniqueToken}){
     return(
         <div className="bg-[#ECFDF5] flex flex-col h-screen w-60 left-0 top-0 p-4  border-r-2 border-[#7a9e8e]">
            <div className="flex flex-col gap-3 overflow-y-auto h-[83vh] scrollbar-hide">
-            <div className="flex items-center gap-3 px-4 py-3 text-gray-700 font-bold bg-[#D1FAE5] rounded-2xl transition cursor-pointer hover:scale-105 hover:bg-[#A7F3D0]">
+            <div className="flex items-center gap-3 px-4 py-3 text-gray-700 font-bold bg-[#D1FAE5] rounded-2xl transition cursor-pointer hover:scale-105 hover:bg-[#A7F3D0]" onClick={(e)=>{
+              navigate("/")
+            }}>
                 <House size={28} absoluteStrokeWidth />
                 <h2>Home</h2>
                 </div>
-            <div className="flex items-center gap-3 px-4 py-3 text-gray-700 font-bold bg-[#D1FAE5] rounded-2xl transition cursor-pointer hover:scale-105 hover:bg-[#A7F3D0]">
+            <div className="flex items-center gap-3 px-4 py-3 text-gray-700 font-bold bg-[#D1FAE5] rounded-2xl transition cursor-pointer hover:scale-105 hover:bg-[#A7F3D0]" onClick={(e)=>{
+              navigate("/user/profile/complaints")
+            }}>
                 <FileText size={28} absoluteStrokeWidth />
                 <h2>My Complaints</h2>
                 </div>
@@ -66,8 +70,7 @@ function Sidebar({email,uniqueToken}){
                 notify(response.data,"success")
                 navigate("/")
             } catch (error) {
-                console.log(error);
-                
+                console.log(error); 
             }
         }}>
           <LogOut size={18} />

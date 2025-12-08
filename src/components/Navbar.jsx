@@ -22,7 +22,7 @@ function Navbar(){
             <div className="hover:cursor-pointer relative dropdown"><h1>Contact Us</h1></div>
             <div className=" mr-2 relative">
                 <Button />
-                <div className="w-60 absolute bg-gray-200 right-0 text-lg flex flex-col gap-2 rounded-md shadow-lg p-5 text-black hover:cursor-pointer" style={{display:isLoginClicked?"block":"none"}}>
+                <div className="w-60 absolute bg-gray-200 right-0 text-lg flex flex-col gap-2 rounded-md shadow-xl p-5 text-black hover:cursor-pointer" style={{display:isLoginClicked?"block":"none"}}>
                     <div className=" hover:bg-gray-100 px-3 py-1" onClick={(e)=>{
                         
                         navigate("/user/login")

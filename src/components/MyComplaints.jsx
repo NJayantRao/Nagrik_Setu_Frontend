@@ -1,6 +1,22 @@
-import { Search, Bell, User, FileText } from "lucide-react";
+import { Search, Bell, User, FileText, FileClock, FileCheck, FileX } from "lucide-react";
+import { useState } from "react";
 
-function MyComplaints() {
+function MyComplaints({filed,inProgress,resolved,rejected,complaints}) {
+  console.log(complaints);  
+  const [search,setSearch]=useState("")
+  const colorInfo={
+    "Filed": "bg-blue-100 text-blue-700 border border-blue-200",
+  "In-Progress": "bg-amber-100 text-amber-700 border border-amber-200",
+  "Resolved": "bg-green-100 text-green-700 border border-green-200",
+  "Rejected": "bg-red-100 text-red-700 border border-red-200"
+  }
+
+  const searchData= complaints.filter((curData)=>
+            curData.title.toLowerCase().includes(search.toLowerCase()) ||
+            curData.uniqueToken.toLowerCase().includes(search.toLowerCase()) ||
+            curData.departmentName.toLowerCase().includes(search.toLowerCase()) ||
+            curData.status.toLowerCase().includes(search.toLowerCase())
+          )
   return (
     <div className="min-h-screen w-full bg-gray-100 p-6 ">
       {/* Top Navigation */}
@@ -18,6 +34,10 @@ function MyComplaints() {
             type="text"
             placeholder="Search your complaints"
             className="w-full outline-none text-sm"
+            value={search}
+            onChange={(e)=>{
+              setSearch(e.target.value)
+            }}
           />
         </div>
       </div>
@@ -31,7 +51,7 @@ function MyComplaints() {
             <div className="bg-white p-4 rounded-xl shadow-sm">
               <p className="text-gray-500 text-lg font-semibold p-1">Total Complaints</p>
               <div className="flex justify-between items-center">
-                <div><h2 className="text-2xl font-semibold">56</h2></div>
+                <div><h2 className="text-2xl font-semibold">{complaints.length}</h2></div>
                 <FileText size={36} strokeWidth={1.5}/>
               </div>
             </div>
@@ -39,7 +59,7 @@ function MyComplaints() {
             <div className="bg-white p-6 rounded-xl shadow-sm">
               <p className="text-gray-500 text-lg font-semibold">Filed</p>
                <div className="flex justify-between items-center">
-                <div><h2 className="text-2xl font-semibold">56</h2></div>
+                <div><h2 className="text-2xl font-semibold">{filed}</h2></div>
                 <FileText size={36} strokeWidth={1.5}/>
               </div>
             </div>
@@ -47,24 +67,24 @@ function MyComplaints() {
             <div className="bg-white p-6 rounded-xl shadow-sm">
               <p className="text-gray-500 text-lg font-semibold">In Progress</p>
                <div className="flex justify-between items-center">
-                <div><h2 className="text-2xl font-semibold">56</h2></div>
-                <FileText size={36} strokeWidth={1.5}/>
+                <div><h2 className="text-2xl font-semibold">{inProgress}</h2></div>
+                <FileClock size={36} strokeWidth={1.5}/>
               </div>
             </div>
 
             <div className="bg-white p-6 rounded-xl shadow-sm">
               <p className="text-gray-500 text-lg font-semibold">Resolved</p>
                <div className="flex justify-between items-center">
-                <div><h2 className="text-2xl font-semibold">56</h2></div>
-                <FileText size={36} strokeWidth={1.5}/>
+                <div><h2 className="text-2xl font-semibold">{resolved}</h2></div>
+                <FileCheck size={36} strokeWidth={1.5}/>
               </div>
             </div>
 
             <div className="bg-white p-6 rounded-xl shadow-sm">
               <p className="text-gray-500 text-lg font-semibold">Rejected</p>
                <div className="flex justify-between items-center">
-                <div><h2 className="text-2xl font-semibold">56</h2></div>
-                <FileText size={36} strokeWidth={1.5}/>
+                <div><h2 className="text-2xl font-semibold">{rejected}</h2></div>
+                <FileX size={36} strokeWidth={1.5}/>
               </div>
             </div>
 
@@ -84,71 +104,14 @@ function MyComplaints() {
               </thead>
 
               <tbody className="space-y-3">
-                {[
-                  {
-                    id: "CIV-823491",
-                    desc: "Disturb weak",
-                    type: "Road",
-                    status: "Resolved",
-                    color: "bg-green-100 text-green-700",
-                  },
-                  {
-                    id: "CIV-912830",
-                    desc: "Gaosanting",
-                    type: "Water",
-                    status: "In Progress",
-                    color: "bg-blue-100 text-blue-700",
-                  },
-                  {
-                    id: "CIV-823104",
-                    desc: "Pecoam",
-                    type: "Garbage",
-                    status: "Submitted",
-                    color: "bg-orange-100 text-orange-700",
-                  },
-                  {
-                    id: "CIV-482301",
-                    desc: "Door entry",
-                    type: "Electricity",
-                    status: "Resolved",
-                    color: "bg-green-100 text-green-700",
-                  },
-                  {
-                    id: "CIV-823491",
-                    desc: "Disturb weak",
-                    type: "Road",
-                    status: "Resolved",
-                    color: "bg-green-100 text-green-700",
-                  },
-                  {
-                    id: "CIV-912830",
-                    desc: "Gaosanting",
-                    type: "Water",
-                    status: "In Progress",
-                    color: "bg-blue-100 text-blue-700",
-                  },
-                  {
-                    id: "CIV-823104",
-                    desc: "Pecoam",
-                    type: "Garbage",
-                    status: "Submitted",
-                    color: "bg-orange-100 text-orange-700",
-                  },
-                  {
-                    id: "CIV-482301",
-                    desc: "Door entry",
-                    type: "Electricity",
-                    status: "Resolved",
-                    color: "bg-green-100 text-green-700",
-                  },
-                ].map((item, i) => (
+                {searchData.map((item, i) => (
                   <tr key={i} className="border-t text-gray-700">
-                    <td className="py-3">{item.id}</td>
-                    <td>{item.desc}</td>
-                    <td>{item.type}</td>
+                    <td className="py-3">{item.uniqueToken}</td>
+                    <td>{item.title}</td>
+                    <td>{item.departmentName}</td>
                     <td>
                       <span
-                        className={`px-2 py-1 rounded-full text-xs font-medium ${item.color}`}
+                        className={`px-2 py-1.5 w-20 rounded-full inline-block text-center text-xs font-medium ${colorInfo[item.status]}`}
                       >
                         {item.status}
                       </span>

@@ -38,37 +38,6 @@ function UserMain({filed,inProgress,resolved,rejected,complaintList}){
         },
     ]
 
-    const recents= [
-        {
-            bgcolor:"bg-[#2480c6]",
-            text:"Filed",
-            count:0,
-            icon:FileText,
-            size:"text-2xl",
-        },
-         {
-            bgcolor:"bg-[#F9A825]", 
-            text:"In-Progress",
-            count:0,
-            icon:FileClock,
-            size:"text-xl",
-        },
-         {
-            bgcolor:"bg-[#8bc34a]",
-            text:"Resolved",
-            count:0,
-            icon:FileCheck,
-            size:"text-2xl",
-        },
-         {
-            bgcolor:"bg-[#f54336]",
-            text:"Rejected",
-            count:0,
-            icon:FileX,
-            size:"text-2xl",
-        },
-    ]
-
     useEffect(()=>{
         console.log(filed,inProgress,resolved,rejected);
         console.log(complaintList);

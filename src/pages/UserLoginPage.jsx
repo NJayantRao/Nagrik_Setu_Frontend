@@ -58,9 +58,7 @@ function UserLoginPage(){
                 }, 4000);
             }else if(error.response?.status === 402){
                 notify(error.response.data)
-                setUniqueToken("")
-                setPassword("")
-            
+                
             }else{
                 console.log(error);
             }
