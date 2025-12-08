@@ -66,8 +66,8 @@ function UserMain(){
         },
     ]
     return(
-        <div className="relative w-full h-screen p-4">
-            <div className="text-3xl text-[#1E3A8A] mb-2 font-bold px-2 tracking-tight">
+        <div className="relative w-full h-screen p-4 bg-[#f2f3f5]">
+            <div className="text-3xl text-[#1E3A8A] mb-2 font-semibold px-2 tracking-tight">
                 <h1>Complaint Insights</h1>
             </div>
             <div className=" flex gap-4 justify-evenly flex-nowrap">
@@ -77,8 +77,8 @@ function UserMain(){
                     })
                 }
             </div>
-            <div className="text-3xl text-[#1E3A8A] mt-5 mb-3 font-bold px-2 tracking-tight">
-                <h1>Recent Complaint </h1>
+            <div className="text-3xl text-[#1E3A8A] mt-5 mb-3 font-semibold px-2 tracking-tight">
+                <h1>Recent Complaints </h1>
             </div>
             <div className=" flex gap-2 justify-evenly flex-col">
                 <Complaints />

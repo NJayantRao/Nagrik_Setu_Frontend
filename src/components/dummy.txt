@@ -1,0 +1,70 @@
+ {/* RIGHT SIDE */}
+        <div className="space-y-6">
+          {/* Illustration Card */}
+          <div className="bg-blue-100 rounded-xl h-40 flex items-center justify-center">
+            <div className="text-blue-400">
+              <FileText size={70} />
+            </div>
+          </div>
+
+          {/* File Complaint Form */}
+          <div className="bg-white p-6 rounded-xl shadow-sm">
+            <h2 className="text-lg font-semibold mb-4">File a Complaint</h2>
+
+            <div className="space-y-4 text-sm">
+              <div>
+                <p className="text-gray-600 mb-1">Title</p>
+                <input
+                  type="text"
+                  className="w-full border rounded-lg p-2 outline-none"
+                />
+              </div>
+
+              <div>
+                <p className="text-gray-600 mb-1">Description</p>
+                <textarea className="w-full border rounded-lg p-2 outline-none"></textarea>
+              </div>
+
+              <div>
+                <p className="text-gray-600 mb-1">Complaint Type</p>
+                <select className="w-full border rounded-lg p-2 outline-none">
+                  <option>Temperature</option>
+                  <option>Road</option>
+                  <option>Water</option>
+                </select>
+              </div>
+
+              <div>
+                <p className="text-gray-600 mb-1">Upload Image</p>
+                <div className="w-full border border-dashed rounded-lg p-3 text-gray-500 text-sm text-center">
+                  Drag and drop or click to select image
+                </div>
+              </div>
+
+              <button className="bg-blue-600 w-full py-2 rounded-lg text-white font-medium">
+                Submit
+              </button>
+            </div>
+          </div>
+
+          {
+                    id: "CIV-912830",
+                    desc: "Gaosanting",
+                    type: "Water",
+                    status: "In Progress",
+                    color: "bg-blue-100 text-blue-700",
+                  },
+                  {
+                    id: "CIV-823104",
+                    desc: "Pecoam",
+                    type: "Garbage",
+                    status: "Submitted",
+                    color: "bg-orange-100 text-orange-700",
+                  },
+                  {
+                    id: "CIV-482301",
+                    desc: "Door entry",
+                    type: "Electricity",
+                    status: "Resolved",
+                    color: "bg-green-100 text-green-700",
+                  },
