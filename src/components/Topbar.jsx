@@ -2,7 +2,7 @@ import ImageAvatars from "./ImageAvatar"
 import LeftSection from "./LeftSection"
 import BackgroundLetterAvatars from "./TextAvatar"
 
-function Topbar(){
+function Topbar({name}){
     return(
         <div className="h-15 w-full bg-[#2a674b] flex justify-between  items-center shadow-xl text-xl font-bold text-[#d6f5e9]">
             <div className="w-1/5 flex justify-center gap-1 items-center">
@@ -13,9 +13,9 @@ function Topbar(){
             </div>
             <div className="text-2xl font-bold text-[#d6f5e9] hover:cursor-pointer relative dropdown">Dashboard</div>
             <div className="flex gap-5 mr-2 p-2  items-center">
-                <div className="hover:cursor-pointer relative dropdown text-lg"><h2>Hi, Rahul Sharma</h2></div>
+                <div className="hover:cursor-pointer relative dropdown text-lg"><h2>Hi, {name}</h2></div>
                 <div className="hover:cursor-pointer  ">
-                    <BackgroundLetterAvatars string={"Rahul Sharma"}/>
+                    <BackgroundLetterAvatars string={name}/>
                     {/* <ImageAvatars /> */}
                 </div>
             </div>

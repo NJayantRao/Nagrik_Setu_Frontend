@@ -22,15 +22,50 @@ function stringToColor(string) {
   return color;
 }
 
-function stringAvatar(name) {
+// function stringAvatar(name) {
+//   return {
+//     sx: {
+//       bgcolor: stringToColor(name),
+//     //   letterSpacing: "2px",   // <-- increase spacing here
+//       height:"40",
+//       width:"40",
+//     },
+//     children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
+//   };
+// }
+
+// function stringAvatar(name = "") {
+//   const parts = name.trim().split(" ");
+
+//   let initials = "";
+//   if (parts.length === 1) {
+//     initials = parts[0][0] || "";
+//   } else if (parts.length >= 2) {
+//     initials = `${parts[0][0]}${parts[1][0]}`;
+//   }
+// }
+
+
+function stringAvatar(name = "") {
+  const clean = name.trim().split(" ").filter(Boolean); // Removes empty strings
+
+  let initials = "";
+
+  if (clean.length === 1) {
+    initials = clean[0][0]; 
+  } else if (clean.length >= 2) {
+    initials = clean[0][0] + clean[1][0];
+  }
+
   return {
     sx: {
       bgcolor: stringToColor(name),
-    //   letterSpacing: "2px",   // <-- increase spacing here
-      height:"40",
-      width:"40",
+      height: "40px",
+      width: "40px",
+      fontSize: "18px",
+      fontWeight: "600",
     },
-    children: `${name.split(' ')[0][0]}${name.split(' ')[1][0]}`,
+    children: initials.toUpperCase(),
   };
 }
 

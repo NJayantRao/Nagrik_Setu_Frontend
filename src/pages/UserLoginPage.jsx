@@ -56,6 +56,11 @@ function UserLoginPage(){
                 setTimeout(() => {
                     navigate("/user/signup")
                 }, 4000);
+            }else if(error.response?.status === 402){
+                notify(error.response.data)
+                setUniqueToken("")
+                setPassword("")
+            
             }else{
                 console.log(error);
             }
@@ -113,7 +118,7 @@ function UserLoginPage(){
                 </div>
                  <div className="font-semibold text-gray-600 text-sm flex justify-between items-center p-2">
                    <div className="flex justify-center gap-1 text-center w-full text-base">
-                        <div><h2>Don't have an Account? <span className="font-bold text-gray-700 hover:cursor-pointer" onClick={()=>{
+                        <div><h2>Don't have an Account? <span className="font-bold text-gray-700 hover:cursor-pointer hover:font-bold hover:text-gray-700" onClick={()=>{
                             navigate("/user/signup")
                         }}>Sign Up</span></h2></div>
                     </div>

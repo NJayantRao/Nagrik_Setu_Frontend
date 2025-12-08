@@ -1,6 +1,32 @@
+import axios from "axios"
 import { House,FileText,FilePlusCorner, User,LogOut } from "lucide-react"
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
-function Sidebar(){
+function Sidebar({email,uniqueToken}){
+    const navigate= useNavigate()
+
+    const notify = (message, type = "success") => {
+      const colors = {
+        success: "#4f46e5", // Indigo (your success color)
+        error: "#dc2626",   // Red-600
+        info: "#2563eb",    // Blue-600
+        warning: "#f59e0b", // Amber-500
+      };
+    
+      toast[type](message, {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        theme: "colored",
+        style: {
+          background: colors[type],
+          color: "#fff",
+          fontWeight: "600",
+          borderRadius: "10px",
+        },
+      });
+    };
 
     return(
         <div className="bg-[#ECFDF5] flex flex-col h-screen w-60 left-0 top-0 p-4  border-r-2 border-[#7a9e8e]">
@@ -23,12 +49,27 @@ function Sidebar(){
                 </div>
                   <div className="bg-[#D1FAE5] p-4 rounded-2xl  hover:scale-105 hover:bg-[#A7F3D0] ">
         <div className="text-gray-900 font-semibold text-lg">Logged in as:</div>
-        <div className="text-gray-700 text-sm">harry@gmail.com</div>
-        <div className="text-gray-500 text-xs mt-1">ID:ldf-dfss-8878744333</div>
+        <div className="text-gray-700 text-sm">{email}</div>
+        <div className="text-gray-700 text-xs mt-1">{`ID: ${uniqueToken}`}</div>
         </div>
 
         <div className="bg-[#D1FAE5] flex justify-center items-center p-2 hover:scale-105 hover:bg-[#A7F3D0] rounded-xl">
-        <div className="flex items-center gap-2 text-red-600 cursor-pointer font-medium hover:text-red-700 hover:underline">
+        <div className="flex items-center gap-2 text-red-600 cursor-pointer font-medium hover:text-red-700 hover:underline" onClick={async (e)=>{
+            try {
+                const token= JSON.parse(localStorage.getItem("token"))
+                const response= await axios.get(`${import.meta.env.VITE_LOCAL_URL}/user/logout`,{
+                    headers:{
+                        Authorization: `Bearer ${token}`
+                    }
+                })
+                console.log(response);
+                notify(response.data,"success")
+                navigate("/")
+            } catch (error) {
+                console.log(error);
+                
+            }
+        }}>
           <LogOut size={18} />
           Logout
         </div>

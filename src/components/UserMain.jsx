@@ -1,35 +1,38 @@
 import ComplaintCard from "./ComplaintCard"
 import { FileText,FileClock,FileCheck,FileX } from "lucide-react"
 import Complaints from "./Complaints"
+import { useEffect } from "react"
 
 
-function UserMain(){
+function UserMain({filed,inProgress,resolved,rejected,complaintList}){
+    
+    
     const cardInfo= [
         {
             bgcolor:"bg-[#2480c6]",
             text:"Filed",
-            count:0,
+            count:filed,
             icon:FileText,
             size:"text-2xl",
         },
          {
             bgcolor:"bg-[#F9A825]", 
             text:"In-Progress",
-            count:0,
+            count:inProgress,
             icon:FileClock,
             size:"text-xl",
         },
          {
             bgcolor:"bg-[#8bc34a]",
             text:"Resolved",
-            count:0,
+            count:resolved,
             icon:FileCheck,
             size:"text-2xl",
         },
          {
             bgcolor:"bg-[#f54336]",
             text:"Rejected",
-            count:0,
+            count:rejected,
             icon:FileX,
             size:"text-2xl",
         },
@@ -65,6 +68,12 @@ function UserMain(){
             size:"text-2xl",
         },
     ]
+
+    useEffect(()=>{
+        console.log(filed,inProgress,resolved,rejected);
+        console.log(complaintList);
+        
+    },[filed,inProgress,resolved,rejected,complaintList])
     return(
         <div className="relative w-full h-screen p-4 bg-[#f2f3f5]">
             <div className="text-3xl text-[#1E3A8A] mb-2 font-semibold px-2 tracking-tight">
@@ -81,9 +90,10 @@ function UserMain(){
                 <h1>Recent Complaints </h1>
             </div>
             <div className=" flex gap-2 justify-evenly flex-col">
-                <Complaints />
-                <Complaints />
-                <Complaints />
+                {complaintList.map((ele,idx)=>{
+                    return <Complaints key={idx} title={ele.title} desc={ele.description} status={ele.status} img={ele.imageURL}/>
+                })
+                }
             </div>
         </div>
     )

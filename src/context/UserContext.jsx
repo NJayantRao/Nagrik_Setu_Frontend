@@ -10,9 +10,10 @@ function UserContext(props){
     const [address,setAddress]= useState("")
     const [phone,setPhone]= useState("")
     const [uniqueToken,setUniqueToken]= useState("")
+    const [id,setId]= useState("")
     return(
         <div>
-            <UserDataContext.Provider value={{isLoginClicked,setIsLoginClicked,setName,setEmail,setPassword,setPhone,setAddress,setUniqueToken,name,email,password,address,phone,uniqueToken}}>
+            <UserDataContext.Provider value={{isLoginClicked,setIsLoginClicked,setName,setEmail,setPassword,setPhone,setAddress,setUniqueToken,name,email,password,address,phone,uniqueToken,id,setId}}>
                 {props.children}
             </UserDataContext.Provider>
         </div>
