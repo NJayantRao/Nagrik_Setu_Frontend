@@ -50,6 +50,10 @@ function ComplaintsRegister(){
         e.preventDefault()
         console.log(e);
         try {
+            if(!image){
+                notify("Image is Required...","error")
+                return
+            }
             const formData = new FormData();
             formData.append("imageURL", image);         
             formData.append("title", title);
