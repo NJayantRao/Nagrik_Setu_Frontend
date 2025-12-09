@@ -67,7 +67,7 @@ function UserSignUpPage(){
 
     useEffect(()=>{
         async function fetchData(){
-            const api= await axios.get("http://localhost:3000/")
+            const api= await axios.get(import.meta.env.VITE_BACKEND_URL)
         console.log(api);
         }
         fetchData()
