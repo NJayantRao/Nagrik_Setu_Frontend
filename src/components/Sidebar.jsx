@@ -43,7 +43,9 @@ function Sidebar({email,uniqueToken}){
                 <FileText size={28} absoluteStrokeWidth />
                 <h2>My Complaints</h2>
                 </div>
-            <div className="flex items-center gap-3 px-4 py-3 text-gray-700 font-bold bg-[#D1FAE5] rounded-2xl transition cursor-pointer hover:scale-105 hover:bg-[#A7F3D0]">
+            <div className="flex items-center gap-3 px-4 py-3 text-gray-700 font-bold bg-[#D1FAE5] rounded-2xl transition cursor-pointer hover:scale-105 hover:bg-[#A7F3D0]" onClick={(e)=>{
+              navigate("/user/profile/complaints/Register")
+            }}>
                 <FilePlusCorner size={28} absoluteStrokeWidth />
                 <h2>Raise Complaint</h2>
                 </div>

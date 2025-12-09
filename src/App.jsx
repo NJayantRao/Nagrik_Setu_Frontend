@@ -16,6 +16,7 @@ import UserResetPassword from "./pages/UserResetPassword"
 import AdminResetPassword from "./pages/AdminResetPassword"
 import AdminLoginPage from "./pages/AdminLoginPage"
 import UserComplaints from "./pages/UserComplaints"
+import ComplaintsRegister from "./pages/ComplaintsRegister"
 import ErrorPage from "./pages/ErrorPage"
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -50,6 +51,7 @@ function App(){
           <Route element={<NoNavbarLayout />}>
             <Route path="/user/profile" element={<UserProfile />}></Route>
             <Route path="/user/profile/complaints" element={<UserComplaints />}></Route>
+            <Route path="/user/profile/complaints/Register" element={<ComplaintsRegister />}></Route>
             <Route path="/admin/profile" element={<AdminProfile />}></Route>
             <Route path="*" element={<ErrorPage />}></Route>
           </Route>
