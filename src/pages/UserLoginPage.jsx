@@ -12,20 +12,28 @@ function UserLoginPage(){
     const [showPassword,setShowPassword]= useState(false)
     const [isLoading,setIsLoading]= useState(false)
 
-        const notify = (err) =>{
-            toast.error(err, {
-      position: "top-center",
-      autoClose: 3000,
-      hideProgressBar: false,
-      theme: "colored",
-      style: {
-        background: "#dc2626",   // red-600
-        color: "#fff",
-        fontWeight: "600",
-        borderRadius: "10px",
-      },
-    });
-        }
+         const notify = (message, type = "success") => {
+  const colors = {
+    success: "#4f46e5", // Indigo (your success color)
+    error: "#dc2626",   // Red-600
+    info: "#2563eb",    // Blue-600
+    warning: "#f59e0b", // Amber-500
+  };
+
+  toast[type](message, {
+    position: "top-center",
+    autoClose: 3000,
+    hideProgressBar: false,
+    theme: "colored",
+    style: {
+      background: colors[type],
+      color: "#fff",
+      fontWeight: "600",
+      borderRadius: "10px",
+    },
+  });
+};
+
 
     async function submitHandler(e){
         e.preventDefault()
@@ -34,13 +42,14 @@ function UserLoginPage(){
             const response= await axios.post(`${import.meta.env.VITE_LOCAL_URL}/user/login`,{
                 uniqueToken,password
             },{withCredentials:true})
+            setUniqueToken("")
+            setPassword("")
             setIsLoading(true)
             const token= response.data.token;
             console.log(response.data.token);
 
             localStorage.setItem("token",JSON.stringify(token))
-            setUniqueToken("")
-            setPassword("")
+            
             notify("Logged-In Successfully...","success")
             setTimeout(() => {
                 setIsLoading(false)
