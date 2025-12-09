@@ -8,6 +8,8 @@ function UserForgotPassword(){
     const navigate= useNavigate()
     const {setUniqueToken,uniqueToken}= useContext(UserDataContext)
     const [loading,setLoading]= useState(false)
+     const [errorStatus,setErrorStatus]= useState(null)
+    const [errorMsg,setErrorMsg]= useState("")
     const notify = (err) =>{
                 toast.error(err, {
           position: "top-center",
@@ -27,24 +29,35 @@ function UserForgotPassword(){
         e.preventDefault()
         try {
             setLoading(true)
-        const response= await axios.post(`${import.meta.env.VITE_LOCAL_URL}/user/forgotPassword`,{uniqueToken})
+            const response= await axios.post(`${import.meta.env.VITE_LOCAL_URL}/user/forgotPassword`,{uniqueToken})
         
-        setUniqueToken("")
-        setTimeout(() => {
+            setTimeout(() => {
+                setUniqueToken("")
             setLoading(false)
             navigate("/user/resetPassword")
-        }, 3000);
+        }, 4000);
         // console.log(uniqueId);
         } catch (error) {
-            if(error.response?.status === 401){
-                console.log(error);
-                notify(error.response.data)
-                setLoading(false)
-            }else{
-                console.log(error);
-            }
+             if(error.response?.status === 401){
+                    console.log(error);
+                    setErrorStatus(error.response.status)
+                    setErrorMsg(error.response.data)
+                    console.log(errorStatus);
+                }else{
+                    console.log(error);
+                    setErrorStatus(500)
+                    setErrorMsg("Internal Server Error")
+                }
             
         }
+    }
+
+     if(errorStatus === (401 || 500)){
+        return(
+            <div>
+            <h1 className="text-5xl absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-bold ">{errorStatus} - {errorMsg}</h1>
+        </div>
+        )
     }
     return(
         <div className=" bg-[#e0e7ff] flex justify-center items-center p-5 max-h-screen">

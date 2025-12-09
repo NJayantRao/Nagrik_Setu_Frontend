@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 
 function UserLoginPage(){
     const navigate= useNavigate()
-    const {uniqueToken,setUniqueToken,setPassword,name,email,password,address,phone}= useContext(UserDataContext)
+    const {password,setPassword,uniqueToken,setUniqueToken,}= useContext(UserDataContext)
     const [showPassword,setShowPassword]= useState(false)
     const [isLoading,setIsLoading]= useState(false)
 
@@ -39,12 +39,13 @@ function UserLoginPage(){
         e.preventDefault()
         console.log(uniqueToken,password);
         try {
+            setIsLoading(true)
             const response= await axios.post(`${import.meta.env.VITE_LOCAL_URL}/user/login`,{
                 uniqueToken,password
             },{withCredentials:true})
-            setUniqueToken("")
+             setUniqueToken("")
             setPassword("")
-            setIsLoading(true)
+            
             const token= response.data.token;
             console.log(response.data.token);
 
@@ -54,21 +55,22 @@ function UserLoginPage(){
             setTimeout(() => {
                 setIsLoading(false)
                 navigate("/user/profile")
-            }, 3000);
+            }, 4000);
             
         } catch (error) {
             console.log(error);
             // setIsLoading(false)
             if(error.response?.status === 401){
-                notify(error.response.data)
+                setIsLoading(false)
+                notify(error.response.data,"error")
                 setUniqueToken("")
                 setPassword("")
                 setTimeout(() => {
                     navigate("/user/signup")
                 }, 4000);
             }else if(error.response?.status === 402){
-                notify(error.response.data)
-                
+                setIsLoading(false)
+                notify(error.response.data,"error")
             }else{
                 console.log(error);
             }

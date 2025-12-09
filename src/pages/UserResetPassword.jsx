@@ -48,8 +48,6 @@ function UserResetPassword(){
             console.log(response);
             
              console.log(response.data)
-             notify(response.data,"success")
-            setIsLoading(false)
             setUniqueToken("")
         setOtp("")
         setPassword("")
@@ -57,7 +55,8 @@ function UserResetPassword(){
 
         setTimeout(() => {
              navigate("/user/profile")
-        }, 3000);
+            setIsLoading(false)
+        }, 4000);
         // console.log(uniqueToken);
         } catch (error) {
             if(error.response?.status === 401){
@@ -70,7 +69,7 @@ function UserResetPassword(){
     }
 
     useEffect(()=>{
-        notify()
+        notify("OTP Sent to Registered E-Mail...")
     },[])
     if(isLoading){
         return(

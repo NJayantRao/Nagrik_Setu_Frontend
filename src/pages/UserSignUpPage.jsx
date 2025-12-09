@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-import Navbar from "../components/Navbar"
 import { Eye,EyeOff } from 'lucide-react';
 import axios from "axios"
 import { useNavigate } from "react-router-dom";
@@ -12,26 +11,36 @@ function UserSignUpPage(){
     const {setName,setEmail,setPassword,setAddress,setPhone,name,email,password,address,phone}= useContext(UserDataContext)
     const [showPassword,setShowPassword]= useState(false)
     const [isLoading,setIsLoading]= useState(false)
+    const [errorStatus,setErrorStatus]= useState(null)
+    const [errorMsg,setErrorMsg]= useState("")
 
     const navigate= useNavigate()
-    const notify = (err) =>{
-        toast.error(err, {
-  position: "top-center",
-  autoClose: 3000,
-  hideProgressBar: false,
-  theme: "colored",
-  style: {
-    background: "#dc2626",   // red-600
-    color: "#fff",
-    fontWeight: "600",
-    borderRadius: "10px",
-  },
-});
-    }
 
+    const notify = (message, type = "success") => {
+        const colors = {
+            success: "#4f46e5", // Indigo (success color)
+            error: "#dc2626",   // Red-600
+            info: "#2563eb",    // Blue-600
+            warning: "#f59e0b", // Amber-500
+        };
+
+  toast[type](message, {
+    position: "top-center",
+    autoClose: 3000,
+    hideProgressBar: false,
+    theme: "colored",
+    style: {
+      background: colors[type],
+      color: "#fff",
+      fontWeight: "600",
+      borderRadius: "10px",
+    },
+  });
+};
+    
     async function submitHandler(e){
         e.preventDefault()
-        console.log(name,email,password,address,phone);
+        // console.log(name,email,password,address,phone);
         try {
             const response= await axios.post(`${import.meta.env.VITE_LOCAL_URL}/user/signup`,{
                 name,email,password,phone,address
@@ -45,7 +54,7 @@ function UserSignUpPage(){
             setTimeout(() => {
                 setIsLoading(false)
                 navigate("/user/profile")
-            }, 3000);
+            }, 4000);
 
         } catch (error) {
             console.log(error);
@@ -56,6 +65,8 @@ function UserSignUpPage(){
                 }, 4000);
             }else{
                 console.log(error);
+                setErrorStatus(error.response.status)
+                setErrorMsg(error.response.data)
             }
         }
         setName("")
@@ -73,12 +84,17 @@ function UserSignUpPage(){
         fetchData()
     },[])
 
-    // useEffect(()=>{
-
-    // },[])
     if(isLoading){
         return(
             <Loader />
+        )
+    }
+
+    if(errorStatus === (401 || 500)){
+        return(
+            <div>
+            <h1 className="text-5xl absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-bold ">{errorStatus} - {errorMsg}</h1>
+        </div>
         )
     }
 

@@ -59,7 +59,7 @@ function UserMain({filed,inProgress,resolved,rejected,complaintList}){
                 <h1>Recent Complaints </h1>
             </div>
             <div className=" flex gap-2 justify-evenly flex-col">
-                {complaintList.map((ele,idx)=>{
+                {complaintList.slice(-3).reverse().map((ele,idx)=>{
                     return <Complaints key={idx} title={ele.title} desc={ele.description} status={ele.status} img={ele.imageURL}/>
                 })
                 }

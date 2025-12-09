@@ -7,7 +7,7 @@ import UserContext from './context/UserContext.jsx'
 import AdminContext from './context/AdminContext.jsx'
 
 createRoot(document.getElementById('root')).render(
-  <StrictMode>
+
    <BrowserRouter>
      <AdminContext>
       <UserContext>
@@ -15,5 +15,4 @@ createRoot(document.getElementById('root')).render(
      </UserContext>
      </AdminContext>
    </BrowserRouter>
-  </StrictMode>,
 )

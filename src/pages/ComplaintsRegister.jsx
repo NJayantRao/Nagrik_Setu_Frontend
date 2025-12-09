@@ -208,9 +208,9 @@ function ComplaintsRegister(){
     className={`py-1 px-4 w-full rounded-xl text-gray-700 text-sm shadow-md
       bg-white border border-gray-300
       focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-blue-500
-      hover:border-gray-400 transition-all `}
+      hover:border-gray-400 hover:cursor-pointer transition-all `}
   >
-    <option value="">Select Department</option>
+    <option value="" >Select Department</option>
     {departmentList.map((ele, idx) => (
       <option key={idx} value={ele._id}>
         {ele.name}
