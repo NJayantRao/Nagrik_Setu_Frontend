@@ -142,7 +142,7 @@ const notify = (message, type = "success") => {
     <div className='flex flex-col justify-center'>
       <img src="/image_upload.svg" alt="image_upload" className="h-15 w-full"/>
       <div className='bg-blue-600 rounded-lg px-2 py-1 text-gray-200 font-semibold'>
-        <input type="file" name="Browse File" placeholder="Browse File" id="" className='h-5 w-20 'onChange={(e)=>{
+        <input type="file" name="Browse File" placeholder="Browse File" id="" className='h-5 w-20 hover:cursor-pointer ' onChange={(e)=>{
           handleFileUpload(e);
         }}/>
       </div>

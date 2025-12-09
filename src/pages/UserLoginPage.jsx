@@ -39,13 +39,14 @@ function UserLoginPage(){
             console.log(response.data.token);
 
             localStorage.setItem("token",JSON.stringify(token))
-
+            setUniqueToken("")
+            setPassword("")
+            notify("Logged-In Successfully...","success")
             setTimeout(() => {
                 setIsLoading(false)
                 navigate("/user/profile")
             }, 3000);
-            setUniqueToken("")
-            setPassword("")
+            
         } catch (error) {
             console.log(error);
             // setIsLoading(false)
