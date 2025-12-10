@@ -1,7 +1,7 @@
-function SubmitButton(){
-    return(
-        <div>
-            <button>Submit</button>
-        </div>
-    )
+function SubmitButton() {
+  return (
+    <div>
+      <button>Submit</button>
+    </div>
+  );
 }

@@ -1,6 +1,6 @@
-import Avatar from '@mui/material/Avatar';
-import Stack from '@mui/material/Stack';
-import { width } from '@mui/system';
+import Avatar from "@mui/material/Avatar";
+import Stack from "@mui/material/Stack";
+import { width } from "@mui/system";
 
 function stringToColor(string) {
   let hash = 0;
@@ -11,7 +11,7 @@ function stringToColor(string) {
     hash = string.charCodeAt(i) + ((hash << 5) - hash);
   }
 
-  let color = '#';
+  let color = "#";
 
   for (i = 0; i < 3; i += 1) {
     const value = (hash >> (i * 8)) & 0xff;
@@ -45,14 +45,13 @@ function stringToColor(string) {
 //   }
 // }
 
-
 function stringAvatar(name = "") {
   const clean = name.trim().split(" ").filter(Boolean); // Removes empty strings
 
   let initials = "";
 
   if (clean.length === 1) {
-    initials = clean[0][0]; 
+    initials = clean[0][0];
   } else if (clean.length >= 2) {
     initials = clean[0][0] + clean[1][0];
   }
