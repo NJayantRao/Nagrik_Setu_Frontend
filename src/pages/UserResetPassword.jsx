@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { UserDataContext } from "../context/UserContext";
 import { Eye, EyeOff } from "lucide-react";
 import Loader from "../components/loader";
@@ -8,6 +8,7 @@ import axios from "axios";
 
 function UserResetPassword() {
   const navigate = useNavigate();
+  const location = useLocation();
   const { setUniqueToken, uniqueToken, password, setPassword } =
     useContext(UserDataContext);
   const [loading, setLoading] = useState(false);
@@ -42,7 +43,7 @@ function UserResetPassword() {
     try {
       const response = await axios.put(
         `${import.meta.env.VITE_LOCAL_URL}/user/resetPassword`,
-        { uniqueToken, otp, newPassword: password },
+        { uniqueToken, otp, newPassword: password }
       );
       console.log(uniqueToken);
 
@@ -53,9 +54,9 @@ function UserResetPassword() {
       setOtp("");
       setPassword("");
       setIsLoading(true);
-
+      notify("Password Saved Successfully...","success")
       setTimeout(() => {
-        navigate("/user/profile");
+        navigate("/user/login");
         setIsLoading(false);
       }, 4000);
       // console.log(uniqueToken);
@@ -70,7 +71,9 @@ function UserResetPassword() {
   }
 
   useEffect(() => {
-    notify("OTP Sent to Registered E-Mail...");
+    if (location.state?.fromForgotPassword) {
+      notify("OTP Sent to Registered E-Mail...");
+    }
   }, []);
   if (isLoading) {
     return <Loader />;

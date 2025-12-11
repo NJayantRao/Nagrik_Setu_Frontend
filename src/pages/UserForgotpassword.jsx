@@ -37,7 +37,7 @@ function UserForgotPassword() {
       setTimeout(() => {
         setUniqueToken("");
         setLoading(false);
-        navigate("/user/resetPassword");
+        navigate("/user/resetPassword",{state:{fromForgotPassword:true}});
       }, 4000);
       // console.log(uniqueId);
     } catch (error) {
