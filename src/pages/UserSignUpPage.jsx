@@ -61,7 +61,7 @@ function UserSignUpPage() {
           phone,
           address,
         },
-        { withCredentials: true },
+        { withCredentials: true }
       );
       setIsLoading(true);
       const token = response.data.token;
@@ -117,8 +117,8 @@ function UserSignUpPage() {
 
   return (
     <div className=" bg-[#e0e7ff] flex justify-center items-center p-3 max-h-screen">
-      <div className=" bg-[#f8fafc] p-3 w-1/3 flex justify-center flex-col gap-3 shadow-2xl rounded-2xl  border-indigo-200 border-3">
-        <div className="text-center text-3xl font-semibold">
+      <div className=" bg-[#f8fafc] p-3 w-3/4 max-h-[75vh] sm:h-full sm:w-1/3 flex justify-center flex-col gap-1 sm:gap-3 shadow-2xl rounded-2xl  border-indigo-200 border-3">
+        <div className="text-center text-lg sm:text-3xl font-semibold">
           <h1>Sign-Up</h1>
         </div>
         <form
@@ -127,13 +127,13 @@ function UserSignUpPage() {
             submitHandler(e);
           }}
         >
-          <div className="font-semibold text-gray-600 text-lg">
+          <div className="font-semibold text-gray-600 text-sm sm:text-lg">
             Name
             <input
               type="text"
               placeholder="Enter Your Name"
               name="name"
-              className={` py-2 px-4 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${name ? "bg-[#e0e7ff]" : "bg-gray-200"}`}
+              className={`py-1 px-2 sm:py-2 sm:px-4 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${name ? "bg-[#e0e7ff]" : "bg-gray-200"}`}
               value={name}
               onChange={(e) => {
                 setName(e.target.value);
@@ -142,13 +142,13 @@ function UserSignUpPage() {
               required
             />
           </div>
-          <div className="font-semibold text-gray-600 text-lg">
+          <div className="font-semibold text-gray-600 text-sm sm:text-lg">
             E-Mail
             <input
               type="email"
               placeholder="Enter Your E-Mail"
               name="email"
-              className={` py-2 px-4 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${email ? "bg-[#e8f0ff]" : "bg-gray-200"}`}
+              className={`py-1 px-2 sm:py-2 sm:px-4 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${email ? "bg-[#e8f0ff]" : "bg-gray-200"}`}
               value={email}
               onChange={(e) => {
                 setEmail(e.target.value);
@@ -163,14 +163,14 @@ function UserSignUpPage() {
               required
             />
           </div>
-          <div className="font-semibold text-gray-600 text-lg ">
+          <div className="font-semibold text-gray-600 text-sm sm:text-lg ">
             Password
             <div className="relative">
               <input
                 type={`${showPassword ? "text" : "password"}`}
                 placeholder="Enter Your Password"
                 name="password"
-                className={` py-2 px-4 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${password ? "bg-[#e8f0ff]" : "bg-gray-200"}`}
+                className={`py-1 px-2 sm:py-2 sm:px-4 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${password ? "bg-[#e8f0ff]" : "bg-gray-200"}`}
                 value={password}
                 onChange={(e) => {
                   setPassword(e.target.value);
@@ -181,22 +181,26 @@ function UserSignUpPage() {
                 required
               />
               <div
-                className="absolute right-3 top-1/2 -translate-y-1/2 hover:cursor-pointer"
+                className="absolute right-3 top-1/2 -translate-y-1/2 hover:cursor-pointer text-sm"
                 onClick={() => {
                   setShowPassword(!showPassword);
                 }}
               >
-                {showPassword ? <Eye /> : <EyeOff />}
+                {showPassword ? (
+                  <Eye className="w-5 h-5 sm:w-6 sm:h-6" />
+                ) : (
+                  <EyeOff className="w-5 h-5 sm:w-6 sm:h-6" />
+                )}
               </div>
             </div>
           </div>
-          <div className="font-semibold text-gray-600 text-lg">
+          <div className="font-semibold text-gray-600 text-sm sm:text-lg">
             Phone
             <input
               type="text"
               placeholder="Enter Your Contact number"
               name="phone"
-              className={` py-2 px-4 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${phone ? "bg-[#e8f0ff]" : "bg-gray-200"}`}
+              className={`py-1 px-2 sm:py-2 sm:px-4 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${phone ? "bg-[#e8f0ff]" : "bg-gray-200"}`}
               value={phone}
               onChange={(e) => {
                 setPhone(e.target.value);
@@ -207,13 +211,13 @@ function UserSignUpPage() {
               required
             />
           </div>
-          <div className="font-semibold text-gray-600 text-lg">
+          <div className="font-semibold text-gray-600 text-sm sm:text-lg">
             Address
             <input
               type="text"
               placeholder="Enter Your City"
               name="address"
-              className={` py-2 px-4 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${address ? "bg-[#e8f0ff]" : "bg-gray-200"}`}
+              className={`py-1 px-2 sm:py-2 sm:px-4 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${address ? "bg-[#e8f0ff]" : "bg-gray-200"}`}
               value={address}
               onChange={(e) => {
                 setAddress(e.target.value);
@@ -225,7 +229,7 @@ function UserSignUpPage() {
           <div className="w-full flex justify-center mt-0.5 p-2">
             <button
               type="submit"
-              className="bg-blue-600 p-2 w-1/2 rounded-full text-xl text-white font-bold hover:scale-105 hover:cursor-pointer hover:bg-blue-700 hover:ease-in-out"
+              className="bg-blue-600 py-1 px-2 sm:p-2 sm:w-1/2 rounded-xl sm:rounded-full text-lg sm:text-xl text-white  font-semibold sm:font-bold hover:scale-105 hover:cursor-pointer hover:bg-blue-700 hover:ease-in-out"
             >
               Sign Up
             </button>
