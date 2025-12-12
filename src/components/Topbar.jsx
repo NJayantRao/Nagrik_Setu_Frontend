@@ -68,7 +68,7 @@ function Topbar({ name }) {
             <div
               className=" px-2 py-1 flex gap-2 bg-[#A7F3D0] rounded-xl mb-2"
               onClick={(e) => {
-                navigate("/user/profile");
+                navigate("/");
               }}
             >
               <House size={20} strokeWidth={1.2} />

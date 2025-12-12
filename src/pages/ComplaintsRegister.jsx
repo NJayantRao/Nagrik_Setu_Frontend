@@ -34,6 +34,7 @@ function ComplaintsRegister() {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [image, setImage] = useState(null);
+  const [preview, setPreview] = useState(null);
   const [departmentId, setDepartmentId] = useState("");
   const [departmentList, setDepartmentList] = useState([]);
   const [registered, setRegistered] = useState(false);
@@ -183,24 +184,24 @@ function ComplaintsRegister() {
       <Topbar name={name} />
       <div className="flex ">
         <Sidebar email={email} uniqueToken={uniqueToken} />
-        <div className="bg-[#f2f3f5]  w-full flex  justify-center ">
-          <div className=" bg-[#f8fafc] p-3 max-h-[75vh] w-1/3 flex justify-center flex-col gap-3 shadow-2xl rounded-2xl  border-indigo-200 border-3 mt-10">
-            <div className="text-center text-3xl font-semibold mt-2 ">
+        <div className="bg-[#f2f3f5]  w-full flex h-screen justify-center ">
+          <div className=" bg-[#f8fafc] py-1 px-3 sm:p-3 h-[75vh] sm:max-h-[75vh] w-3/4 sm:w-1/3 flex justify-center flex-col gap-3 shadow-2xl rounded-2xl  border-indigo-200 border-3 mt-10">
+            <div className="text-center text-2xl sm:text-3xl font-semibold mt-2 ">
               <h1>Register Complaint</h1>
             </div>
             <form
-              className="flex flex-col gap-2 w-full"
+              className="flex flex-col gap-2 s w-full"
               onSubmit={(e) => {
                 submitHandler(e);
               }}
             >
-              <div className="font-semibold text-gray-600 text-lg">
+              <div className="font-semibold text-gray-600 text-lg sm:text-lg">
                 Title
                 <input
                   type="text"
                   placeholder="Enter Title"
                   name="title"
-                  className={` py-2 px-4 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${title ? "bg-[#e0e7ff]" : "bg-gray-200"}`}
+                  className={` py-1 sm:py-2 px-2 sm:px-4 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${title ? "bg-[#e0e7ff]" : "bg-gray-200"}`}
                   value={title}
                   onChange={(e) => {
                     setTitle(e.target.value);
@@ -216,7 +217,7 @@ function ComplaintsRegister() {
                   type="textarea"
                   placeholder="Enter Description"
                   name="desc"
-                  className={` py-2 px-4 h-15 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${desc ? "bg-[#e0e7ff]" : "bg-gray-200"}`}
+                  className={`py-1 sm:py-2 px-2 sm:px-4 h-10 sm:h-15 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${desc ? "bg-[#e0e7ff]" : "bg-gray-200"}`}
                   value={desc}
                   onChange={(e) => {
                     setDesc(e.target.value);
@@ -225,7 +226,12 @@ function ComplaintsRegister() {
                   required
                 />
               </div>
-              <ImageUploader image={image} setImage={setImage} />
+              <ImageUploader
+                image={image}
+                setImage={setImage}
+                preview={preview}
+                setPreview={setPreview}
+              />
 
               <div className="font-semibold text-gray-600 text-lg flex justify-center">
                 <select
@@ -251,7 +257,7 @@ function ComplaintsRegister() {
               <div className="w-full flex justify-center mt-0.5">
                 <button
                   type="submit"
-                  className="bg-blue-600 p-2 w-1/2 rounded-full text-xl text-white font-bold hover:scale-105 hover:cursor-pointer hover:bg-blue-700 hover:ease-in-out mb-3"
+                  className="bg-blue-600 py-1 px-2 sm:p-2 w-1/2 rounded-xl sm:rounded-full text-lg sm:text-xl text-white font-bold hover:scale-105 hover:cursor-pointer hover:bg-blue-700 hover:ease-in-out mb-3"
                 >
                   {registered ? "Registering..." : "Registered"}
                 </button>

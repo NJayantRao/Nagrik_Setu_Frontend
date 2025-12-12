@@ -1,94 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import ImageUploading from "react-images-uploading";
 import { toast } from "react-toastify";
 
-//   const [images, setImages] = React.useState([]);
-//   const maxNumber = 10;
-
-//   const onChange = (imageList) => {
-//     setImages(imageList);
-//   };
-
-//   return (
-//     <div className="w-full flex flex-col items-center ">
-//       <ImageUploading
-//         multiple
-//         value={images}
-//         onChange={onChange}
-//         maxNumber={maxNumber}
-//         dataURLKey="data_url"
-//       >
-//         {({
-//           imageList,
-//           onImageUpload,
-//           onImageRemoveAll,
-//           onImageUpdate,
-//           onImageRemove,
-//           isDragging,
-//           dragProps,
-//         }) => (
-//           <div className="w-full max-w-lg">
-//             {/* Upload Box */}
-//             <div
-//               className={`border-2 border-dashed rounded-2xl p-4 flex flex-col items-center justify-center transition
-//               ${isDragging ? "border-green-500 bg-green-50" : "border-gray-300"}`}
-//               onClick={onImageUpload}
-//               {...dragProps}
-//             >
-//               <div className="text-gray-500 text-lg">📁 Click or Drop Images Here</div>
-//               <div className="text-sm text-gray-400 mt-2">Max {maxNumber} images</div>
-//             </div>
-
-//             {/* Actions */}
-//             {imageList.length > 0 && (
-//               <button
-//                 onClick={onImageRemoveAll}
-//                 className="mt-4 bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded-xl font-medium shadow-sm"
-//               >
-//                 Remove All
-//               </button>
-//             )}
-
-//             {/* Images Grid */}
-//             <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mt-6">
-//               {imageList.map((image, index) => (
-//                 <div
-//                   key={index}
-//                   className="relative group bg-white rounded-xl shadow p-2"
-//                 >
-//                   <img
-//                     src={image.data_url}
-//                     alt=""
-//                     className="rounded-xl object-cover w-full h-32"
-//                   />
-
-//                   {/* Hover Buttons */}
-//                   <div className="absolute inset-0 bg-black/50 rounded-xl opacity-0 group-hover:opacity-100 flex items-center justify-center gap-2 transition">
-//                     <button
-//                       onClick={() => onImageUpdate(index)}
-//                       className="bg-white text-gray-800 px-3 py-1 rounded-lg text-sm shadow"
-//                     >
-//                       Update
-//                     </button>
-
-//                     <button
-//                       onClick={() => onImageRemove(index)}
-//                       className="bg-red-500 text-white px-3 py-1 rounded-lg text-sm shadow"
-//                     >
-//                       Remove
-//                     </button>
-//                   </div>
-//                 </div>
-//               ))}
-//             </div>
-//           </div>
-//         )}
-//       </ImageUploading>
-//     </div>
-//   );
-// }
-
-function ImageUploader({ image, setImage }) {
+function ImageUploader({ image, setImage, preview, setPreview }) {
   const notify = (message, type = "success") => {
     const colors = {
       success: "#4f46e5", // Indigo (your success color)
@@ -118,6 +32,7 @@ function ImageUploader({ image, setImage }) {
       return;
     }
     setImage(file);
+    setPreview(URL.createObjectURL(file));
     notify("Image Uploaded Successfully!", "success");
   };
   return (
@@ -127,9 +42,9 @@ function ImageUploader({ image, setImage }) {
       >
         <div className="flex flex-col justify-center">
           <img
-            src="/image_upload.svg"
+            src={`${preview?preview:"/image_upload.svg"}`}
             alt="image_upload"
-            className="h-15 w-full"
+            className="h-10 sm:h-15 w-full"
           />
           <div className="bg-blue-600 rounded-lg px-2 py-1 text-gray-200 font-semibold">
             <input
