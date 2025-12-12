@@ -54,7 +54,7 @@ function ImageUploader({ image, setImage, preview, setPreview }) {
             <input
               type="file"
               name="Browse File"
-              disabled={isDisabled}
+              
               placeholder="Browse File"
               id=""
               className="h-5 w-20 hover:cursor-pointer "

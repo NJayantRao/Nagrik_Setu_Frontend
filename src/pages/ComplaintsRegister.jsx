@@ -210,7 +210,6 @@ function ComplaintsRegister() {
                   name="title"
                   className={` py-1 sm:py-2 px-2 sm:px-4 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${title ? "bg-[#e0e7ff]" : "bg-gray-200"}`}
                   value={title}
-                  disabled={isDisabled}
                   onChange={(e) => {
                     setTitle(e.target.value);
                     //console.log(title);
@@ -227,7 +226,6 @@ function ComplaintsRegister() {
                   name="desc"
                   className={`py-1 sm:py-2 px-2 sm:px-4 h-10 sm:h-15 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${desc ? "bg-[#e0e7ff]" : "bg-gray-200"}`}
                   value={desc}
-                  disabled={isDisabled}
                   onChange={(e) => {
                     setDesc(e.target.value);
                     //console.log(desc);
@@ -246,7 +244,6 @@ function ComplaintsRegister() {
                 <select
                   value={departmentId}
                   required
-                  disabled={isDisabled}
                   onChange={(e) => {
                     setDepartmentId(e.target.value);
                     console.log(e.target.value); // logs selected department _id
@@ -267,7 +264,6 @@ function ComplaintsRegister() {
               <div className="w-full flex justify-center mt-0.5">
                 <button
                   type="submit"
-                  disabled={isDisabled}
                   className="bg-blue-600 py-1 px-2 sm:p-2 w-1/2 rounded-xl sm:rounded-full text-lg sm:text-xl text-white font-bold hover:scale-105 hover:cursor-pointer hover:bg-blue-700 hover:ease-in-out mb-3"
                 >
                   {registered ? "Registering..." : "Registered"}
