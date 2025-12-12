@@ -66,10 +66,14 @@ function Navbar() {
       >
         <h1>Home</h1>
       </div>
-      <div className="hover:cursor-pointer relative dropdown hidden sm:block">
+      <div className="hover:cursor-pointer relative dropdown hidden sm:block" onClick={()=>{
+        navigate("/user/profile/complaints/Register")
+      }}>
         <h1>Report Issue</h1>
       </div>
-      <div className="hover:cursor-pointer relative dropdown hidden sm:block">
+      <div className="hover:cursor-pointer relative dropdown hidden sm:block" onClick={()=>{
+        navigate("/user/profile/complaints")
+      }}>
         <h1>Track Issue</h1>
       </div>
       <div className="hover:cursor-pointer relative dropdown hidden sm:block">
@@ -81,7 +85,7 @@ function Navbar() {
       <div className=" sm:mr-2 relative ">
         <Button />
         <div
-          className="sm:w-60 w-40 absolute bg-gray-200 right-0 text-sm sm:text-lg flex flex-col gap-2 rounded-md shadow-xl p-1 sm:p-5 text-black hover:cursor-pointer"
+          className="sm:w-60 w-40 absolute bg-gray-200 right-0 text-sm sm:text-lg flex flex-col gap-2 rounded-md shadow-xl p-1 sm:p-5 text-black hover:cursor-pointer z-50"
           style={{ display: isLoginClicked ? "block" : "none" }}
         >
           <div
