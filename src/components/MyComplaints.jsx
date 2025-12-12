@@ -30,7 +30,7 @@ function MyComplaints({ filed, inProgress, resolved, rejected, complaints }) {
     <div className="min-h-screen w-full bg-gray-100 p-6 ">
       {/* Top Navigation */}
       <div className="flex justify-between items-center mb-4">
-        <h1 className="text-3xl font-semibold text-[#1E3A8A]">My Complaints</h1>
+        <h1 className="text-xlsm:text-3xl font-semibold text-[#1E3A8A]">My Complaints</h1>
       </div>
 
       {/* Search Bar */}
@@ -54,9 +54,9 @@ function MyComplaints({ filed, inProgress, resolved, rejected, complaints }) {
         {/* LEFT SIDE */}
         <div className="col-span-2 space-y-6">
           {/* Stats Cards */}
-          <div className="grid grid-cols-5 gap-4">
+          <div className="sm:grid grid-cols-5 gap-4 hidden ">
             <div className="bg-white p-4 rounded-xl shadow-sm">
-              <p className="text-gray-500 text-lg font-semibold p-1">
+              <p className="text-gray-500 text-sm sm:text-lg font-semibold p-1">
                 Total Complaints
               </p>
               <div className="flex justify-between items-center">
@@ -127,7 +127,7 @@ function MyComplaints({ filed, inProgress, resolved, rejected, complaints }) {
                 {searchData.map((item, i) => (
                   <tr key={i} className="border-t text-gray-700">
                     <td className="py-3">{item.uniqueToken}</td>
-                    <td>{item.title}</td>
+                    <td className="truncate overflow-hidden text-ellipsis whitespace-nowrap max-w-[20vw]">{item.title}</td>
                     <td>{item.departmentName}</td>
                     <td>
                       <span

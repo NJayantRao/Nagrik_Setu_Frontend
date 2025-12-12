@@ -1,5 +1,5 @@
 import ComplaintCard from "./ComplaintCard";
-import { FileText, FileClock, FileCheck, FileX } from "lucide-react";
+import { FileText, FileClock, FileCheck, FileX, Plus } from "lucide-react";
 import Complaints from "./Complaints";
 import { useEffect } from "react";
 
@@ -41,10 +41,13 @@ function UserMain({ filed, inProgress, resolved, rejected, complaintList }) {
   }, [filed, inProgress, resolved, rejected, complaintList]);
   return (
     <div className="relative w-full h-screen p-4 bg-[#f2f3f5]">
-      <div className="text-3xl text-[#1E3A8A] mb-2 font-semibold px-2 tracking-tight">
+      <div className="bg-[#1d4ed8] h-10 w-10 sm:hidden absolute right-10 bottom-20 rounded-full flex justify-center items-center">
+        <Plus size={36}  className="invert"/>
+      </div>
+      <div className="text-xl sm:text-3xl text-[#1E3A8A] mb-2 font-semibold px-2 tracking-tight">
         <h1>Complaint Insights</h1>
       </div>
-      <div className=" flex gap-4 justify-evenly flex-nowrap">
+      <div className=" flex gap-2 sm:gap-4 justify-evenly flex-nowrap">
         {cardInfo.map((ele, idx) => {
           return (
             <ComplaintCard
@@ -58,7 +61,7 @@ function UserMain({ filed, inProgress, resolved, rejected, complaintList }) {
           );
         })}
       </div>
-      <div className="text-3xl text-[#1E3A8A] mt-5 mb-3 font-semibold px-2 tracking-tight">
+      <div className="text-xl sm:text-3xl text-[#1E3A8A] mt-5 mb-3 font-semibold px-2 tracking-tight">
         <h1>Recent Complaints </h1>
       </div>
       <div className=" flex gap-2 justify-evenly flex-col">

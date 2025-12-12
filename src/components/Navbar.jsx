@@ -27,7 +27,6 @@ function Navbar() {
         className={`fixed top-0 left-0 h-full w-28 bg-white shadow-xl z-50 transform
         ${isOpen ? "translate-x-0" : "-translate-x-full"} transition-transform duration-300  px-2 py-5`}
       >
-        {/* Close Button */}
         <div className="flex justify-end ">
           <X strokeWidth={1.5}
             className="cursor-pointer"

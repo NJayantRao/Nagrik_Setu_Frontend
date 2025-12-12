@@ -117,7 +117,7 @@ function UserSignUpPage() {
 
   return (
     <div className=" bg-[#e0e7ff] flex justify-center items-center p-3 max-h-screen">
-      <div className=" bg-[#f8fafc] p-3 w-3/4 max-h-[75vh] sm:h-full sm:w-1/3 flex justify-center flex-col gap-1 sm:gap-3 shadow-2xl rounded-2xl  border-indigo-200 border-3">
+      <div className=" bg-[#f8fafc] p-3 w-3/4  sm:w-1/3 flex justify-center flex-col gap-1 sm:gap-3 shadow-2xl rounded-2xl  border-indigo-200 border-3">
         <div className="text-center text-lg sm:text-3xl font-semibold">
           <h1>Sign-Up</h1>
         </div>

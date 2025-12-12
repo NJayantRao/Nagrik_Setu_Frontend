@@ -139,7 +139,7 @@ function UserLoginPage() {
             </div>
           </div>
           <div className="font-semibold text-gray-600 text-base flex flex-col  sm:flex-row justify-between items-center p-1 sm:p-2">
-            <div className="flex gap-2 mb-2 sm:mb-0">
+            <div className="flex gap-2 mb-2 sm:mb-0 ">
               <input type="checkbox" name="Remember" id="Remember" />
               <h2 className="font-medium">Remember Me</h2>
             </div>
