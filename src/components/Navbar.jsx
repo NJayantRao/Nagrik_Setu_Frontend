@@ -4,7 +4,14 @@ import Button from "./Button";
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserDataContext } from "../context/UserContext";
-import { Menu, X,FilePlusCorner,UserRoundPen,FileSearchCorner,MessageCircleQuestionMark } from "lucide-react";
+import {
+  Menu,
+  X,
+  FilePlusCorner,
+  UserRoundPen,
+  FileSearchCorner,
+  MessageCircleQuestionMark,
+} from "lucide-react";
 
 function Navbar() {
   const { isLoginClicked, setIsLoginClicked } = useContext(UserDataContext);
@@ -22,13 +29,14 @@ function Navbar() {
           }}
         />
       </div>
-  
+
       <div
         className={`fixed top-0 left-0 h-full w-28 bg-white shadow-xl z-50 transform
         ${isOpen ? "translate-x-0" : "-translate-x-full"} transition-transform duration-300  px-2 py-5`}
       >
         <div className="flex justify-end ">
-          <X strokeWidth={1.5}
+          <X
+            strokeWidth={1.5}
             className="cursor-pointer"
             onClick={() => {
               setIsOpen(false);
@@ -36,13 +44,23 @@ function Navbar() {
           />
         </div>
         <div className="flex flex-col gap-2 text-gray-700 text-sm items-start mt-5">
-          <div className="whitespace-nowrap rounded-lg hover:bg-gray-200 transition flex items-center gap-1">
-            <FilePlusCorner   size={14} strokeWidth={1.5}/>
+          <div
+            className="whitespace-nowrap rounded-lg hover:bg-gray-200 transition flex items-center gap-1"
+            onClick={() => {
+              navigate("/user/profile/complaints/Register");
+            }}
+          >
+            <FilePlusCorner size={14} strokeWidth={1.5} />
             <h1 className="font-medium">Report Issue</h1>
           </div>
 
-          <div className="whitespace-nowrap rounded-lg hover:bg-gray-200 transition flex items-center gap-1">
-            <FileSearchCorner  size={14} strokeWidth={1.5}/>
+          <div
+            className="whitespace-nowrap rounded-lg hover:bg-gray-200 transition flex items-center gap-1"
+            onClick={() => {
+              navigate("/user/profile/complaints");
+            }}
+          >
+            <FileSearchCorner size={14} strokeWidth={1.5} />
             <h1 className="font-medium">Track Issue</h1>
           </div>
 
@@ -52,12 +70,12 @@ function Navbar() {
           </div>
 
           <div className="whitespace-nowrap rounded-lg hover:bg-gray-200 transition flex items-center gap-1">
-            <UserRoundPen  size={14} strokeWidth={1.5} />
+            <UserRoundPen size={14} strokeWidth={1.5} />
             <h1 className="font-medium">Contact Us</h1>
           </div>
         </div>
       </div>
-       <LeftSection />
+      <LeftSection />
       <div
         className={`hover:cursor-pointer relative dropdown hidden sm:block`}
         onClick={(e) => {
@@ -66,14 +84,20 @@ function Navbar() {
       >
         <h1>Home</h1>
       </div>
-      <div className="hover:cursor-pointer relative dropdown hidden sm:block" onClick={()=>{
-        navigate("/user/profile/complaints/Register")
-      }}>
+      <div
+        className="hover:cursor-pointer relative dropdown hidden sm:block"
+        onClick={() => {
+          navigate("/user/profile/complaints/Register");
+        }}
+      >
         <h1>Report Issue</h1>
       </div>
-      <div className="hover:cursor-pointer relative dropdown hidden sm:block" onClick={()=>{
-        navigate("/user/profile/complaints")
-      }}>
+      <div
+        className="hover:cursor-pointer relative dropdown hidden sm:block"
+        onClick={() => {
+          navigate("/user/profile/complaints");
+        }}
+      >
         <h1>Track Issue</h1>
       </div>
       <div className="hover:cursor-pointer relative dropdown hidden sm:block">
