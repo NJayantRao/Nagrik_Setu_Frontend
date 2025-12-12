@@ -42,8 +42,8 @@ function AdminResetPassword() {
     e.preventDefault();
     try {
       const response = await axios.put(
-        `${import.meta.env.VITE_BACKEND_URL}/admin/resetPassword`,
-        { uniqueId: adminUniqueId, otp, newPassword: adminPassword },
+        `${import.meta.env.VITE_LOCAL_URL}/admin/resetPassword`,
+        { uniqueId: adminUniqueId, otp, newPassword: adminPassword }
       );
       console.log(adminUniqueId);
 

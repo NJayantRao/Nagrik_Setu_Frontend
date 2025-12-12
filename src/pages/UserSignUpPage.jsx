@@ -58,7 +58,7 @@ function UserSignUpPage() {
     try {
       setIsDisabled(true);
       const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/user/signup`,
+        `${import.meta.env.VITE_LOCAL_URL}/user/signup`,
         {
           name,
           email,
@@ -103,7 +103,7 @@ function UserSignUpPage() {
 
   useEffect(() => {
     async function fetchData() {
-      const api = await axios.get(import.meta.env.VITE_BACKEND_URL);
+      const api = await axios.get(import.meta.env.VITE_LOCAL_URL);
       console.log(api);
     }
     fetchData();
@@ -241,7 +241,8 @@ function UserSignUpPage() {
           </div>
           <div className="w-full flex justify-center mt-0.5 p-2">
             <button
-              type="submit" disabled={isDisabled}
+              type="submit"
+              disabled={isDisabled}
               className="bg-blue-600 py-1 px-3 sm:p-2 sm:w-1/2 rounded-xl sm:rounded-full text-lg sm:text-xl text-white  font-semibold sm:font-bold hover:scale-105 hover:cursor-pointer hover:bg-blue-700 hover:ease-in-out"
             >
               Sign Up

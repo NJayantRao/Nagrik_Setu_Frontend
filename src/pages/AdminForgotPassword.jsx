@@ -28,8 +28,8 @@ function AdminForgotPassword() {
     try {
       setLoading(true);
       const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/admin/forgotPassword`,
-        { uniqueId: adminUniqueId },
+        `${import.meta.env.VITE_LOCAL_URL}/admin/forgotPassword`,
+        { uniqueId: adminUniqueId }
       );
 
       setAdminUniqueId("");

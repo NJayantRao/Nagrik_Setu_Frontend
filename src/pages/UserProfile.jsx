@@ -41,12 +41,12 @@ function UserProfile() {
       try {
         const token = JSON.parse(localStorage.getItem("token"));
         const response = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URL}/user/profile`,
+          `${import.meta.env.VITE_LOCAL_URL}/user/profile`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
             },
-          },
+          }
         );
         console.log(response.data);
         setName(response.data.name);
@@ -66,7 +66,7 @@ function UserProfile() {
         } else {
           console.log(error);
           setErrorStatus(error.response.status);
-        setErrorMsg(error.response.data);
+          setErrorMsg(error.response.data);
         }
       }
     }
@@ -78,10 +78,10 @@ function UserProfile() {
       try {
         const token = JSON.parse(localStorage.getItem("token"));
         const response = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URL}/user/profile/complaints`,
+          `${import.meta.env.VITE_LOCAL_URL}/user/profile/complaints`,
           {
             headers: { Authorization: `Bearer ${token}` },
-          },
+          }
         );
 
         let f = 0,
@@ -114,7 +114,7 @@ function UserProfile() {
     fetchComplaintsInfo();
   }, []);
 
-  if ((errorStatus === 401) || (errorStatus ===500)) {
+  if (errorStatus === 401 || errorStatus === 500) {
     return (
       <div>
         <h1 className="text-3xl sm:text-5xl absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-bold ">

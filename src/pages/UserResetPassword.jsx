@@ -53,7 +53,7 @@ function UserResetPassword() {
     try {
       setIsDisabled(true);
       const response = await axios.put(
-        `${import.meta.env.VITE_BACKEND_URL}/user/resetPassword`,
+        `${import.meta.env.VITE_LOCAL_URL}/user/resetPassword`,
         { uniqueToken, otp, newPassword: password }
       );
       console.log(uniqueToken);

@@ -52,7 +52,7 @@ function UserLoginPage() {
       setIsLoading(true);
       setIsDisabled(true);
       const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/user/login`,
+        `${import.meta.env.VITE_LOCAL_URL}/user/login`,
         {
           uniqueToken,
           password,

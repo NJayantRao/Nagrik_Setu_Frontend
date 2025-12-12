@@ -42,7 +42,7 @@ function UserComplaints() {
       try {
         const token = JSON.parse(localStorage.getItem("token"));
         const response = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URL}/user/profile`,
+          `${import.meta.env.VITE_LOCAL_URL}/user/profile`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -79,7 +79,7 @@ function UserComplaints() {
       try {
         const token = JSON.parse(localStorage.getItem("token"));
         const response = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URL}/user/profile/complaints`,
+          `${import.meta.env.VITE_LOCAL_URL}/user/profile/complaints`,
           {
             headers: { Authorization: `Bearer ${token}` },
           }

@@ -81,7 +81,7 @@ function ComplaintsRegister() {
       const token = JSON.parse(localStorage.getItem("token"));
       setRegistered(true);
       const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/complaints/register`,
+        `${import.meta.env.VITE_LOCAL_URL}/complaints/register`,
         formData,
         {
           headers: {
@@ -124,7 +124,7 @@ function ComplaintsRegister() {
       try {
         const token = JSON.parse(localStorage.getItem("token"));
         const response = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URL}/user/profile/complaints/departments`,
+          `${import.meta.env.VITE_LOCAL_URL}/user/profile/complaints/departments`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -155,7 +155,7 @@ function ComplaintsRegister() {
         setIsDisabled(true);
         const token = JSON.parse(localStorage.getItem("token"));
         const response = await axios.get(
-          `${import.meta.env.VITE_BACKEND_URL}/user/profile`,
+          `${import.meta.env.VITE_LOCAL_URL}/user/profile`,
           {
             headers: {
               Authorization: `Bearer ${token}`,

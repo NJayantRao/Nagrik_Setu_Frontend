@@ -45,7 +45,7 @@ function AdminSignUpPage() {
     console.log(adminName, adminEmail, adminPassword, adminPhone, adminAddress);
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/admin/signup`,
+        `${import.meta.env.VITE_LOCAL_URL}/admin/signup`,
         {
           name: adminName,
           email: adminEmail,
@@ -53,7 +53,7 @@ function AdminSignUpPage() {
           phone: adminPhone,
           address: adminAddress,
         },
-        { withCredentials: true },
+        { withCredentials: true }
       );
       setIsLoading(true);
       const token = response.data.token;

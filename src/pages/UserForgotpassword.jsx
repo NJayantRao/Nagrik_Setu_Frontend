@@ -38,7 +38,7 @@ function UserForgotPassword() {
       setLoading(true);
       setIsDisabled(true);
       const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_URL}/user/forgotPassword`,
+        `${import.meta.env.VITE_LOCAL_URL}/user/forgotPassword`,
         { uniqueToken }
       );
 
