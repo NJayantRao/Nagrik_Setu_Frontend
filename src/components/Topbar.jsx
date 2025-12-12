@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import ImageAvatars from "./ImageAvatar";
 import LeftSection from "./LeftSection";
 import BackgroundLetterAvatars from "./TextAvatar";
-import { Menu, House, FileText, LogOut } from "lucide-react";
+import { Menu, House, FileText, User } from "lucide-react";
 import { useState, useContext, useEffect } from "react";
 import { UserDataContext } from "../context/UserContext";
 import axios from "axios";
@@ -82,6 +82,15 @@ function Topbar({ name }) {
             >
               <FileText size={20} strokeWidth={1.2} />
               <h2 className="font-medium">My Complaints</h2>
+            </div>
+             <div
+              className=" px-2 py-1 flex gap-2 bg-[#A7F3D0] rounded-xl mb-2"
+              onClick={(e) => {
+                navigate("/user/profile");
+              }}
+            >
+              <User size={20} strokeWidth={1.2} />
+              <h2 className="font-medium">My Profile</h2>
             </div>
             <div className="flex flex-col gap-2">
               <LogoutButton />

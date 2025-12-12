@@ -18,11 +18,15 @@ function UserSignUpPage() {
     password,
     address,
     phone,
+    errorMsg,
+    setErrorMsg,
+    errorStatus,
+    setErrorStatus,
+    isDisabled,
+    setIsDisabled,
   } = useContext(UserDataContext);
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [errorStatus, setErrorStatus] = useState(null);
-  const [errorMsg, setErrorMsg] = useState("");
 
   const navigate = useNavigate();
 
@@ -52,8 +56,9 @@ function UserSignUpPage() {
     e.preventDefault();
     // console.log(name,email,password,address,phone);
     try {
+      setIsDisabled(true);
       const response = await axios.post(
-        `${import.meta.env.VITE_LOCAL_URL}/user/signup`,
+        `${import.meta.env.VITE_BACKEND_URL}/user/signup`,
         {
           name,
           email,
@@ -71,19 +76,22 @@ function UserSignUpPage() {
 
       setTimeout(() => {
         setIsLoading(false);
+        setIsDisabled(false);
         navigate("/user/profile");
       }, 4000);
     } catch (error) {
       console.log(error);
       if (error.response?.status === 400) {
         notify(error.response.data);
+        setIsDisabled(false);
         setTimeout(() => {
           navigate("/user/login");
         }, 4000);
       } else {
+        setIsDisabled(false);
         console.log(error);
-        setErrorStatus(error.response.status);
-        setErrorMsg(error.response.data);
+        setErrorStatus(500);
+        setErrorMsg("Something went wrong");
       }
     }
     setName("");
@@ -105,10 +113,10 @@ function UserSignUpPage() {
     return <Loader />;
   }
 
-  if (errorStatus === (401 || 500)) {
+  if (errorStatus === 401 || errorStatus === 500) {
     return (
       <div>
-        <h1 className="text-5xl absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-bold ">
+        <h1 className="text-3xl sm:text-5xl absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-bold ">
           {errorStatus} - {errorMsg}
         </h1>
       </div>
@@ -135,6 +143,7 @@ function UserSignUpPage() {
               name="name"
               className={`py-1 px-2 sm:py-2 sm:px-4 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${name ? "bg-[#e0e7ff]" : "bg-gray-200"}`}
               value={name}
+              disabled={isDisabled}
               onChange={(e) => {
                 setName(e.target.value);
                 //console.log(name);
@@ -150,6 +159,7 @@ function UserSignUpPage() {
               name="email"
               className={`py-1 px-2 sm:py-2 sm:px-4 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${email ? "bg-[#e8f0ff]" : "bg-gray-200"}`}
               value={email}
+              disabled={isDisabled}
               onChange={(e) => {
                 setEmail(e.target.value);
                 //console.log(email);
@@ -172,6 +182,7 @@ function UserSignUpPage() {
                 name="password"
                 className={`py-1 px-2 sm:py-2 sm:px-4 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${password ? "bg-[#e8f0ff]" : "bg-gray-200"}`}
                 value={password}
+                disabled={isDisabled}
                 onChange={(e) => {
                   setPassword(e.target.value);
                   //console.log(password);
@@ -202,6 +213,7 @@ function UserSignUpPage() {
               name="phone"
               className={`py-1 px-2 sm:py-2 sm:px-4 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${phone ? "bg-[#e8f0ff]" : "bg-gray-200"}`}
               value={phone}
+              disabled={isDisabled}
               onChange={(e) => {
                 setPhone(e.target.value);
                 //console.log(name);
@@ -219,6 +231,7 @@ function UserSignUpPage() {
               name="address"
               className={`py-1 px-2 sm:py-2 sm:px-4 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${address ? "bg-[#e8f0ff]" : "bg-gray-200"}`}
               value={address}
+              disabled={isDisabled}
               onChange={(e) => {
                 setAddress(e.target.value);
                 //console.log(name);
@@ -228,7 +241,7 @@ function UserSignUpPage() {
           </div>
           <div className="w-full flex justify-center mt-0.5 p-2">
             <button
-              type="submit"
+              type="submit" disabled={isDisabled}
               className="bg-blue-600 py-1 px-3 sm:p-2 sm:w-1/2 rounded-xl sm:rounded-full text-lg sm:text-xl text-white  font-semibold sm:font-bold hover:scale-105 hover:cursor-pointer hover:bg-blue-700 hover:ease-in-out"
             >
               Sign Up

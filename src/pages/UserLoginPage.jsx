@@ -8,8 +8,18 @@ import { toast } from "react-toastify";
 
 function UserLoginPage() {
   const navigate = useNavigate();
-  const { password, setPassword, uniqueToken, setUniqueToken } =
-    useContext(UserDataContext);
+  const {
+    password,
+    setPassword,
+    uniqueToken,
+    setUniqueToken,
+    errorMsg,
+    setErrorMsg,
+    errorStatus,
+    setErrorStatus,
+    isDisabled,
+    setIsDisabled,
+  } = useContext(UserDataContext);
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -40,13 +50,14 @@ function UserLoginPage() {
     console.log(uniqueToken, password);
     try {
       setIsLoading(true);
+      setIsDisabled(true);
       const response = await axios.post(
-        `${import.meta.env.VITE_LOCAL_URL}/user/login`,
+        `${import.meta.env.VITE_BACKEND_URL}/user/login`,
         {
           uniqueToken,
           password,
         },
-        { withCredentials: true },
+        { withCredentials: true }
       );
       setUniqueToken("");
       setPassword("");
@@ -57,6 +68,7 @@ function UserLoginPage() {
       localStorage.setItem("token", JSON.stringify(token));
 
       notify("Logged-In Successfully...", "success");
+      setIsDisabled(false);
       setTimeout(() => {
         setIsLoading(false);
         navigate("/user/profile");
@@ -69,20 +81,34 @@ function UserLoginPage() {
         notify(error.response.data, "error");
         setUniqueToken("");
         setPassword("");
+        setIsDisabled(false);
         setTimeout(() => {
           navigate("/user/signup");
         }, 4000);
       } else if (error.response?.status === 402) {
         setIsLoading(false);
         notify(error.response.data, "error");
+        setIsDisabled(false);
       } else {
         console.log(error);
+        setErrorStatus(500);
+        setErrorMsg("Something went wrong");
+        setIsDisabled(false);
       }
     }
   }
 
   if (isLoading) {
     return <Loader />;
+  }
+  if (errorStatus === 401 || errorStatus === 500) {
+    return (
+      <div>
+        <h1 className="text-3xl sm:text-5xl absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-bold ">
+          {errorStatus} - {errorMsg}
+        </h1>
+      </div>
+    );
   }
   return (
     <div className=" bg-[#e0e7ff] flex justify-center items-center p-5 max-h-screen">
@@ -104,6 +130,7 @@ function UserLoginPage() {
               name="uniqueId"
               className={` py-2 px-4 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${uniqueToken ? "bg-[#e0e7ff]" : "bg-gray-200"}`}
               value={uniqueToken}
+              disabled={isDisabled}
               onChange={(e) => {
                 setUniqueToken(e.target.value);
                 //console.log(uniqueToken);
@@ -120,6 +147,7 @@ function UserLoginPage() {
                 name="password"
                 className={` py-2 px-4 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${password ? "bg-[#e8f0ff]" : "bg-gray-200"}`}
                 value={password}
+                disabled={isDisabled}
                 onChange={(e) => {
                   setPassword(e.target.value);
                   //console.log(password);
@@ -157,6 +185,7 @@ function UserLoginPage() {
           <div className="w-full flex justify-center mt-0.5">
             <button
               type="submit"
+              disabled={isDisabled}
               className="bg-blue-600 p-2 w-1/2 rounded-xl sm:rounded-full text-xl text-white font-bold hover:scale-105 hover:cursor-pointer hover:bg-blue-700 hover:ease-in-out"
             >
               Login

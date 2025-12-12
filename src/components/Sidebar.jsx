@@ -38,10 +38,12 @@ function Sidebar({ email, uniqueToken }) {
           <FilePlusCorner size={28} absoluteStrokeWidth />
           <h2>Raise Complaint</h2>
         </div>
-        {/* <div className="flex items-center gap-3 px-4 py-3 text-gray-700 font-bold bg-[#D1FAE5] rounded-2xl transition cursor-pointer hover:scale-105 hover:bg-[#A7F3D0]">
+        <div className="flex items-center gap-3 px-4 py-3 text-gray-700 font-bold bg-[#D1FAE5] rounded-2xl transition cursor-pointer hover:scale-105 hover:bg-[#A7F3D0]" onClick={()=>{
+          navigate("/user/profile")
+        }}>
           <User size={28} absoluteStrokeWidth />
           <h2>My Profile</h2>
-        </div> */}
+        </div>
         <div className="bg-[#D1FAE5] p-4 rounded-2xl  hover:scale-105 hover:bg-[#A7F3D0] ">
           <div className="text-gray-900 font-semibold text-lg">
             Logged in as:

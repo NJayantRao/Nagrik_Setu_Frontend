@@ -9,8 +9,18 @@ import axios from "axios";
 function UserResetPassword() {
   const navigate = useNavigate();
   const location = useLocation();
-  const { setUniqueToken, uniqueToken, password, setPassword } =
-    useContext(UserDataContext);
+  const {
+    setUniqueToken,
+    uniqueToken,
+    password,
+    setPassword,
+    errorMsg,
+    setErrorMsg,
+    errorStatus,
+    setErrorStatus,
+    isDisabled,
+    setIsDisabled,
+  } = useContext(UserDataContext);
   const [loading, setLoading] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [otp, setOtp] = useState("");
@@ -41,8 +51,9 @@ function UserResetPassword() {
   async function submitHandler(e) {
     e.preventDefault();
     try {
+      setIsDisabled(true);
       const response = await axios.put(
-        `${import.meta.env.VITE_LOCAL_URL}/user/resetPassword`,
+        `${import.meta.env.VITE_BACKEND_URL}/user/resetPassword`,
         { uniqueToken, otp, newPassword: password }
       );
       console.log(uniqueToken);
@@ -54,7 +65,8 @@ function UserResetPassword() {
       setOtp("");
       setPassword("");
       setIsLoading(true);
-      notify("Password Saved Successfully...","success")
+      notify("Password Saved Successfully...", "success");
+      setIsDisabled(false);
       setTimeout(() => {
         navigate("/user/login");
         setIsLoading(false);
@@ -63,9 +75,13 @@ function UserResetPassword() {
     } catch (error) {
       if (error.response?.status === 401) {
         console.log(error);
+        setIsDisabled(false);
         notify(error.response.data, "error");
       } else {
         console.log(error);
+        setIsDisabled(false);
+        setErrorStatus(500);
+        setErrorMsg("Something went wrong");
       }
     }
   }
@@ -77,6 +93,15 @@ function UserResetPassword() {
   }, []);
   if (isLoading) {
     return <Loader />;
+  }
+  if (errorStatus === 401 || errorStatus === 500) {
+    return (
+      <div>
+        <h1 className="text-3xl sm:text-5xl absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-bold ">
+          {errorStatus} - {errorMsg}
+        </h1>
+      </div>
+    );
   }
   return (
     <div className=" bg-[#e0e7ff] flex justify-center items-center p-5 max-h-screen">
@@ -98,6 +123,7 @@ function UserResetPassword() {
               name="uniqueId"
               className={` py-2 px-4 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${uniqueToken ? "bg-[#e0e7ff]" : "bg-gray-200"}`}
               value={uniqueToken}
+              disabled={isDisabled}
               onChange={(e) => {
                 setUniqueToken(e.target.value);
                 //console.log(uniqueToken);
@@ -113,6 +139,7 @@ function UserResetPassword() {
               name="otp"
               className={` py-2 px-4 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${otp ? "bg-[#e0e7ff]" : "bg-gray-200"}`}
               value={otp}
+              disabled={isDisabled}
               maxLength={6}
               minLength={6}
               onChange={(e) => {
@@ -131,6 +158,7 @@ function UserResetPassword() {
                 name="password"
                 className={` py-2 px-4 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${password ? "bg-[#e8f0ff]" : "bg-gray-200"}`}
                 value={password}
+                disabled={isDisabled}
                 onChange={(e) => {
                   setPassword(e.target.value);
                   //console.log(password);
@@ -152,6 +180,7 @@ function UserResetPassword() {
           <div className="w-full flex justify-center mt-0.5">
             <button
               type="submit"
+              disabled={isDisabled}
               className="bg-blue-600 p-2 w-3/4 rounded-xl sm:rounded-full text-lg sm:text-xl text-white font-bold hover:scale-105 hover:cursor-pointer hover:bg-blue-700 hover:ease-in-out"
             >
               Reset Password

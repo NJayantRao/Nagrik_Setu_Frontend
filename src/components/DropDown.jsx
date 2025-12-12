@@ -59,7 +59,7 @@ const DropDown = ({isLoginClicked}) => {
               try {
                 const token = JSON.parse(localStorage.getItem("token"));
                 const response = await axios.get(
-                  `${import.meta.env.VITE_LOCAL_URL}/user/logout`,
+                  `${import.meta.env.VITE_BACKEND_URL}/user/logout`,
                   {
                     headers: {
                       Authorization: `Bearer ${token}`,

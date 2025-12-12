@@ -35,7 +35,7 @@ const DeleteButton = () => {
           try {
             const token = JSON.parse(localStorage.getItem("token"));
             const del = await axios.delete(
-              `${import.meta.env.VITE_LOCAL_URL}/user/delete`,
+              `${import.meta.env.VITE_BACKEND_URL}/user/delete`,
               {
                 headers: {
                   Authorization: `Bearer ${token}`,

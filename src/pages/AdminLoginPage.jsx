@@ -52,7 +52,7 @@ function AdminLoginPage() {
     console.log(adminUniqueId, adminPassword);
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_LOCAL_URL}/admin/login`,
+        `${import.meta.env.VITE_BACKEND_URL}/admin/login`,
         {
           uniqueId: adminUniqueId,
           password: adminPassword,

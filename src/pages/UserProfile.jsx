@@ -11,8 +11,6 @@ import { UserDataContext } from "../context/UserContext";
 
 function UserProfile() {
   const navigate = useNavigate();
-  const [errorStatus, setErrorStatus] = useState(null);
-  const [errorMsg, setErrorMsg] = useState("");
   const [countFiled, setCountFiled] = useState(0);
   const [countInProgress, setCountInProgress] = useState(0);
   const [countResolved, setCountResolved] = useState(0);
@@ -33,13 +31,17 @@ function UserProfile() {
     uniqueToken,
     id,
     setId,
+    errorMsg,
+    setErrorMsg,
+    errorStatus,
+    setErrorStatus,
   } = useContext(UserDataContext);
   useEffect(() => {
     async function fetchUserInfo() {
       try {
         const token = JSON.parse(localStorage.getItem("token"));
         const response = await axios.get(
-          `${import.meta.env.VITE_LOCAL_URL}/user/profile`,
+          `${import.meta.env.VITE_BACKEND_URL}/user/profile`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -63,8 +65,8 @@ function UserProfile() {
           console.log(errorStatus);
         } else {
           console.log(error);
-          setErrorStatus(500);
-          setErrorMsg("Internal Server Error");
+          setErrorStatus(error.response.status);
+        setErrorMsg(error.response.data);
         }
       }
     }
@@ -76,7 +78,7 @@ function UserProfile() {
       try {
         const token = JSON.parse(localStorage.getItem("token"));
         const response = await axios.get(
-          `${import.meta.env.VITE_LOCAL_URL}/user/profile/complaints`,
+          `${import.meta.env.VITE_BACKEND_URL}/user/profile/complaints`,
           {
             headers: { Authorization: `Bearer ${token}` },
           },
@@ -104,16 +106,18 @@ function UserProfile() {
         console.log(countFiled, countInProgress, countRejected, countResolved);
       } catch (error) {
         console.log(error);
+        setErrorStatus(500);
+        setErrorMsg("Something went wrong");
       }
     };
 
     fetchComplaintsInfo();
   }, []);
 
-  if (errorStatus === (401 || 500)) {
+  if ((errorStatus === 401) || (errorStatus ===500)) {
     return (
       <div>
-        <h1 className="text-5xl absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-bold ">
+        <h1 className="text-3xl sm:text-5xl absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-bold ">
           {errorStatus} - {errorMsg}
         </h1>
       </div>

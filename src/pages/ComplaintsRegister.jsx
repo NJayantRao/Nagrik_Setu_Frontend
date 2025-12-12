@@ -28,9 +28,13 @@ function ComplaintsRegister() {
     uniqueToken,
     id,
     setId,
+    errorMsg,
+    setErrorMsg,
+    errorStatus,
+    setErrorStatus,
+    isDisabled,
+    setIsDisabled,
   } = useContext(UserDataContext);
-  const [errorStatus, setErrorStatus] = useState(null);
-  const [errorMsg, setErrorMsg] = useState("");
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [image, setImage] = useState(null);
@@ -77,7 +81,7 @@ function ComplaintsRegister() {
       const token = JSON.parse(localStorage.getItem("token"));
       setRegistered(true);
       const response = await axios.post(
-        `${import.meta.env.VITE_LOCAL_URL}/complaints/register`,
+        `${import.meta.env.VITE_BACKEND_URL}/complaints/register`,
         formData,
         {
           headers: {
@@ -120,7 +124,7 @@ function ComplaintsRegister() {
       try {
         const token = JSON.parse(localStorage.getItem("token"));
         const response = await axios.get(
-          `${import.meta.env.VITE_LOCAL_URL}/user/profile/complaints/departments`,
+          `${import.meta.env.VITE_BACKEND_URL}/user/profile/complaints/departments`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -148,9 +152,10 @@ function ComplaintsRegister() {
   useEffect(() => {
     async function fetchUserInfo() {
       try {
+        setIsDisabled(true);
         const token = JSON.parse(localStorage.getItem("token"));
         const response = await axios.get(
-          `${import.meta.env.VITE_LOCAL_URL}/user/profile`,
+          `${import.meta.env.VITE_BACKEND_URL}/user/profile`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -169,10 +174,12 @@ function ComplaintsRegister() {
           setErrorStatus(error.response.status);
           setErrorMsg(error.response.data);
           console.log(errorStatus);
+          setIsDisabled(false);
         } else {
           console.log(error);
           setErrorStatus(500);
-          setErrorMsg("Internal Server Error");
+          setErrorMsg("Something went wrong");
+          setIsDisabled(false);
         }
       }
     }
@@ -203,6 +210,7 @@ function ComplaintsRegister() {
                   name="title"
                   className={` py-1 sm:py-2 px-2 sm:px-4 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${title ? "bg-[#e0e7ff]" : "bg-gray-200"}`}
                   value={title}
+                  disabled={isDisabled}
                   onChange={(e) => {
                     setTitle(e.target.value);
                     //console.log(title);
@@ -219,6 +227,7 @@ function ComplaintsRegister() {
                   name="desc"
                   className={`py-1 sm:py-2 px-2 sm:px-4 h-10 sm:h-15 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${desc ? "bg-[#e0e7ff]" : "bg-gray-200"}`}
                   value={desc}
+                  disabled={isDisabled}
                   onChange={(e) => {
                     setDesc(e.target.value);
                     //console.log(desc);
@@ -237,6 +246,7 @@ function ComplaintsRegister() {
                 <select
                   value={departmentId}
                   required
+                  disabled={isDisabled}
                   onChange={(e) => {
                     setDepartmentId(e.target.value);
                     console.log(e.target.value); // logs selected department _id
@@ -257,6 +267,7 @@ function ComplaintsRegister() {
               <div className="w-full flex justify-center mt-0.5">
                 <button
                   type="submit"
+                  disabled={isDisabled}
                   className="bg-blue-600 py-1 px-2 sm:p-2 w-1/2 rounded-xl sm:rounded-full text-lg sm:text-xl text-white font-bold hover:scale-105 hover:cursor-pointer hover:bg-blue-700 hover:ease-in-out mb-3"
                 >
                   {registered ? "Registering..." : "Registered"}

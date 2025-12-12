@@ -3,6 +3,7 @@ import ImageUploading from "react-images-uploading";
 import { toast } from "react-toastify";
 
 function ImageUploader({ image, setImage, preview, setPreview }) {
+  const [isDisabled,setIsDisabled]= useState(false)
   const notify = (message, type = "success") => {
     const colors = {
       success: "#4f46e5", // Indigo (your success color)
@@ -25,15 +26,18 @@ function ImageUploader({ image, setImage, preview, setPreview }) {
     });
   };
   const handleFileUpload = (e) => {
+    setIsDisabled(true)
     console.log(e.target.files[0]);
     const file = e.target.files[0];
     if (!file) {
       notify("Image is Required...", "error");
+      setIsDisabled(false)
       return;
     }
     setImage(file);
     setPreview(URL.createObjectURL(file));
     notify("Image Uploaded Successfully!", "success");
+    setIsDisabled(false)
   };
   return (
     <div className="w-full max-w-lg">
@@ -50,6 +54,7 @@ function ImageUploader({ image, setImage, preview, setPreview }) {
             <input
               type="file"
               name="Browse File"
+              disabled={isDisabled}
               placeholder="Browse File"
               id=""
               className="h-5 w-20 hover:cursor-pointer "
