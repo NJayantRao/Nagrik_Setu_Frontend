@@ -4,37 +4,82 @@ import Button from "./Button";
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserDataContext } from "../context/UserContext";
+import { Menu, X,FilePlusCorner,UserRoundPen,FileSearchCorner,MessageCircleQuestionMark } from "lucide-react";
 
 function Navbar() {
   const { isLoginClicked, setIsLoginClicked } = useContext(UserDataContext);
   const navigate = useNavigate();
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <div
-      className="bg-[#1D4ED8] w-full h-25 px-2 py-3 flex items-center justify-around shadow-xl text-gray-300 text-xl font-bold"
+      className="bg-[#1D4ED8] w-full h-12 sm:h-25 px-2 py-3 flex items-center justify-between sm:justify-around shadow-xl text-gray-300 text-xl font-bold"
       onClick={(e) => {}}
     >
-      <LeftSection />
+      <div className="sm:hidden flex gap-3">
+        <Menu
+          onClick={() => {
+            setIsOpen(true);
+          }}
+        />
+      </div>
+  
       <div
-        className="hover:cursor-pointer relative dropdown"
+        className={`fixed top-0 left-0 h-full w-28 bg-white shadow-xl z-50 transform
+        ${isOpen ? "translate-x-0" : "-translate-x-full"} transition-transform duration-300  px-2 py-5`}
+      >
+        {/* Close Button */}
+        <div className="flex justify-end ">
+          <X strokeWidth={1.5}
+            className="cursor-pointer"
+            onClick={() => {
+              setIsOpen(false);
+            }}
+          />
+        </div>
+        <div className="flex flex-col gap-2 text-gray-700 text-sm items-start mt-5">
+          <div className="whitespace-nowrap rounded-lg hover:bg-gray-200 transition flex items-center gap-1">
+            <FilePlusCorner   size={14} strokeWidth={1.5}/>
+            <h1 className="font-medium">Report Issue</h1>
+          </div>
+
+          <div className="whitespace-nowrap rounded-lg hover:bg-gray-200 transition flex items-center gap-1">
+            <FileSearchCorner  size={14} strokeWidth={1.5}/>
+            <h1 className="font-medium">Track Issue</h1>
+          </div>
+
+          <div className="whitespace-nowrap rounded-lg hover:bg-gray-200 transition flex items-center gap-1">
+            <MessageCircleQuestionMark size={14} strokeWidth={1.5} />
+            <h1 className="font-medium">Help</h1>
+          </div>
+
+          <div className="whitespace-nowrap rounded-lg hover:bg-gray-200 transition flex items-center gap-1">
+            <UserRoundPen  size={14} strokeWidth={1.5} />
+            <h1 className="font-medium">Contact Us</h1>
+          </div>
+        </div>
+      </div>
+       <LeftSection />
+      <div
+        className={`hover:cursor-pointer relative dropdown hidden sm:block`}
         onClick={(e) => {
           navigate("/");
         }}
       >
         <h1>Home</h1>
       </div>
-      <div className="hover:cursor-pointer relative dropdown">
+      <div className="hover:cursor-pointer relative dropdown hidden sm:block">
         <h1>Report Issue</h1>
       </div>
-      <div className="hover:cursor-pointer relative dropdown">
+      <div className="hover:cursor-pointer relative dropdown hidden sm:block">
         <h1>Track Issue</h1>
       </div>
-      <div className="hover:cursor-pointer relative dropdown">
+      <div className="hover:cursor-pointer relative dropdown hidden sm:block">
         <h1>Help</h1>
       </div>
-      <div className="hover:cursor-pointer relative dropdown">
+      <div className="hover:cursor-pointer relative dropdown hidden sm:block">
         <h1>Contact Us</h1>
       </div>
-      <div className=" mr-2 relative">
+      <div className=" sm:mr-2 relative ">
         <Button />
         <div
           className="w-60 absolute bg-gray-200 right-0 text-lg flex flex-col gap-2 rounded-md shadow-xl p-5 text-black hover:cursor-pointer"
