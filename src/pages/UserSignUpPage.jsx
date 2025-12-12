@@ -229,7 +229,7 @@ function UserSignUpPage() {
           <div className="w-full flex justify-center mt-0.5 p-2">
             <button
               type="submit"
-              className="bg-blue-600 py-1 px-2 sm:p-2 sm:w-1/2 rounded-xl sm:rounded-full text-lg sm:text-xl text-white  font-semibold sm:font-bold hover:scale-105 hover:cursor-pointer hover:bg-blue-700 hover:ease-in-out"
+              className="bg-blue-600 py-1 px-3 sm:p-2 sm:w-1/2 rounded-xl sm:rounded-full text-lg sm:text-xl text-white  font-semibold sm:font-bold hover:scale-105 hover:cursor-pointer hover:bg-blue-700 hover:ease-in-out"
             >
               Sign Up
             </button>

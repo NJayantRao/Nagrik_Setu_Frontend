@@ -80,12 +80,12 @@ function UserResetPassword() {
   }
   return (
     <div className=" bg-[#e0e7ff] flex justify-center items-center p-5 max-h-screen">
-      <div className=" bg-[#f8fafc] p-3 w-1/3 flex justify-center flex-col gap-3 shadow-2xl rounded-2xl  border-indigo-200 border-3">
-        <div className="text-center text-3xl font-semibold">
+      <div className=" bg-[#f8fafc] p-3 w-3/4 sm:w-1/3 flex justify-center flex-col gap-2 sm:gap-3 shadow-2xl rounded-2xl  border-indigo-200 border-3">
+        <div className="text-center text-2xl sm:text-3xl font-semibold">
           <h1>Reset Password</h1>
         </div>
         <form
-          className="flex flex-col gap-5 w-full p-3"
+          className="flex flex-col gap-3 sm:gap-5 w-full p-2 sm:p-3"
           onSubmit={(e) => {
             submitHandler(e);
           }}
@@ -152,7 +152,7 @@ function UserResetPassword() {
           <div className="w-full flex justify-center mt-0.5">
             <button
               type="submit"
-              className="bg-blue-600 p-2 w-1/2 rounded-full text-xl text-white font-bold hover:scale-105 hover:cursor-pointer hover:bg-blue-700 hover:ease-in-out"
+              className="bg-blue-600 p-2 w-3/4 rounded-xl sm:rounded-full text-lg sm:text-xl text-white font-bold hover:scale-105 hover:cursor-pointer hover:bg-blue-700 hover:ease-in-out"
             >
               Reset Password
             </button>

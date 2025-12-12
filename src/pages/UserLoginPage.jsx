@@ -86,7 +86,7 @@ function UserLoginPage() {
   }
   return (
     <div className=" bg-[#e0e7ff] flex justify-center items-center p-5 max-h-screen">
-      <div className=" bg-[#f8fafc] p-3 w-1/3 flex justify-center flex-col gap-3 shadow-2xl rounded-2xl  border-indigo-200 border-3">
+      <div className=" bg-[#f8fafc] p-3 w-3/4 max-h-[75vh] sm:w-1/3 sm:h-full flex justify-center flex-col gap-3 shadow-2xl rounded-2xl  border-indigo-200 border-3">
         <div className="text-center text-3xl font-semibold">
           <h1>Login</h1>
         </div>
@@ -138,10 +138,10 @@ function UserLoginPage() {
               </div>
             </div>
           </div>
-          <div className="font-semibold text-gray-600 text-base flex justify-between items-center p-2">
-            <div className="flex gap-2">
+          <div className="font-semibold text-gray-600 text-base flex flex-col  sm:flex-row justify-between items-center p-1 sm:p-2">
+            <div className="flex gap-2 mb-2 sm:mb-0">
               <input type="checkbox" name="Remember" id="Remember" />
-              <h2>Remember Me</h2>
+              <h2 className="font-medium">Remember Me</h2>
             </div>
             <div>
               <h2
@@ -157,7 +157,7 @@ function UserLoginPage() {
           <div className="w-full flex justify-center mt-0.5">
             <button
               type="submit"
-              className="bg-blue-600 p-2 w-1/2 rounded-full text-xl text-white font-bold hover:scale-105 hover:cursor-pointer hover:bg-blue-700 hover:ease-in-out"
+              className="bg-blue-600 p-2 w-1/2 rounded-xl sm:rounded-full text-xl text-white font-bold hover:scale-105 hover:cursor-pointer hover:bg-blue-700 hover:ease-in-out"
             >
               Login
             </button>

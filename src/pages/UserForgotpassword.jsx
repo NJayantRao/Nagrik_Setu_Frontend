@@ -65,7 +65,7 @@ function UserForgotPassword() {
   }
   return (
     <div className=" bg-[#e0e7ff] flex justify-center items-center p-5 max-h-screen">
-      <div className=" bg-[#f8fafc] p-3 w-1/3 flex justify-center flex-col gap-3 shadow-2xl rounded-2xl  border-indigo-200 border-3">
+      <div className=" bg-[#f8fafc] p-3 w-3/4 sm:w-1/3 flex justify-center flex-col gap-3 shadow-2xl rounded-2xl  border-indigo-200 border-3">
         <div className="text-center text-3xl font-semibold">
           <h1>Forgot Password</h1>
         </div>
@@ -93,7 +93,7 @@ function UserForgotPassword() {
           <div className="w-full flex justify-center mt-0.5">
             <button
               type="submit"
-              className="bg-blue-600 p-2 w-1/2 rounded-full text-xl text-white font-bold hover:scale-105 hover:cursor-pointer hover:bg-blue-700 hover:ease-in-out"
+              className="bg-blue-600 py-1 px-2 sm:p-2 w-1/2 rounded-xl sm:rounded-full text-xl text-white font-bold hover:scale-105 hover:cursor-pointer hover:bg-blue-700 hover:ease-in-out"
             >
               {loading ? "Sending..." : "Send OTP!"}
             </button>
