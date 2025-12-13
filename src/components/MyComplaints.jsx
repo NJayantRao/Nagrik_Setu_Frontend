@@ -24,13 +24,15 @@ function MyComplaints({ filed, inProgress, resolved, rejected, complaints }) {
       curData.title.toLowerCase().includes(search.toLowerCase()) ||
       curData.uniqueToken.toLowerCase().includes(search.toLowerCase()) ||
       curData.departmentName.toLowerCase().includes(search.toLowerCase()) ||
-      curData.status.toLowerCase().includes(search.toLowerCase()),
+      curData.status.toLowerCase().includes(search.toLowerCase())
   );
   return (
     <div className="min-h-screen w-full bg-gray-100 p-6 ">
       {/* Top Navigation */}
       <div className="flex justify-between items-center mb-4">
-        <h1 className="text-xlsm:text-3xl font-semibold text-[#1E3A8A]">My Complaints</h1>
+        <h1 className="text-xlsm:text-3xl font-semibold text-[#1E3A8A]">
+          My Complaints
+        </h1>
       </div>
 
       {/* Search Bar */}
@@ -111,40 +113,49 @@ function MyComplaints({ filed, inProgress, resolved, rejected, complaints }) {
           </div>
 
           {/* Recent Complaints Table */}
-          <div className="bg-white rounded-xl p-6 h-[40vh] shadow-sm relative overflow-y-auto  scrollbar-hide">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="text-gray-500 ">
-                  <th className="text-left pb-3">Complaint ID</th>
-                  <th className="text-left pb-3">Title</th>
-                  <th className="text-left pb-3 ">Department</th>
-                  <th className="text-left pb-3">Status</th>
-                  <th className="text-left pb-3">Actions</th>
-                </tr>
-              </thead>
-
-              <tbody className="space-y-3">
-                {searchData.map((item, i) => (
-                  <tr key={i} className="border-t text-gray-700">
-                    <td className="py-3">{item.uniqueToken}</td>
-                    <td className="truncate overflow-hidden text-ellipsis whitespace-nowrap max-w-[20vw]">{item.title}</td>
-                    <td>{item.departmentName}</td>
-                    <td>
-                      <span
-                        className={`px-2 py-1.5 w-20 rounded-full inline-block text-center text-xs font-medium ${colorInfo[item.status]}`}
-                      >
-                        {item.status}
-                      </span>
-                    </td>
-                    <td>
-                      <button className="bg-blue-100 text-blue-700 px-3 py-1 rounded-lg text-xs">
-                        View
-                      </button>
-                    </td>
+          <div className="bg-white rounded-xl p-4 sm:p-6 h-[40vh] shadow-sm relative overflow-y-auto">
+            <div className="overflow-x-auto">
+              <table className="max-w-[80vw] sm:min-w-[700px] w-full text-sm">
+                <thead>
+                  <tr className="text-gray-500 whitespace-nowrap">
+                    <th className="text-left pb-3">Complaint ID</th>
+                    <th className="text-left pb-3">Title</th>
+                    <th className="text-left pb-3">Department</th>
+                    <th className="text-left pb-3">Status</th>
+                    <th className="text-left pb-3">Actions</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+
+                <tbody>
+                  {searchData.map((item, i) => (
+                    <tr
+                      key={i}
+                      className="border-t text-gray-700 whitespace-nowrap"
+                    >
+                      <td className="py-3 truncate overflow-hidden text-ellipsis whitespace-nowrap max-w-[15vw]">{item.uniqueToken}</td>
+
+                      <td className=" truncate overflow-hidden text-ellipsis whitespace-nowrap max-w-[15vw] ">{item.title}</td>
+
+                      <td className="truncate overflow-hidden text-ellipsis whitespace-nowrap max-w-[15vw]">{item.departmentName}</td>
+
+                      <td>
+                        <span
+                          className={`px-3 py-1 rounded-full inline-block text-xs font-medium ${colorInfo[item.status]}`}
+                        >
+                          {item.status}
+                        </span>
+                      </td>
+
+                      <td>
+                        <button className="bg-blue-100 text-blue-700 px-3 py-1 rounded-lg text-xs">
+                          View
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
       </div>

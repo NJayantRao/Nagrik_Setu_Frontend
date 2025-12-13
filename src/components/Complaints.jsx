@@ -22,7 +22,7 @@ function Complaints(props) {
         />
       </div>
       <div className="flex flex-col px-3 sm:px-5 sm:h-15">
-        <div className="text-sm sm:text-lg font-semibold sm:font-bold">
+        <div className="text-sm sm:text-lg font-semibold sm:font-bold truncate overflow-hidden text-ellipsis whitespace-nowrap max-w-[40vw]">
           <h2>{props.title}</h2>
         </div>
         <div className="text-xs sm:text-sm sm:font-medium truncate overflow-hidden text-ellipsis whitespace-nowrap max-w-[40vw]">

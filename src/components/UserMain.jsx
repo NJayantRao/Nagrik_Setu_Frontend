@@ -43,10 +43,10 @@ function UserMain({ filed, inProgress, resolved, rejected, complaintList }) {
   }, [filed, inProgress, resolved, rejected, complaintList]);
   return (
     <div className="relative w-full h-screen p-4 bg-[#f2f3f5]">
-      <div className="bg-[#1d4ed8] h-10 w-10 sm:hidden absolute z-50 right-10 bottom-20 rounded-full flex justify-center items-center" onClick={()=>{
+      <div className="bg-[#1d4ed8] h-15  w-15 sm:hidden absolute z-50 right-10 bottom-[15vh] rounded-full flex justify-center items-center" onClick={()=>{
         navigate("/user/profile/complaints/Register")
       }}>
-        <Plus size={36}  className="invert"/>
+        <Plus size={50} strokeWidth={2.5} className="invert"/>
       </div>
       <div className="text-xl sm:text-3xl text-[#1E3A8A] mb-2 font-semibold px-2 tracking-tight">
         <h1>Complaint Insights</h1>

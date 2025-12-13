@@ -27,7 +27,9 @@ function Topbar({ name }) {
   return (
     <div className="h-15 w-full bg-[#2a674b] flex justify-between  items-center shadow-xl text-xl font-bold text-[#d6f5e9] px-2 sm:p-0">
       <div className="sm:hidden flex gap-3">
-        <Menu />
+        <House size={30} onClick={()=>{
+          navigate("/")
+        }}/>
       </div>
       <div
         className="w-1/5 sm:flex justify-center gap-2 items-center hover:cursor-pointer hidden"
