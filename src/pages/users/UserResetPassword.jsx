@@ -5,6 +5,7 @@ import { Eye, EyeOff } from "lucide-react";
 import Loader from "../../components/Loaders";
 import axios from "axios";
 import { notify } from "../../utils/notify";
+import Errors from "../../components/Errors";
 
 function UserResetPassword() {
   const navigate = useNavigate();
@@ -31,37 +32,47 @@ function UserResetPassword() {
   async function submitHandler(e) {
     e.preventDefault();
     try {
+      setIsLoading(true)
       setIsDisabled(true);
       const response = await axios.put(
         `${import.meta.env.VITE_LOCAL_URL}/user/resetPassword`,
         { uniqueToken, otp, newPassword: password }
       );
-      console.log(uniqueToken);
+      // console.log(uniqueToken);
 
-      console.log(response);
+      // console.log(response);
 
-      console.log(response.data);
+      // console.log(response.data);
       setUniqueToken("");
       setOtp("");
       setPassword("");
-      setIsLoading(true);
       notify("Password Saved Successfully...", "success");
-      setIsDisabled(false);
       setTimeout(() => {
-        navigate("/user/login");
+        setIsDisabled(false);
         setIsLoading(false);
+        navigate("/user/login");
       }, 4000);
-      // console.log(uniqueToken);
     } catch (error) {
+      console.log(error);
+      // 🔴 NETWORK ERROR (backend unreachable)
+      if (!error.response) {
+        setIsLoading(false);
+        setIsDisabled(false);
+        notify("Server is Unreachable. Please try again later.", "error");
+        setErrorStatus(500);
+        setErrorMsg("Server is unreachable");
+        return;
+      }
       if (error.response?.status === 401) {
-        console.log(error);
+        setIsLoading(false)
         setIsDisabled(false);
         notify(error.response.data, "error");
       } else {
-        console.log(error);
+        // console.log(error);
+        setIsLoading(false)
         setIsDisabled(false);
-        setErrorStatus(500);
-        setErrorMsg("Something went wrong");
+        setErrorStatus(error.response.status);
+        setErrorMsg(error.response.data);
       }
     }
   }
@@ -75,13 +86,7 @@ function UserResetPassword() {
     return <Loader />;
   }
   if (errorStatus === 401 || errorStatus === 500) {
-    return (
-      <div>
-        <h1 className="text-3xl sm:text-5xl absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-bold ">
-          {errorStatus} - {errorMsg}
-        </h1>
-      </div>
-    );
+    return <Errors status={errorStatus} message={errorMsg} />
   }
   return (
     <div className=" bg-[#e0e7ff] flex justify-center items-center p-5 max-h-screen">

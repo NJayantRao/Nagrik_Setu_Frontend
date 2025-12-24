@@ -78,8 +78,8 @@ function UserSignUpPage() {
       } else {
         setIsLoading(false);
         setIsDisabled(false);
-        setErrorStatus(500);
-        setErrorMsg("Something went wrong");
+        setErrorStatus(error.response.status);
+        setErrorMsg(error.response.data);
       }
     }
     setName("");

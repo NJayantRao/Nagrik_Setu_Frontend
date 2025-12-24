@@ -1,30 +1,21 @@
-import { use, useEffect, useState, useContext } from "react";
-import Navbar from "../../components/Navbar";
-import { Eye, EyeOff } from "lucide-react";
+import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import Topbar from "../../components/Topbar";
 import Sidebar from "../../components/Sidebar";
-import UserMain from "../../components/UserMain";
-import MyComplaints from "../../components/MyComplaints";
 import { UserDataContext } from "../../context/UserContext";
 import ImageUploader from "../../components/ImageUploader";
-import { toast } from "react-toastify";
+import { notify } from "../../utils/notify";
+import Errors from "../../components/Errors";
 
 function ComplaintsRegister() {
   const navigate = useNavigate();
   const {
     setName,
     setEmail,
-    setPassword,
-    setPhone,
-    setAddress,
     setUniqueToken,
     name,
     email,
-    password,
-    address,
-    phone,
     uniqueToken,
     id,
     setId,
@@ -43,31 +34,9 @@ function ComplaintsRegister() {
   const [departmentList, setDepartmentList] = useState([]);
   const [registered, setRegistered] = useState(false);
 
-  const notify = (message, type = "success") => {
-    const colors = {
-      success: "#4f46e5", // Indigo (your success color)
-      error: "#dc2626", // Red-600
-      info: "#2563eb", // Blue-600
-      warning: "#f59e0b", // Amber-500
-    };
-
-    toast[type](message, {
-      position: "top-center",
-      autoClose: 3000,
-      hideProgressBar: false,
-      theme: "colored",
-      style: {
-        background: colors[type],
-        color: "#fff",
-        fontWeight: "600",
-        borderRadius: "10px",
-      },
-    });
-  };
-
   const submitHandler = async (e) => {
     e.preventDefault();
-    console.log(e);
+    // console.log(e);
     try {
       if (!image) {
         notify("Image is Required...", "error");
@@ -80,6 +49,7 @@ function ComplaintsRegister() {
       formData.append("department", departmentId);
       const token = JSON.parse(localStorage.getItem("token"));
       setRegistered(true);
+      setIsDisabled(true);
       const response = await axios.post(
         `${import.meta.env.VITE_LOCAL_URL}/complaints/register`,
         formData,
@@ -95,10 +65,11 @@ function ComplaintsRegister() {
       setDesc("");
       setImage(null);
       setDepartmentId("");
-      console.log(response);
+      // console.log(response);
 
       setTimeout(() => {
         setRegistered(false);
+        setIsDisabled(false);
         notify("Complaint Registered!", "success");
       }, 4000);
 
@@ -106,15 +77,29 @@ function ComplaintsRegister() {
         navigate("/user/profile");
       }, 5000);
     } catch (error) {
+      console.log(error);
+      // 🔴 NETWORK ERROR (backend unreachable)
+      if (!error.response) {
+        setRegistered(false);
+        setIsDisabled(false);
+        notify("Server is Unreachable. Please try again later.", "error");
+        setErrorStatus(500);
+        setErrorMsg("Server is unreachable");
+        return;
+      }
       if (error.response?.status === 401) {
-        console.log(error);
+        // console.log(error);
+        setRegistered(false);
+        setIsDisabled(false);
         setErrorStatus(error.response.status);
         setErrorMsg(error.response.data);
-        console.log(errorStatus);
+        // console.log(errorStatus);
       } else {
-        console.log(error);
-        setErrorStatus(500);
-        setErrorMsg("Internal Server Error");
+        // console.log(error);
+        setRegistered(false);
+        setIsDisabled(false);
+        setErrorStatus(error.response.status);
+        setErrorMsg(error.response.data);
       }
     }
   };
@@ -131,18 +116,25 @@ function ComplaintsRegister() {
             },
           }
         );
-        console.log(response.data);
+        // console.log(response.data);
         setDepartmentList(response.data.departments);
       } catch (error) {
+        console.log(error);
+        // 🔴 NETWORK ERROR (backend unreachable)
+        if (!error.response) {
+          notify("Server is Unreachable. Please try again later.", "error");
+          setErrorStatus(500);
+          setErrorMsg("Server is unreachable");
+          return;
+        }
         if (error.response?.status === 401) {
+          setErrorStatus(error.response.status);
+          setErrorMsg(error.response.data);
+          // console.log(errorStatus);
+        } else {
           console.log(error);
           setErrorStatus(error.response.status);
           setErrorMsg(error.response.data);
-          console.log(errorStatus);
-        } else {
-          console.log(error);
-          setErrorStatus(500);
-          setErrorMsg("Internal Server Error");
         }
       }
     }
@@ -152,7 +144,6 @@ function ComplaintsRegister() {
   useEffect(() => {
     async function fetchUserInfo() {
       try {
-        setIsDisabled(true);
         const token = JSON.parse(localStorage.getItem("token"));
         const response = await axios.get(
           `${import.meta.env.VITE_LOCAL_URL}/user/profile`,
@@ -162,30 +153,30 @@ function ComplaintsRegister() {
             },
           }
         );
-        console.log(response.data);
+        // console.log(response.data);
         setName(response.data.name);
         setEmail(response.data.email);
         setUniqueToken(response.data.uniqueToken);
 
-        console.log(id);
+        // console.log(id);
       } catch (error) {
         if (error.response?.status === 401) {
-          console.log(error);
+          // console.log(error);
           setErrorStatus(error.response.status);
           setErrorMsg(error.response.data);
           console.log(errorStatus);
-          setIsDisabled(false);
         } else {
-          console.log(error);
-          setErrorStatus(500);
-          setErrorMsg("Something went wrong");
-          setIsDisabled(false);
+          // console.log(error);
+          setErrorStatus(error.response.status);
+          setErrorMsg(error.response.data);
         }
       }
     }
     fetchUserInfo();
   }, []);
-
+  if (errorStatus === 401 || errorStatus === 500) {
+    return <Errors status={errorStatus} message={errorMsg} />;
+  }
   return (
     <div className="h-screen w-full overflow-hidden ">
       <Topbar name={name} />
@@ -210,6 +201,7 @@ function ComplaintsRegister() {
                   name="title"
                   className={` py-1 sm:py-2 px-2 sm:px-4 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${title ? "bg-[#e0e7ff]" : "bg-gray-200"}`}
                   value={title}
+                  disabled={isDisabled}
                   onChange={(e) => {
                     setTitle(e.target.value);
                     //console.log(title);
@@ -226,6 +218,7 @@ function ComplaintsRegister() {
                   name="desc"
                   className={`py-1 sm:py-2 px-2 sm:px-4 h-10 sm:h-15 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${desc ? "bg-[#e0e7ff]" : "bg-gray-200"}`}
                   value={desc}
+                  disabled={isDisabled}
                   onChange={(e) => {
                     setDesc(e.target.value);
                     //console.log(desc);
@@ -243,10 +236,11 @@ function ComplaintsRegister() {
               <div className="font-semibold text-gray-600 text-lg flex justify-center">
                 <select
                   value={departmentId}
+                  disabled={isDisabled}
                   required
                   onChange={(e) => {
                     setDepartmentId(e.target.value);
-                    console.log(e.target.value); // logs selected department _id
+                    // console.log(e.target.value); // logs selected department _id
                   }}
                   className={`py-1 px-4 w-full rounded-xl text-gray-700 text-sm shadow-md
       bg-white border border-gray-300
