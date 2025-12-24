@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "lucide-react";
 import axios from "axios";
 import Loader from "../../components/Loaders";
-import { toast } from "react-toastify";
-
+import {notify} from "../../utils/notify"
+import Errors from "../../components/Errors";
 function AdminSignUpPage() {
   const {
     adminName,
@@ -18,32 +18,24 @@ function AdminSignUpPage() {
     setAdminAddress,
     adminPhone,
     setAdminPhone,
+    setErrorMsg,
+    errorMsg,
+    setErrorStatus,
+    errorStatus
   } = useContext(AdminDataContext);
 
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const navigate = useNavigate();
-
-  const notify = (err) => {
-    toast.error(err, {
-      position: "top-center",
-      autoClose: 3000,
-      hideProgressBar: false,
-      theme: "colored",
-      style: {
-        background: "#dc2626", // red-600
-        color: "#fff",
-        fontWeight: "600",
-        borderRadius: "10px",
-      },
-    });
-  };
 
   async function submitHandler(e) {
     e.preventDefault();
     console.log(adminName, adminEmail, adminPassword, adminPhone, adminAddress);
     try {
+      setIsLoading(true)
+      setIsDisabled(true)
       const response = await axios.post(
         `${import.meta.env.VITE_LOCAL_URL}/admin/signup`,
         {
@@ -55,7 +47,6 @@ function AdminSignUpPage() {
         },
         { withCredentials: true }
       );
-      setIsLoading(true);
       const token = response.data.token;
       console.log(response.data.token);
 
@@ -63,17 +54,33 @@ function AdminSignUpPage() {
 
       setTimeout(() => {
         setIsLoading(false);
+        setIsDisabled(false)
+        notify("Admin Account Created!","success")
         navigate("/admin/profile");
-      }, 3000);
+      }, 4000);
     } catch (error) {
       console.log(error);
-      if (error.response?.status === 400) {
+      // 🔴 NETWORK ERROR (backend unreachable)
+      if (!error.response) {
+        setIsLoading(false);
+        setIsDisabled(false);
+        notify("Server is Unreachable. Please try again later.", "error");
+        setErrorStatus(500);
+        setErrorMsg("Server is unreachable");
+        return;
+      }
+     if (error.response?.status === 400) {
         notify(error.response.data, "error");
         setTimeout(() => {
+          setIsLoading(false)
+          setIsDisabled(false);
           navigate("/admin/login");
         }, 4000);
       } else {
-        console.log(error);
+        setIsLoading(false);
+        setIsDisabled(false);
+        setErrorStatus(error.response.status);
+        setErrorMsg(error.response.data);
       }
     }
     setAdminName("");
@@ -83,19 +90,12 @@ function AdminSignUpPage() {
     setAdminPhone("");
   }
 
-  useEffect(() => {
-    async function fetchData() {
-      const api = await axios.get("http://localhost:3000/");
-      console.log(api);
-    }
-    fetchData();
-  }, []);
-
-  // useEffect(()=>{
-
-  // },[])
   if (isLoading) {
     return <Loader />;
+  }
+
+  if (errorStatus === 401 || errorStatus === 500) {
+    return <Errors status={errorStatus} message={errorMsg} />;
   }
 
   return (

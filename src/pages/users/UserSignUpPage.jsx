@@ -72,6 +72,7 @@ function UserSignUpPage() {
       if (error.response?.status === 400) {
         notify(error.response.data, "error");
         setTimeout(() => {
+          setIsLoading(false);
           setIsDisabled(false);
           navigate("/user/login");
         }, 4000);

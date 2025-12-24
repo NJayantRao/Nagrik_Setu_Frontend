@@ -9,6 +9,8 @@ function AdminContext(props) {
   const [adminAddress, setAdminAddress] = useState("");
   const [adminPhone, setAdminPhone] = useState("");
   const [adminUniqueId, setAdminUniqueId] = useState("");
+  const [errorStatus, setErrorStatus] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
   return (
     <div>
       <AdminDataContext.Provider
@@ -25,6 +27,10 @@ function AdminContext(props) {
           setAdminPhone,
           adminUniqueId,
           setAdminUniqueId,
+          errorStatus,
+          setErrorStatus,
+          errorMsg,
+          setErrorMsg,
         }}
       >
         {props.children}
