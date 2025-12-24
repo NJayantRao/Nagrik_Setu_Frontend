@@ -2,7 +2,7 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { AdminDataContext } from "../context/AdminContext";
+import { AdminDataContext } from "../../context/AdminContext";
 
 function AdminForgotPassword() {
   const navigate = useNavigate();

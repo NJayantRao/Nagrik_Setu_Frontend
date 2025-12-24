@@ -1,8 +1,7 @@
 import { FileText, FileClock, FileCheck, FileX } from "lucide-react";
-import { useState } from "react";
 
 function Complaints(props) {
-  const isMobile= window.innerWidth <768;
+  // const isMobile= window.innerWidth <768;
   const icons = {
     Filed: FileText,
     "In-Progress": FileClock,

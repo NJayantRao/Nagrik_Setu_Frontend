@@ -1,16 +1,13 @@
-import { use, useContext, useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
-import { Eye, EyeOff } from "lucide-react";
-import { FileText, FileClock, FileCheck, FileX } from "lucide-react";
+import {  useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import Topbar from "../components/Topbar";
-import Sidebar from "../components/Sidebar";
-import UserMain from "../components/UserMain";
-import { UserDataContext } from "../context/UserContext";
+import Topbar from "../../components/Topbar";
+import Sidebar from "../../components/Sidebar";
+import UserMain from "../../components/UserMain";
+import { UserDataContext } from "../../context/UserContext";
+import { notify } from "../../utils/notify";
+import Errors from "../../components/Errors";
 
 function UserProfile() {
-  const navigate = useNavigate();
   const [countFiled, setCountFiled] = useState(0);
   const [countInProgress, setCountInProgress] = useState(0);
   const [countResolved, setCountResolved] = useState(0);
@@ -19,17 +16,12 @@ function UserProfile() {
   const {
     setName,
     setEmail,
-    setPassword,
     setPhone,
     setAddress,
     setUniqueToken,
     name,
     email,
-    password,
-    address,
-    phone,
     uniqueToken,
-    id,
     setId,
     errorMsg,
     setErrorMsg,
@@ -48,23 +40,30 @@ function UserProfile() {
             },
           }
         );
-        console.log(response.data);
+        // console.log(response.data);
         setName(response.data.name);
         setEmail(response.data.email);
         setUniqueToken(response.data.uniqueToken);
         setPhone(response.data.phone);
         setAddress(response.data.address);
         setId(response.data.id);
-
-        console.log(id);
+        // console.log(id);
       } catch (error) {
+        console.log(error);
+        // 🔴 NETWORK ERROR (backend unreachable)
+              if (!error.response) {
+                notify("Server is Unreachable. Please try again later.", "error");
+                setErrorStatus(500);
+                setErrorMsg("Server is unreachable");
+                return;
+              }
         if (error.response?.status === 401) {
-          console.log(error);
+          // console.log(error);
           setErrorStatus(error.response.status);
           setErrorMsg(error.response.data);
-          console.log(errorStatus);
+          // console.log(errorStatus);
         } else {
-          console.log(error);
+          // console.log(error);
           setErrorStatus(error.response.status);
           setErrorMsg(error.response.data);
         }
@@ -103,7 +102,7 @@ function UserProfile() {
 
         setComplaintList(response.data);
 
-        console.log(countFiled, countInProgress, countRejected, countResolved);
+        // console.log(countFiled, countInProgress, countRejected, countResolved);
       } catch (error) {
         console.log(error);
         setErrorStatus(500);
@@ -116,11 +115,7 @@ function UserProfile() {
 
   if (errorStatus === 401 || errorStatus === 500) {
     return (
-      <div>
-        <h1 className="text-3xl sm:text-5xl absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-bold ">
-          {errorStatus} - {errorMsg}
-        </h1>
-      </div>
+      <Errors status={errorStatus} message={errorMsg} />
     );
   }
   return (

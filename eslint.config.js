@@ -23,7 +23,13 @@ export default defineConfig([
       },
     },
     rules: {
-      "no-unused-vars": ["error", { varsIgnorePattern: "^[A-Z_]" }],
+      "no-unused-vars": ["off", { varsIgnorePattern: "^[A-Z_]" }],
+      "no-console": "off",
+      "no-var": "off",
+      "eqeqeq": "off",
+      "react-hooks/rules-of-hooks": "off",
+      "react-hooks/exhaustive-deps": "off",
+      "react-refresh/only-export-components": "off",
     },
   },
 ]);

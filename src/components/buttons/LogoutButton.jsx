@@ -33,6 +33,7 @@ const LogoutButton = () => {
         className="flex items-center gap-2 text-red-600 cursor-pointer font-medium hover:text-red-700 hover:underline"
         onClick={async (e) => {
           try {
+            
             const token = JSON.parse(localStorage.getItem("token"));
             const response = await axios.get(
               `${import.meta.env.VITE_LOCAL_URL}/user/logout`,
