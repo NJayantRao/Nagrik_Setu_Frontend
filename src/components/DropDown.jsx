@@ -2,7 +2,6 @@ import React from "react";
 import axios from "axios";
 import { House, FileText, FilePlusCorner, User, LogOut } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
 
 const DropDown = ({ isLoginClicked }) => {
   const navigate = useNavigate();
@@ -14,7 +13,7 @@ const DropDown = ({ isLoginClicked }) => {
     >
       <div
         className="flex items-center gap-3 px-4 py-3 text-gray-700 font-bold bg-[#D1FAE5] rounded-2xl transition cursor-pointer hover:scale-105 hover:bg-[#A7F3D0]"
-        onClick={(e) => {
+        onClick={() => {
           navigate("/user/profile");
         }}
       >
@@ -23,7 +22,7 @@ const DropDown = ({ isLoginClicked }) => {
       </div>
       <div
         className="flex items-center gap-3 px-4 py-3 text-gray-700 font-bold bg-[#D1FAE5] rounded-2xl transition cursor-pointer hover:scale-105 hover:bg-[#A7F3D0]"
-        onClick={(e) => {
+        onClick={() => {
           navigate("/user/profile/complaints");
         }}
       >
@@ -32,7 +31,7 @@ const DropDown = ({ isLoginClicked }) => {
       </div>
       <div
         className="flex items-center gap-3 px-4 py-3 text-gray-700 font-bold bg-[#D1FAE5] rounded-2xl transition cursor-pointer hover:scale-105 hover:bg-[#A7F3D0]"
-        onClick={(e) => {
+        onClick={() => {
           navigate("/user/profile/complaints/Register");
         }}
       >
@@ -43,16 +42,10 @@ const DropDown = ({ isLoginClicked }) => {
         <User size={28} absoluteStrokeWidth />
         <h2>My Profile</h2>
       </div>
-      <div className="bg-[#D1FAE5] p-4 rounded-2xl  hover:scale-105 hover:bg-[#A7F3D0] ">
-        <div className="text-gray-900 font-semibold text-lg">Logged in as:</div>
-        <div className="text-gray-700 text-sm">{email}</div>
-        <div className="text-gray-700 text-xs mt-1">{`ID: ${uniqueToken}`}</div>
-      </div>
-
       <div className="bg-[#D1FAE5] flex justify-center items-center p-2 hover:scale-105 hover:bg-[#A7F3D0] rounded-xl">
         <div
           className="flex items-center gap-2 text-red-600 cursor-pointer font-medium hover:text-red-700 hover:underline"
-          onClick={async (e) => {
+          onClick={async () => {
             try {
               const token = JSON.parse(localStorage.getItem("token"));
               const response = await axios.get(
@@ -64,8 +57,7 @@ const DropDown = ({ isLoginClicked }) => {
                 }
               );
               localStorage.removeItem("token");
-              console.log(response);
-              notify(response.data, "success");
+              // console.log(response);
               navigate("/");
             } catch (error) {
               console.log(error);

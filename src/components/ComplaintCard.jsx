@@ -8,7 +8,7 @@ function ComplaintCard(props) {
       <div className="flex justify-between items-center w-full h-full">
         <div className="flex flex-col w-full h-full gap-2">
           <div className={`sm:${props.size} font-semibold`}>
-            <h1 className="text-base sm:text:xl">{props.text}</h1>
+            <h1>{props.text}</h1>
           </div>
 
           <div className="font-semibold flex justify-around items-center">

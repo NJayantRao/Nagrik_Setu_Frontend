@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { UserDataContext } from "../context/UserContext";
 
-function Button(props) {
+function Button() {
   const { isLoginClicked, setIsLoginClicked } = useContext(UserDataContext);
   return (
     <button

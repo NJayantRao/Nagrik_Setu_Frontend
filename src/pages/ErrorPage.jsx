@@ -1,4 +1,7 @@
+import {useNavigate} from "react-router-dom"
+
 function ErrorPage() {
+  const navigate= useNavigate()
   return (
     <div className="h-screen w-full bg-[#e0e7ff] flex items-center justify-center relative overflow-hidden">
 
@@ -18,9 +21,10 @@ function ErrorPage() {
         </p>
 
         <button
-          onClick={() => (window.location.href = "/")}
+          // onClick={() => (window.location.href = "/")}
+          onClick={() => navigate("/")}
           className="bg-white text-[#1D4ED8] font-bold px-6 py-3 rounded-xl shadow-lg 
-                     hover:shadow-2xl hover:scale-105 transition-all"
+                     hover:shadow-2xl hover:scale-105 transition-all hover:cursor-pointer"
         >
           Go to Home
         </button>

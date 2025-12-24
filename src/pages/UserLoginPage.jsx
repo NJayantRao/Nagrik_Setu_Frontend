@@ -2,9 +2,9 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserDataContext } from "../context/UserContext";
 import { Eye, EyeOff } from "lucide-react";
-import Loader from "../components/loader";
+import Loader from "../components/Loaders";
 import axios from "axios";
-import { toast } from "react-toastify";
+import { notify } from "../utils/notify";
 
 function UserLoginPage() {
   const navigate = useNavigate();
@@ -22,28 +22,6 @@ function UserLoginPage() {
   } = useContext(UserDataContext);
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-
-  const notify = (message, type = "success") => {
-    const colors = {
-      success: "#4f46e5", // Indigo (your success color)
-      error: "#dc2626", // Red-600
-      info: "#2563eb", // Blue-600
-      warning: "#f59e0b", // Amber-500
-    };
-
-    toast[type](message, {
-      position: "top-center",
-      autoClose: 3000,
-      hideProgressBar: false,
-      theme: "colored",
-      style: {
-        background: colors[type],
-        color: "#fff",
-        fontWeight: "600",
-        borderRadius: "10px",
-      },
-    });
-  };
 
   async function submitHandler(e) {
     e.preventDefault();
@@ -67,9 +45,9 @@ function UserLoginPage() {
 
       localStorage.setItem("token", JSON.stringify(token));
 
-      notify("Logged-In Successfully...", "success");
       setIsDisabled(false);
       setTimeout(() => {
+        notify("Logged-In Successfully...", "success");
         setIsLoading(false);
         navigate("/user/profile");
       }, 4000);

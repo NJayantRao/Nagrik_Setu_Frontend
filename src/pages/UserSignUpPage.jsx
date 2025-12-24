@@ -3,8 +3,9 @@ import { Eye, EyeOff } from "lucide-react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { UserDataContext } from "../context/UserContext";
-import { toast } from "react-toastify";
-import Loader from "../components/loader";
+import { notify } from "../utils/notify";
+import Loader from "../components/Loaders";
+import Errors from "../components/Errors";
 
 function UserSignUpPage() {
   const {
@@ -22,40 +23,18 @@ function UserSignUpPage() {
     setErrorMsg,
     errorStatus,
     setErrorStatus,
-    isDisabled,
-    setIsDisabled,
   } = useContext(UserDataContext);
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const navigate = useNavigate();
-
-  const notify = (message, type = "success") => {
-    const colors = {
-      success: "#4f46e5", // Indigo (success color)
-      error: "#dc2626", // Red-600
-      info: "#2563eb", // Blue-600
-      warning: "#f59e0b", // Amber-500
-    };
-
-    toast[type](message, {
-      position: "top-center",
-      autoClose: 3000,
-      hideProgressBar: false,
-      theme: "colored",
-      style: {
-        background: colors[type],
-        color: "#fff",
-        fontWeight: "600",
-        borderRadius: "10px",
-      },
-    });
-  };
 
   async function submitHandler(e) {
     e.preventDefault();
     // console.log(name,email,password,address,phone);
     try {
+      setIsLoading(true);
       setIsDisabled(true);
       const response = await axios.post(
         `${import.meta.env.VITE_LOCAL_URL}/user/signup`,
@@ -68,9 +47,8 @@ function UserSignUpPage() {
         },
         { withCredentials: true }
       );
-      setIsLoading(true);
       const token = response.data.token;
-      console.log(response.data.token);
+      // console.log(response.data.token);
 
       localStorage.setItem("token", JSON.stringify(token));
 
@@ -81,8 +59,16 @@ function UserSignUpPage() {
       }, 4000);
     } catch (error) {
       console.log(error);
+      // 🔴 NETWORK ERROR (backend unreachable)
+      if (error.request) {
+        setIsLoading(false)
+        notify("Server is unreachable. Please try again later.", "error");
+        setErrorStatus(500);
+        setErrorMsg("Server is unreachable");
+        return;
+      }
       if (error.response?.status === 400) {
-        notify(error.response.data);
+        notify(error.response.data, "error");
         setIsDisabled(false);
         setTimeout(() => {
           navigate("/user/login");
@@ -114,13 +100,7 @@ function UserSignUpPage() {
   }
 
   if (errorStatus === 401 || errorStatus === 500) {
-    return (
-      <div>
-        <h1 className="text-3xl sm:text-5xl absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-bold ">
-          {errorStatus} - {errorMsg}
-        </h1>
-      </div>
-    );
+    return <Errors status={errorStatus} message={errorMsg} />;
   }
 
   return (

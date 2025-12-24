@@ -3,6 +3,7 @@ import { FileText, FileClock, FileCheck, FileX, Plus } from "lucide-react";
 import Complaints from "./Complaints";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Modal from "./Modal";
 
 function UserMain({ filed, inProgress, resolved, rejected, complaintList }) {
   const navigate= useNavigate()
@@ -84,6 +85,7 @@ function UserMain({ filed, inProgress, resolved, rejected, complaintList }) {
             );
           })}
       </div>
+      <Modal />
     </div>
   );
 }
