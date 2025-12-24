@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { UserDataContext } from "../context/UserContext";
+import { UserDataContext } from "../../context/UserContext";
 import { Eye, EyeOff } from "lucide-react";
-import Loader from "../components/Loaders";
+import Loader from "../../components/Loaders";
 import axios from "axios";
-import { notify } from "../utils/notify";
+import { notify } from "../../utils/notify";
 
 function UserResetPassword() {
   const navigate = useNavigate();

@@ -1,10 +1,11 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserDataContext } from "../context/UserContext";
+import { UserDataContext } from "../../context/UserContext";
 import { Eye, EyeOff } from "lucide-react";
-import Loader from "../components/Loaders";
+import Loader from "../../components/Loaders";
 import axios from "axios";
-import { notify } from "../utils/notify";
+import { notify } from "../../utils/notify";
+import Errors from "../../components/Errors";
 
 function UserLoginPage() {
   const navigate = useNavigate();
@@ -17,15 +18,14 @@ function UserLoginPage() {
     setErrorMsg,
     errorStatus,
     setErrorStatus,
-    isDisabled,
-    setIsDisabled,
   } = useContext(UserDataContext);
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
 
   async function submitHandler(e) {
     e.preventDefault();
-    console.log(uniqueToken, password);
+    // console.log(uniqueToken, password);
     try {
       setIsLoading(true);
       setIsDisabled(true);
@@ -41,37 +41,45 @@ function UserLoginPage() {
       setPassword("");
 
       const token = response.data.token;
-      console.log(response.data.token);
+      // console.log(response.data.token);
 
       localStorage.setItem("token", JSON.stringify(token));
 
-      setIsDisabled(false);
       setTimeout(() => {
-        notify("Logged-In Successfully...", "success");
         setIsLoading(false);
+        setIsDisabled(false);
+        notify("Logged-In Successfully...", "success");
         navigate("/user/profile");
       }, 4000);
     } catch (error) {
       console.log(error);
-      // setIsLoading(false)
+      // 🔴 NETWORK ERROR (backend unreachable)
+      if (!error.response) {
+        setIsLoading(false);
+        setIsDisabled(false);
+        notify("Server is Unreachable. Please try again later.", "error");
+        setErrorStatus(500);
+        setErrorMsg("Server is unreachable");
+        return;
+      }
       if (error.response?.status === 401) {
         setIsLoading(false);
+        setIsDisabled(false);
         notify(error.response.data, "error");
         setUniqueToken("");
         setPassword("");
-        setIsDisabled(false);
         setTimeout(() => {
           navigate("/user/signup");
         }, 4000);
       } else if (error.response?.status === 402) {
         setIsLoading(false);
-        notify(error.response.data, "error");
         setIsDisabled(false);
+        notify(error.response.data, "error");
       } else {
-        console.log(error);
+        setIsLoading(false);
+        setIsDisabled(false);
         setErrorStatus(500);
         setErrorMsg("Something went wrong");
-        setIsDisabled(false);
       }
     }
   }
@@ -80,13 +88,7 @@ function UserLoginPage() {
     return <Loader />;
   }
   if (errorStatus === 401 || errorStatus === 500) {
-    return (
-      <div>
-        <h1 className="text-3xl sm:text-5xl absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-bold ">
-          {errorStatus} - {errorMsg}
-        </h1>
-      </div>
-    );
+    return <Errors status={errorStatus} message={errorMsg} />;
   }
   return (
     <div className=" bg-[#e0e7ff] flex justify-center items-center p-5 max-h-screen">
@@ -108,6 +110,7 @@ function UserLoginPage() {
               name="uniqueId"
               className={` py-2 px-4 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${uniqueToken ? "bg-[#e0e7ff]" : "bg-gray-200"}`}
               value={uniqueToken}
+              disabled={isDisabled}
               onChange={(e) => {
                 setUniqueToken(e.target.value);
                 //console.log(uniqueToken);
@@ -124,6 +127,7 @@ function UserLoginPage() {
                 name="password"
                 className={` py-2 px-4 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${password ? "bg-[#e8f0ff]" : "bg-gray-200"}`}
                 value={password}
+                disabled={isDisabled}
                 onChange={(e) => {
                   setPassword(e.target.value);
                   //console.log(password);

@@ -1,16 +1,21 @@
-import { use, useEffect, useState, useContext } from "react";
-import Navbar from "../components/Navbar";
+import { use, useContext, useEffect, useState } from "react";
+import Navbar from "../../components/Navbar";
 import { Eye, EyeOff } from "lucide-react";
+import { FileText, FileClock, FileCheck, FileX } from "lucide-react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Topbar from "../components/Topbar";
-import Sidebar from "../components/Sidebar";
-import UserMain from "../components/UserMain";
-import MyComplaints from "../components/MyComplaints";
-import { UserDataContext } from "../context/UserContext";
+import Topbar from "../../components/Topbar";
+import Sidebar from "../../components/Sidebar";
+import UserMain from "../../components/UserMain";
+import { UserDataContext } from "../../context/UserContext";
 
-function UserComplaints() {
+function UserProfile() {
   const navigate = useNavigate();
+  const [countFiled, setCountFiled] = useState(0);
+  const [countInProgress, setCountInProgress] = useState(0);
+  const [countResolved, setCountResolved] = useState(0);
+  const [countRejected, setCountRejected] = useState(0);
+  const [complaintList, setComplaintList] = useState([]);
   const {
     setName,
     setEmail,
@@ -31,12 +36,6 @@ function UserComplaints() {
     errorStatus,
     setErrorStatus,
   } = useContext(UserDataContext);
-  const [countFiled, setCountFiled] = useState(0);
-  const [countInProgress, setCountInProgress] = useState(0);
-  const [countResolved, setCountResolved] = useState(0);
-  const [countRejected, setCountRejected] = useState(0);
-  const [complaintList, setComplaintList] = useState([]);
-
   useEffect(() => {
     async function fetchUserInfo() {
       try {
@@ -66,8 +65,8 @@ function UserComplaints() {
           console.log(errorStatus);
         } else {
           console.log(error);
-          setErrorStatus(500);
-          setErrorMsg("Something went wrong");
+          setErrorStatus(error.response.status);
+          setErrorMsg(error.response.data);
         }
       }
     }
@@ -107,13 +106,14 @@ function UserComplaints() {
         console.log(countFiled, countInProgress, countRejected, countResolved);
       } catch (error) {
         console.log(error);
-        setErrorStatus(error.response.status);
-        setErrorMsg(error.response.data);
+        setErrorStatus(500);
+        setErrorMsg("Something went wrong");
       }
     };
 
     fetchComplaintsInfo();
   }, []);
+
   if (errorStatus === 401 || errorStatus === 500) {
     return (
       <div>
@@ -123,22 +123,21 @@ function UserComplaints() {
       </div>
     );
   }
-
   return (
     <div className="h-screen w-full overflow-hidden ">
       <Topbar name={name} />
       <div className="flex ">
         <Sidebar email={email} uniqueToken={uniqueToken} />
-        <MyComplaints
-          complaints={complaintList}
+        <UserMain
           filed={countFiled}
           inProgress={countInProgress}
           resolved={countResolved}
           rejected={countRejected}
+          complaintList={complaintList}
         />
       </div>
     </div>
   );
 }
 
-export default UserComplaints;
+export default UserProfile;

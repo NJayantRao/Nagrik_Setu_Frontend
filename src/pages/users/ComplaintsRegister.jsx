@@ -1,14 +1,14 @@
 import { use, useEffect, useState, useContext } from "react";
-import Navbar from "../components/Navbar";
+import Navbar from "../../components/Navbar";
 import { Eye, EyeOff } from "lucide-react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Topbar from "../components/Topbar";
-import Sidebar from "../components/Sidebar";
-import UserMain from "../components/UserMain";
-import MyComplaints from "../components/MyComplaints";
-import { UserDataContext } from "../context/UserContext";
-import ImageUploader from "../components/ImageUploader";
+import Topbar from "../../components/Topbar";
+import Sidebar from "../../components/Sidebar";
+import UserMain from "../../components/UserMain";
+import MyComplaints from "../../components/MyComplaints";
+import { UserDataContext } from "../../context/UserContext";
+import ImageUploader from "../../components/ImageUploader";
 import { toast } from "react-toastify";
 
 function ComplaintsRegister() {

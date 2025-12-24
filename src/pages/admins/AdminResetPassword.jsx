@@ -1,11 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserDataContext } from "../context/UserContext";
 import { Eye, EyeOff } from "lucide-react";
-import Loader from "../components/Loaders";
+import Loader from "../../components/Loaders";
 import { toast } from "react-toastify";
 import axios from "axios";
-import { AdminDataContext } from "../context/AdminContext";
+import { AdminDataContext } from "../../context/AdminContext";
 
 function AdminResetPassword() {
   const navigate = useNavigate();

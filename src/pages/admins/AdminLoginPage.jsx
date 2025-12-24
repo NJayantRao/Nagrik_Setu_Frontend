@@ -1,8 +1,8 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AdminDataContext } from "../context/AdminContext";
+import { AdminDataContext } from "../../context/AdminContext";
 import { Eye, EyeOff } from "lucide-react";
-import Loader from "../components/Loaders";
+import Loader from "../../components/Loaders";
 import axios from "axios";
 import { toast } from "react-toastify";
 
