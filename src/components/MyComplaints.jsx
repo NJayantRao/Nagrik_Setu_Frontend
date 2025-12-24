@@ -1,13 +1,12 @@
+import { useState } from "react";
 import {
   Search,
-  Bell,
-  User,
   FileText,
   FileClock,
   FileCheck,
   FileX,
 } from "lucide-react";
-import { useState } from "react";
+import DeleteModal from "./modals/DeleteModal";
 
 function MyComplaints({ filed, inProgress, resolved, rejected, complaints }) {
   console.log(complaints);
@@ -159,6 +158,7 @@ function MyComplaints({ filed, inProgress, resolved, rejected, complaints }) {
           </div>
         </div>
       </div>
+      <DeleteModal />
     </div>
   );
 }

@@ -1,6 +1,5 @@
 import {  useContext, useEffect, useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 import Topbar from "../../components/Topbar";
 import Sidebar from "../../components/Sidebar";
 import UserMain from "../../components/UserMain";

@@ -1,5 +1,3 @@
-import { FileText, FileClock, FileCheck, FileX } from "lucide-react";
-
 function ComplaintCard(props) {
   return (
     <div

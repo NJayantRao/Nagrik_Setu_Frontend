@@ -3,10 +3,10 @@ import { FileText, FileClock, FileCheck, FileX, Plus } from "lucide-react";
 import Complaints from "./Complaints";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Modal from "./Modal";
+import DeleteModal from "./modals/DeleteModal";
 
 function UserMain({ filed, inProgress, resolved, rejected, complaintList }) {
-  const navigate= useNavigate()
+  const navigate = useNavigate();
   const cardInfo = [
     {
       bgcolor: "bg-[#2480c6]",
@@ -44,10 +44,13 @@ function UserMain({ filed, inProgress, resolved, rejected, complaintList }) {
   }, [filed, inProgress, resolved, rejected, complaintList]);
   return (
     <div className="relative w-full h-screen p-4 bg-[#f2f3f5]">
-      <div className="bg-[#1d4ed8] h-15  w-15 sm:hidden absolute z-50 right-10 bottom-[15vh] rounded-full flex justify-center items-center" onClick={()=>{
-        navigate("/user/profile/complaints/Register")
-      }}>
-        <Plus size={50} strokeWidth={2.5} className="invert"/>
+      <div
+        className="bg-[#1d4ed8] h-15  w-15 sm:hidden absolute z-50 right-10 bottom-[15vh] rounded-full flex justify-center items-center"
+        onClick={() => {
+          navigate("/user/profile/complaints/Register");
+        }}
+      >
+        <Plus size={50} strokeWidth={2.5} className="invert" />
       </div>
       <div className="text-xl sm:text-3xl text-[#1E3A8A] mb-2 font-semibold px-2 tracking-tight">
         <h1>Complaint Insights</h1>
@@ -85,7 +88,7 @@ function UserMain({ filed, inProgress, resolved, rejected, complaintList }) {
             );
           })}
       </div>
-      <Modal />
+      <DeleteModal />
     </div>
   );
 }

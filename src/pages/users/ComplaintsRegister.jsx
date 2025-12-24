@@ -7,6 +7,7 @@ import { UserDataContext } from "../../context/UserContext";
 import ImageUploader from "../../components/ImageUploader";
 import { notify } from "../../utils/notify";
 import Errors from "../../components/Errors";
+import DeleteModal from "../../components/modals/DeleteModal";
 
 function ComplaintsRegister() {
   const navigate = useNavigate();
@@ -267,6 +268,7 @@ function ComplaintsRegister() {
           </div>
         </div>
       </div>
+      <DeleteModal />
     </div>
   );
 }

@@ -1,8 +1,8 @@
 import LeftSection from "./LeftSection";
 import RightSection from "./RightSection";
-import Button from "./Button";
+import Button from "./buttons/Button";
 import { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { UserDataContext } from "../context/UserContext";
 import {
   Menu,

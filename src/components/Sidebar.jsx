@@ -2,8 +2,8 @@ import axios from "axios";
 import { House, FileText, FilePlusCorner, User, LogOut } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import LogoutButton from "./LogoutButton";
-import DeleteButton from "./DeleteButton";
+import LogoutButton from "./buttons/LogoutButton";
+import DeleteButton from "./buttons/DeleteButton";
 
 function Sidebar({ email, uniqueToken }) {
   const navigate = useNavigate();
@@ -38,9 +38,12 @@ function Sidebar({ email, uniqueToken }) {
           <FilePlusCorner size={28} absoluteStrokeWidth />
           <h2>Raise Complaint</h2>
         </div>
-        <div className="flex items-center gap-3 px-4 py-3 text-gray-700 font-bold bg-[#D1FAE5] rounded-2xl transition cursor-pointer hover:scale-105 hover:bg-[#A7F3D0]" onClick={()=>{
-          navigate("/user/profile")
-        }}>
+        <div
+          className="flex items-center gap-3 px-4 py-3 text-gray-700 font-bold bg-[#D1FAE5] rounded-2xl transition cursor-pointer hover:scale-105 hover:bg-[#A7F3D0]"
+          onClick={() => {
+            navigate("/user/profile");
+          }}
+        >
           <User size={28} absoluteStrokeWidth />
           <h2>My Profile</h2>
         </div>
@@ -51,8 +54,8 @@ function Sidebar({ email, uniqueToken }) {
           <div className="text-gray-700 text-sm">{email}</div>
           <div className="text-gray-700 text-xs mt-1">{`ID: ${uniqueToken}`}</div>
         </div>
-          <LogoutButton />
-          <DeleteButton />
+        <LogoutButton />
+        <DeleteButton />
       </div>
     </div>
   );
