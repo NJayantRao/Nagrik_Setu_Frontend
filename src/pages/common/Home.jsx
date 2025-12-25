@@ -1,52 +1,75 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Typewriter } from "react-simple-typewriter";
+import { motion } from "framer-motion";
 
 function Home() {
-  const [phrases, setPhrases] = useState([
+  const [phrases] = useState([
     "Report Issues Effortlessly",
     "Empowering Citizens, Driving Change",
     "Transparency at Your Fingertips",
     "Bridging Citizens and Governance",
     "Your Complaints, Our Commitment",
-    "Together for a Better Community"
+    "Together for a Better Community",
   ]);
 
   return (
     <div className="relative h-screen w-full bg-[#e0e7ff] flex items-center justify-center overflow-hidden">
-      {/* Watermark Logo/Text */}
-      <h1 className="absolute text-[5rem] sm:text-[10rem] font-black text-white opacity-10 select-none pointer-events-none uppercase">
+      
+      {/* Watermark */}
+      <motion.h1
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 0.1 }}
+        transition={{ duration: 1.2, ease: "easeOut" }}
+        className="absolute text-[5rem] sm:text-[10rem] font-black text-white select-none pointer-events-none uppercase"
+      >
         NAGRIK SETU
-      </h1>
+      </motion.h1>
 
       {/* Main Content */}
       <div className="z-10 text-center px-4 sm:px-10">
-        {/* Big Bold Title */}
-        <h1 className="text-6xl sm:text-8xl font-extrabold text-[#1D4ED8] drop-shadow-lg mb-6">
-          NAGRIK SETU
-        </h1>
 
-        {/* Typewriter Catchphrases */}
-        <h2 className="text-xl sm:text-3xl text-gray-700 font-semibold drop-shadow-md">
+        {/* Title */}
+        <motion.h1
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="text-6xl sm:text-8xl font-extrabold text-[#1D4ED8] drop-shadow-lg mb-6"
+        >
+          NAGRIK SETU
+        </motion.h1>
+
+        {/* Typewriter */}
+        <motion.h2
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+          className="text-xl sm:text-3xl text-gray-700 font-semibold drop-shadow-md"
+        >
           <Typewriter
             words={phrases}
-            loop={0} // infinite loop
+            loop={0}
             cursor
             cursorStyle="|"
             typeSpeed={80}
             deleteSpeed={50}
             delaySpeed={2000}
           />
-        </h2>
+        </motion.h2>
 
-        {/* Call to Action Button */}
-        <div className="mt-10">
+        {/* Button */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+          className="mt-10"
+        >
           <button
             onClick={() => (window.location.href = "/user/signup")}
             className="bg-white text-[#1D4ED8] font-bold px-6 py-3 rounded-xl shadow-lg hover:shadow-2xl hover:scale-105 transition-all"
           >
             Get Started
           </button>
-        </div>
+        </motion.div>
       </div>
     </div>
   );

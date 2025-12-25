@@ -15,7 +15,7 @@ function Errors({ status, message }) {
       <div className="text-center z-10 px-6 max-w-3xl">
         
         {/* Title */}
-        <h2 className="text-5xl sm:text-7xl font-extrabold text-[#1D4ED8] drop-shadow-lg mb-6 tracking-tight whitespace-nowrap">
+        <h2 className="text-5xl sm:text-7xl font-extrabold text-[#1D4ED8] drop-shadow-lg mb-6 tracking-tight sm:whitespace-nowrap">
           {message}
         </h2>
 

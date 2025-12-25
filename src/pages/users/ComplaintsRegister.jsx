@@ -184,7 +184,7 @@ function ComplaintsRegister() {
       <div className="flex ">
         <Sidebar email={email} uniqueToken={uniqueToken} />
         <div className="bg-[#f2f3f5]  w-full flex h-screen justify-center ">
-          <div className=" bg-[#f8fafc] py-1 px-3 sm:p-3 h-[75vh] sm:max-h-[75vh] w-3/4 sm:w-1/3 flex justify-center flex-col gap-3 shadow-2xl rounded-2xl  border-indigo-200 border-3 mt-10">
+          <div className=" bg-[#f8fafc] py-1 px-3 sm:p-3 h-[50vh] sm:h-[75vh] sm:max-h-[75vh] w-3/4 sm:w-1/3 flex justify-center flex-col gap-3 shadow-2xl rounded-2xl  border-indigo-200 border-3 mt-10">
             <div className="text-center text-2xl sm:text-3xl font-semibold mt-2 ">
               <h1>Register Complaint</h1>
             </div>
