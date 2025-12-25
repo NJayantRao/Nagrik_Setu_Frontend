@@ -24,7 +24,7 @@ export default defineConfig([
     },
     rules: {
       "no-unused-vars": ["off", { varsIgnorePattern: "^[A-Z_]" }],
-      "no-console": "warn",
+      "no-console": "off",
       "no-var": "error",
       "eqeqeq": "warn",
       "react-hooks/rules-of-hooks": "off",
