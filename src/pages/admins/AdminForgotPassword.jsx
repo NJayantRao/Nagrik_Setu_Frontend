@@ -40,10 +40,11 @@ function AdminForgotPassword() {
       // console.log(adminUniqueId);
     } catch (error) {
       if (error.response?.status === 401) {
-        console.log(error);
+        // console.log(error);
         notify(error.response.data);
         setLoading(false);
       } else {
+        //eslint-disable-next-line no-console
         console.log(error);
       }
     }

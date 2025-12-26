@@ -1,15 +1,9 @@
 import { useState } from "react";
-import {
-  Search,
-  FileText,
-  FileClock,
-  FileCheck,
-  FileX,
-} from "lucide-react";
+import { Search, FileText, FileClock, FileCheck, FileX } from "lucide-react";
 import DeleteModal from "./modals/DeleteModal";
 
 function MyComplaints({ filed, inProgress, resolved, rejected, complaints }) {
-  console.log(complaints);
+  // console.log(complaints);
   const [search, setSearch] = useState("");
   const colorInfo = {
     Filed: "bg-blue-100 text-blue-700 border border-blue-200",
@@ -131,11 +125,17 @@ function MyComplaints({ filed, inProgress, resolved, rejected, complaints }) {
                       key={i}
                       className="border-t text-gray-700 whitespace-nowrap"
                     >
-                      <td className="py-3 truncate overflow-hidden text-ellipsis whitespace-nowrap max-w-[15vw]">{item.uniqueToken}</td>
+                      <td className="py-3 truncate overflow-hidden text-ellipsis whitespace-nowrap max-w-[15vw]">
+                        {item.uniqueToken}
+                      </td>
 
-                      <td className=" truncate overflow-hidden text-ellipsis whitespace-nowrap max-w-[15vw] ">{item.title}</td>
+                      <td className=" truncate overflow-hidden text-ellipsis whitespace-nowrap max-w-[15vw] ">
+                        {item.title}
+                      </td>
 
-                      <td className="truncate overflow-hidden text-ellipsis whitespace-nowrap max-w-[15vw]">{item.departmentName}</td>
+                      <td className="truncate overflow-hidden text-ellipsis whitespace-nowrap max-w-[15vw]">
+                        {item.departmentName}
+                      </td>
 
                       <td>
                         <span

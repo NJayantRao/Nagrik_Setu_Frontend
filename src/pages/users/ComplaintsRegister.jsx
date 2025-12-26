@@ -78,7 +78,7 @@ function ComplaintsRegister() {
         navigate("/user/profile");
       }, 5000);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       // 🔴 NETWORK ERROR (backend unreachable)
       if (!error.response) {
         setRegistered(false);
@@ -120,7 +120,7 @@ function ComplaintsRegister() {
         // console.log(response.data);
         setDepartmentList(response.data.departments);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
         // 🔴 NETWORK ERROR (backend unreachable)
         if (!error.response) {
           notify("Server is Unreachable. Please try again later.", "error");
@@ -133,7 +133,7 @@ function ComplaintsRegister() {
           setErrorMsg(error.response.data);
           // console.log(errorStatus);
         } else {
-          console.log(error);
+          // console.log(error);
           setErrorStatus(error.response.status);
           setErrorMsg(error.response.data);
         }
@@ -165,7 +165,7 @@ function ComplaintsRegister() {
           // console.log(error);
           setErrorStatus(error.response.status);
           setErrorMsg(error.response.data);
-          console.log(errorStatus);
+          // console.log(errorStatus);
         } else {
           // console.log(error);
           setErrorStatus(error.response.status);

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "lucide-react";
 import axios from "axios";
 import Loader from "../../components/Loaders";
-import {notify} from "../../utils/notify"
+import { notify } from "../../utils/notify";
 import Errors from "../../components/Errors";
 function AdminSignUpPage() {
   const {
@@ -21,7 +21,7 @@ function AdminSignUpPage() {
     setErrorMsg,
     errorMsg,
     setErrorStatus,
-    errorStatus
+    errorStatus,
   } = useContext(AdminDataContext);
 
   const [showPassword, setShowPassword] = useState(false);
@@ -32,10 +32,10 @@ function AdminSignUpPage() {
 
   async function submitHandler(e) {
     e.preventDefault();
-    console.log(adminName, adminEmail, adminPassword, adminPhone, adminAddress);
+    // console.log(adminName, adminEmail, adminPassword, adminPhone, adminAddress);
     try {
-      setIsLoading(true)
-      setIsDisabled(true)
+      setIsLoading(true);
+      setIsDisabled(true);
       const response = await axios.post(
         `${import.meta.env.VITE_LOCAL_URL}/admin/signup`,
         {
@@ -48,18 +48,18 @@ function AdminSignUpPage() {
         { withCredentials: true }
       );
       const token = response.data.token;
-      console.log(response.data.token);
+      // console.log(response.data.token);
 
       localStorage.setItem("token", JSON.stringify(token));
 
       setTimeout(() => {
         setIsLoading(false);
-        setIsDisabled(false)
-        notify("Admin Account Created!","success")
+        setIsDisabled(false);
+        notify("Admin Account Created!", "success");
         navigate("/admin/profile");
       }, 4000);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       // 🔴 NETWORK ERROR (backend unreachable)
       if (!error.response) {
         setIsLoading(false);
@@ -69,10 +69,10 @@ function AdminSignUpPage() {
         setErrorMsg("Server is unreachable");
         return;
       }
-     if (error.response?.status === 400) {
+      if (error.response?.status === 400) {
         notify(error.response.data, "error");
         setTimeout(() => {
-          setIsLoading(false)
+          setIsLoading(false);
           setIsDisabled(false);
           navigate("/admin/login");
         }, 4000);

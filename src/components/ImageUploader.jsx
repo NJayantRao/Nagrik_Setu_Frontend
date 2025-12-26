@@ -3,7 +3,7 @@ import ImageUploading from "react-images-uploading";
 import { toast } from "react-toastify";
 
 function ImageUploader({ image, setImage, preview, setPreview }) {
-  const [isDisabled,setIsDisabled]= useState(false)
+  const [isDisabled, setIsDisabled] = useState(false);
   const notify = (message, type = "success") => {
     const colors = {
       success: "#4f46e5", // Indigo (your success color)
@@ -26,18 +26,18 @@ function ImageUploader({ image, setImage, preview, setPreview }) {
     });
   };
   const handleFileUpload = (e) => {
-    setIsDisabled(true)
-    console.log(e.target.files[0]);
+    setIsDisabled(true);
+    // console.log(e.target.files[0]);
     const file = e.target.files[0];
     if (!file) {
       notify("Image is Required...", "error");
-      setIsDisabled(false)
+      setIsDisabled(false);
       return;
     }
     setImage(file);
     setPreview(URL.createObjectURL(file));
     notify("Image Uploaded Successfully!", "success");
-    setIsDisabled(false)
+    setIsDisabled(false);
   };
   return (
     <div className="w-full max-w-lg">
@@ -46,7 +46,7 @@ function ImageUploader({ image, setImage, preview, setPreview }) {
       >
         <div className="flex flex-col justify-center">
           <img
-            src={`${preview?preview:"/image_upload.svg"}`}
+            src={`${preview ? preview : "/image_upload.svg"}`}
             alt="image_upload"
             className="h-10 sm:h-15 w-full"
           />
@@ -54,7 +54,6 @@ function ImageUploader({ image, setImage, preview, setPreview }) {
             <input
               type="file"
               name="Browse File"
-              
               placeholder="Browse File"
               id=""
               className="h-5 w-20 hover:cursor-pointer "

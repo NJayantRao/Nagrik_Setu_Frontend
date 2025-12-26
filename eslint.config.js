@@ -23,10 +23,10 @@ export default defineConfig([
       },
     },
     rules: {
-      "no-unused-vars": ["off", { varsIgnorePattern: "^[A-Z_]" }],
-      "no-console": "off",
+      "no-unused-vars": ["warn", { varsIgnorePattern: "^[A-Z_]" }],
+      "no-console": "error",
       "no-var": "error",
-      "eqeqeq": "warn",
+      eqeqeq: "warn",
       "react-hooks/rules-of-hooks": "off",
       "react-hooks/exhaustive-deps": "off",
       "react-refresh/only-export-components": "off",

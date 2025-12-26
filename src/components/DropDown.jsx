@@ -60,6 +60,7 @@ const DropDown = ({ isLoginClicked }) => {
               // console.log(response);
               navigate("/");
             } catch (error) {
+              // eslint-disable-next-line no-console
               console.log(error);
             }
           }}

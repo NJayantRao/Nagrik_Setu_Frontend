@@ -52,7 +52,7 @@ function UserLoginPage() {
         navigate("/user/profile");
       }, 4000);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       // 🔴 NETWORK ERROR (backend unreachable)
       if (!error.response) {
         setIsLoading(false);

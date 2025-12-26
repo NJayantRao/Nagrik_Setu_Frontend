@@ -49,7 +49,7 @@ function AdminLoginPage() {
 
   async function submitHandler(e) {
     e.preventDefault();
-    console.log(adminUniqueId, adminPassword);
+    // console.log(adminUniqueId, adminPassword);
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_LOCAL_URL}/admin/login`,
@@ -61,7 +61,7 @@ function AdminLoginPage() {
       );
       setIsLoading(true);
       const token = response.data.token;
-      console.log(response.data.token);
+      // console.log(response.data.token);
 
       localStorage.setItem("token", JSON.stringify(token));
 
@@ -72,6 +72,7 @@ function AdminLoginPage() {
       setAdminUniqueId("");
       setAdminPassword("");
     } catch (error) {
+      //eslint-disable-next-line no-console
       console.log(error);
       // setIsLoading(false)
       if (error.response?.status === 401) {
@@ -79,6 +80,7 @@ function AdminLoginPage() {
         setAdminUniqueId("");
         setAdminPassword("");
       } else {
+        //eslint-disable-next-line no-console
         console.log(error);
       }
     }

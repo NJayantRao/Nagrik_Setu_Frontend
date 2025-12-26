@@ -27,12 +27,10 @@ function UserResetPassword() {
   const [otp, setOtp] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
-  
-
   async function submitHandler(e) {
     e.preventDefault();
     try {
-      setIsLoading(true)
+      setIsLoading(true);
       setIsDisabled(true);
       const response = await axios.put(
         `${import.meta.env.VITE_LOCAL_URL}/user/resetPassword`,
@@ -53,7 +51,7 @@ function UserResetPassword() {
         navigate("/user/login");
       }, 4000);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       // 🔴 NETWORK ERROR (backend unreachable)
       if (!error.response) {
         setIsLoading(false);
@@ -64,12 +62,12 @@ function UserResetPassword() {
         return;
       }
       if (error.response?.status === 401) {
-        setIsLoading(false)
+        setIsLoading(false);
         setIsDisabled(false);
         notify(error.response.data, "error");
       } else {
         // console.log(error);
-        setIsLoading(false)
+        setIsLoading(false);
         setIsDisabled(false);
         setErrorStatus(error.response.status);
         setErrorMsg(error.response.data);
@@ -86,7 +84,7 @@ function UserResetPassword() {
     return <Loader />;
   }
   if (errorStatus === 401 || errorStatus === 500) {
-    return <Errors status={errorStatus} message={errorMsg} />
+    return <Errors status={errorStatus} message={errorMsg} />;
   }
   return (
     <div className=" bg-[#e0e7ff] flex justify-center items-center p-5 max-h-screen">

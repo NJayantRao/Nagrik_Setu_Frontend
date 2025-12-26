@@ -51,7 +51,7 @@ function UserComplaints() {
         setId(response.data.id);
         // console.log(id);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
         // 🔴 NETWORK ERROR (backend unreachable)
         if (!error.response) {
           notify("Server is Unreachable. Please try again later.", "error");
@@ -106,7 +106,7 @@ function UserComplaints() {
 
         // console.log(countFiled, countInProgress, countRejected, countResolved);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
         setErrorStatus(error.response.status);
         setErrorMsg(error.response.data);
       }

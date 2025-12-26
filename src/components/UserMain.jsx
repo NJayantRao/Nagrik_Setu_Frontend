@@ -38,10 +38,10 @@ function UserMain({ filed, inProgress, resolved, rejected, complaintList }) {
     },
   ];
 
-  useEffect(() => {
-    console.log(filed, inProgress, resolved, rejected);
-    console.log(complaintList);
-  }, [filed, inProgress, resolved, rejected, complaintList]);
+  // useEffect(() => {
+  //   console.log(filed, inProgress, resolved, rejected);
+  //   console.log(complaintList);
+  // }, [filed, inProgress, resolved, rejected, complaintList]);
   return (
     <div className="relative w-full h-screen p-4 bg-[#f2f3f5]">
       <div

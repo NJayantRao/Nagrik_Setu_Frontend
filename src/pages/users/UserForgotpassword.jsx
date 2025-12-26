@@ -16,8 +16,8 @@ function UserForgotPassword() {
     setErrorStatus,
   } = useContext(UserDataContext);
   const [isSending, setIsSending] = useState(false);
-  const [isDisabled,setIsDisabled] = useState(false);
- 
+  const [isDisabled, setIsDisabled] = useState(false);
+
   async function submitHandler(e) {
     e.preventDefault();
     try {
@@ -37,25 +37,25 @@ function UserForgotPassword() {
       }, 4000);
       // console.log(uniqueId);
     } catch (error) {
-      console.log(error);
-       // 🔴 NETWORK ERROR (backend unreachable)
-            if (!error.response) {
-              setIsSending(false);
-              setIsDisabled(false);
-              notify("Server is Unreachable. Please try again later.", "error");
-              setErrorStatus(500);
-              setErrorMsg("Server is unreachable");
-              return;
-            }
+      // console.log(error);
+      // 🔴 NETWORK ERROR (backend unreachable)
+      if (!error.response) {
+        setIsSending(false);
+        setIsDisabled(false);
+        notify("Server is Unreachable. Please try again later.", "error");
+        setErrorStatus(500);
+        setErrorMsg("Server is unreachable");
+        return;
+      }
       if (error.response?.status === 401) {
-        setIsSending(false)
+        setIsSending(false);
         setIsDisabled(false);
         setErrorStatus(error.response.status);
         setErrorMsg(error.response.data);
         // console.log(errorStatus);
       } else {
         // console.log(error);
-                setIsSending(false)
+        setIsSending(false);
 
         setIsDisabled(false);
         setErrorStatus(error.response.status);
@@ -65,7 +65,7 @@ function UserForgotPassword() {
   }
 
   if (errorStatus === 401 || errorStatus === 500) {
-    return <Errors  status={errorStatus} message={errorMsg} />;
+    return <Errors status={errorStatus} message={errorMsg} />;
   }
   return (
     <div className=" bg-[#e0e7ff] flex justify-center items-center p-5 max-h-screen">

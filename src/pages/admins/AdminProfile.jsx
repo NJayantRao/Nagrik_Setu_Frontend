@@ -18,11 +18,12 @@ function AdminProfile() {
             headers: {
               Authorization: `Bearer ${token}`,
             },
-          },
+          }
         );
-        console.log(response.data);
+        // console.log(response.data);
         setName(response.data.name);
       } catch (error) {
+        //eslint-disable-next-line no-console
         console.log(error);
         return <div>error occured</div>;
       }

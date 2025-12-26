@@ -16,10 +16,11 @@ const DeleteModal = () => {
         }
       );
       localStorage.removeItem("token");
-      console.log(del);
+      // console.log(del);
       notify(del.data, "error");
       navigate("/");
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.log(error);
     }
   };
@@ -53,7 +54,7 @@ const DeleteModal = () => {
             <button
               className="btn bg-red-600 hover:bg-red-700 text-white rounded-xl"
               onClick={(e) => {
-                console.log("Account deleted");
+                // console.log("Account deleted");
                 handleDelete(e);
                 document.getElementById("delete_account_modal").close();
               }}

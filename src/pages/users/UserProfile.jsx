@@ -1,4 +1,4 @@
-import {  useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import Topbar from "../../components/Topbar";
 import Sidebar from "../../components/Sidebar";
@@ -49,14 +49,14 @@ function UserProfile() {
         setId(response.data.id);
         // console.log(id);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
         // 🔴 NETWORK ERROR (backend unreachable)
-              if (!error.response) {
-                notify("Server is Unreachable. Please try again later.", "error");
-                setErrorStatus(500);
-                setErrorMsg("Server is unreachable");
-                return;
-              }
+        if (!error.response) {
+          notify("Server is Unreachable. Please try again later.", "error");
+          setErrorStatus(500);
+          setErrorMsg("Server is unreachable");
+          return;
+        }
         if (error.response?.status === 401) {
           // console.log(error);
           setErrorStatus(error.response.status);
@@ -104,7 +104,7 @@ function UserProfile() {
 
         // console.log(countFiled, countInProgress, countRejected, countResolved);
       } catch (error) {
-        console.log(error);
+        // console.log(error);
         setErrorStatus(500);
         setErrorMsg("Something went wrong");
       }
@@ -114,9 +114,7 @@ function UserProfile() {
   }, []);
 
   if (errorStatus === 401 || errorStatus === 500) {
-    return (
-      <Errors status={errorStatus} message={errorMsg} />
-    );
+    return <Errors status={errorStatus} message={errorMsg} />;
   }
   return (
     <div className="h-screen w-full overflow-hidden ">

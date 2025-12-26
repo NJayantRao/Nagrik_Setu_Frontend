@@ -44,11 +44,11 @@ function AdminResetPassword() {
         `${import.meta.env.VITE_LOCAL_URL}/admin/resetPassword`,
         { uniqueId: adminUniqueId, otp, newPassword: adminPassword }
       );
-      console.log(adminUniqueId);
+      // console.log(adminUniqueId);
 
-      console.log(response);
+      // console.log(response);
 
-      console.log(response.data);
+      // console.log(response.data);
       notify(response.data, "success");
       setIsLoading(false);
       setAdminUniqueId("");
@@ -62,9 +62,10 @@ function AdminResetPassword() {
       // console.log(adminUniqueId);
     } catch (error) {
       if (error.response?.status === 401) {
-        console.log(error);
+        // console.log(error);
         notify(error.response.data, "error");
       } else {
+        //eslint-disable-next-line no-console
         console.log(error);
       }
     }
