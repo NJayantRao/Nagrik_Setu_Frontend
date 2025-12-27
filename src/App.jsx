@@ -31,6 +31,10 @@ const AdminResetPassword = lazy(
 import "react-toastify/dist/ReactToastify.css";
 import Loader from "./components/common/Loaders";
 import AdminDashboard from "./pages/admins/AdminDashboard";
+import AdminComplaints from "./pages/admins/AdminComplaints";
+import AdminUsersList from "./pages/admins/AdminUsersList";
+import AdminStaff from "./pages/admins/AdminStaff";
+import Adminsettings from "./pages/admins/AdminSettings";
 
 function App() {
   const { setIsLoginClicked, isLoginClicked } = useContext(UserDataContext);
@@ -89,11 +93,11 @@ function App() {
             <Route path="/admin/dashboard" element={<AdminDashboard />}></Route>
             <Route
               path="/admin/complaints"
-              element={<AdminDashboard />}
+              element={<AdminComplaints />}
             ></Route>
-            <Route path="/admin/usersList" element={<AdminDashboard />}></Route>
-            <Route path="/admin/staff" element={<AdminDashboard />}></Route>
-            <Route path="/admin/settings" element={<AdminDashboard />}></Route>
+            <Route path="/admin/usersList" element={<AdminUsersList />}></Route>
+            <Route path="/admin/staff" element={<AdminStaff />}></Route>
+            <Route path="/admin/settings" element={<Adminsettings />}></Route>
             <Route path="*" element={<ErrorPage />}></Route>
           </Route>
         </Routes>
