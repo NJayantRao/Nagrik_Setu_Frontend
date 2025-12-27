@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { UserDataContext } from "../../context/UserContext";
 import axios from "axios";
 import { notify } from "../../utils/notify";
-import Errors from "../../components/Errors";
+import Errors from "../../components/common/Errors";
 
 function UserForgotPassword() {
   const navigate = useNavigate();

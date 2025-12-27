@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AdminDataContext } from "../../context/AdminContext";
 import { notify } from "../../utils/notify";
-import Errors from "../../components/Errors";
+import Errors from "../../components/common/Errors";
 
 function AdminForgotPassword() {
   const navigate = useNavigate();

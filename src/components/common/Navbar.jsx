@@ -1,9 +1,9 @@
-import LeftSection from "./LeftSection";
-import RightSection from "./RightSection";
-import Button from "./buttons/Button";
+import LeftSection from "../LeftSection";
+import RightSection from "../RightSection";
+import Button from "../buttons/Button";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserDataContext } from "../context/UserContext";
+import { UserDataContext } from "../../context/UserContext";
 import {
   Menu,
   X,

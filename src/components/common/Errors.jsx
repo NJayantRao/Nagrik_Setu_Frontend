@@ -5,7 +5,6 @@ function Errors({ status, message }) {
 
   return (
     <div className="h-screen w-full bg-[#e0e7ff] flex items-center justify-center relative overflow-hidden">
-      
       {/* BIG watermark */}
       <h1 className="absolute text-[10rem] sm:text-[20rem] font-extrabold text-[#1e3a8a] opacity-[0.07] select-none pointer-events-none tracking-widest">
         {status}
@@ -13,7 +12,6 @@ function Errors({ status, message }) {
 
       {/* Main Content */}
       <div className="text-center z-10 px-6 max-w-3xl">
-        
         {/* Title */}
         <h2 className="text-5xl sm:text-7xl font-extrabold text-[#1D4ED8] drop-shadow-lg mb-6 tracking-tight sm:whitespace-nowrap">
           {message}

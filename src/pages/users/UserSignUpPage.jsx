@@ -4,8 +4,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { UserDataContext } from "../../context/UserContext";
 import { notify } from "../../utils/notify";
-import Loader from "../../components/Loaders";
-import Errors from "../../components/Errors";
+import Loader from "../../components/common/Loaders";
+import Errors from "../../components/common/Errors";
 
 function UserSignUpPage() {
   const {

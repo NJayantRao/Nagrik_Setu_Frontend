@@ -29,7 +29,8 @@ const AdminResetPassword = lazy(
 );
 
 import "react-toastify/dist/ReactToastify.css";
-import Loader from "./components/Loaders";
+import Loader from "./components/common/Loaders";
+import AdminDashboard from "./pages/admins/AdminDashboard";
 
 function App() {
   const { setIsLoginClicked, isLoginClicked } = useContext(UserDataContext);
@@ -85,6 +86,7 @@ function App() {
               element={<ComplaintsRegister />}
             ></Route>
             <Route path="/admin/profile" element={<AdminProfile />}></Route>
+            <Route path="/admin/dashboard" element={<AdminDashboard />}></Route>
             <Route path="*" element={<ErrorPage />}></Route>
           </Route>
         </Routes>

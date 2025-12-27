@@ -1,11 +1,11 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState } from "react";
 import { AdminDataContext } from "../../context/AdminContext";
 import { useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "lucide-react";
 import axios from "axios";
-import Loader from "../../components/Loaders";
+import Loader from "../../components/common/Loaders";
 import { notify } from "../../utils/notify";
-import Errors from "../../components/Errors";
+import Errors from "../../components/common/Errors";
 function AdminSignUpPage() {
   const {
     adminName,
@@ -56,7 +56,7 @@ function AdminSignUpPage() {
         setIsLoading(false);
         setIsDisabled(false);
         notify("Admin Account Created!", "success");
-        navigate("/admin/profile");
+        navigate("/admin/dashboard");
       }, 4000);
     } catch (error) {
       //eslint-disable-next-line no-console

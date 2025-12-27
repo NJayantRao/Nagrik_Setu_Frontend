@@ -5,7 +5,7 @@ import Sidebar from "../../components/Sidebar";
 import UserMain from "../../components/UserMain";
 import { UserDataContext } from "../../context/UserContext";
 import { notify } from "../../utils/notify";
-import Errors from "../../components/Errors";
+import Errors from "../../components/common/Errors";
 
 function UserProfile() {
   const [countFiled, setCountFiled] = useState(0);

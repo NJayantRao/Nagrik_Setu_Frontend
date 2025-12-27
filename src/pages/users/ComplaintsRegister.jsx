@@ -6,7 +6,7 @@ import Sidebar from "../../components/Sidebar";
 import { UserDataContext } from "../../context/UserContext";
 import ImageUploader from "../../components/ImageUploader";
 import { notify } from "../../utils/notify";
-import Errors from "../../components/Errors";
+import Errors from "../../components/common/Errors";
 import DeleteModal from "../../components/modals/DeleteModal";
 
 function ComplaintsRegister() {

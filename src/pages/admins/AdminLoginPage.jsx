@@ -2,10 +2,10 @@ import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AdminDataContext } from "../../context/AdminContext";
 import { Eye, EyeOff } from "lucide-react";
-import Loader from "../../components/Loaders";
+import Loader from "../../components/common/Loaders";
 import axios from "axios";
 import { notify } from "../../utils/notify";
-import Errors from "../../components/Errors";
+import Errors from "../../components/common/Errors";
 
 function AdminLoginPage() {
   const navigate = useNavigate();
@@ -45,7 +45,7 @@ function AdminLoginPage() {
         setIsLoading(false);
         setIsDisabled(false);
         notify("Logged-In Successfully!", "success");
-        navigate("/admin/profile");
+        navigate("/admin/dashboard");
       }, 4000);
       setAdminUniqueId("");
       setAdminPassword("");
