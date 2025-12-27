@@ -87,6 +87,13 @@ function App() {
             ></Route>
             <Route path="/admin/profile" element={<AdminProfile />}></Route>
             <Route path="/admin/dashboard" element={<AdminDashboard />}></Route>
+            <Route
+              path="/admin/complaints"
+              element={<AdminDashboard />}
+            ></Route>
+            <Route path="/admin/usersList" element={<AdminDashboard />}></Route>
+            <Route path="/admin/staff" element={<AdminDashboard />}></Route>
+            <Route path="/admin/settings" element={<AdminDashboard />}></Route>
             <Route path="*" element={<ErrorPage />}></Route>
           </Route>
         </Routes>
