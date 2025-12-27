@@ -8,7 +8,7 @@ function AdminStatCard(props) {
       </p>
       <div className="flex justify-between items-center">
         <div>
-          <h2 className="text-3xl font-bold">56</h2>
+          <h2 className="text-3xl font-bold">{props.count}</h2>
         </div>
         <div className={`p-2 ${props.bgColor} rounded-xl ${props.textColor}`}>
           <props.icon size={36} strokeWidth={1.5} />

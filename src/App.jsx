@@ -5,7 +5,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 const NavbarLayout = lazy(() => import("./layout/NavbarLayout"));
 const NoNavbarLayout = lazy(() => import("./layout/NoNavbarLayout"));
-const Home = lazy(() => import("./pages/common/Home"));
+import Home from "./pages/common/Home";
 const ErrorPage = lazy(() => import("./pages/common/ErrorPage"));
 const UserSignUpPage = lazy(() => import("./pages/users/UserSignUpPage"));
 const UserLoginPage = lazy(() => import("./pages/users/UserLoginPage"));

@@ -4,7 +4,7 @@ import BackgroundLetterAvatars from "../components/TextAvatar";
 const SearchBar = () => {
   return (
     <div className="  bg-[#eef2f7] p-2 shadow-lg flex items-center justify-between backdrop-blur-md">
-      <div className="bg-[#f7f9fa] p-3 rounded-xl flex items-center shadow-lg w-3/4">
+      <div className="bg-[#f7f9fa] p-3 rounded-xl flex items-center shadow-sm w-3/4">
         <Search className="text-gray-400 mr-2" />
         <input
           type="text"
