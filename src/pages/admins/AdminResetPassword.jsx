@@ -1,81 +1,85 @@
 import { useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Eye, EyeOff } from "lucide-react";
 import Loader from "../../components/Loaders";
-import { toast } from "react-toastify";
 import axios from "axios";
 import { AdminDataContext } from "../../context/AdminContext";
+import { notify } from "../../utils/notify";
+import Errors from "../../components/Errors";
 
 function AdminResetPassword() {
   const navigate = useNavigate();
-  const { setAdminUniqueId, adminUniqueId, adminPassword, setAdminPassword } =
-    useContext(AdminDataContext);
-  const [loading, setLoading] = useState(false);
+  const location = useLocation();
+  const {
+    setAdminUniqueId,
+    adminUniqueId,
+    adminPassword,
+    setAdminPassword,
+    setErrorMsg,
+    errorMsg,
+    setErrorStatus,
+    errorStatus,
+  } = useContext(AdminDataContext);
   const [isLoading, setIsLoading] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
   const [otp, setOtp] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-
-  const notify = (message, type = "success") => {
-    const colors = {
-      success: "#4f46e5", // Indigo (your success color)
-      error: "#dc2626", // Red-600
-      info: "#2563eb", // Blue-600
-      warning: "#f59e0b", // Amber-500
-    };
-
-    toast[type](message, {
-      position: "top-center",
-      autoClose: 3000,
-      hideProgressBar: false,
-      theme: "colored",
-      style: {
-        background: colors[type],
-        color: "#fff",
-        fontWeight: "600",
-        borderRadius: "10px",
-      },
-    });
-  };
 
   async function submitHandler(e) {
     e.preventDefault();
     try {
+      setIsLoading(true);
+      setIsDisabled(true);
       const response = await axios.put(
         `${import.meta.env.VITE_LOCAL_URL}/admin/resetPassword`,
         { uniqueId: adminUniqueId, otp, newPassword: adminPassword }
       );
-      // console.log(adminUniqueId);
-
-      // console.log(response);
-
-      // console.log(response.data);
       notify(response.data, "success");
-      setIsLoading(false);
       setAdminUniqueId("");
       setOtp("");
       setAdminPassword("");
-      setIsLoading(true);
 
       setTimeout(() => {
-        navigate("/admin/profile");
-      }, 3000);
-      // console.log(adminUniqueId);
+        setIsDisabled(false);
+        setIsLoading(false);
+        navigate("/admin/login");
+      }, 4000);
     } catch (error) {
+      //eslint-disable-next-line no-console
+      console.log(error);
+      // 🔴 NETWORK ERROR (backend unreachable)
+      if (!error.response) {
+        setIsLoading(false);
+        setIsDisabled(false);
+        notify("Server is Unreachable. Please try again later.", "error");
+        setErrorStatus(500);
+        setErrorMsg("Server is unreachable");
+        return;
+      }
       if (error.response?.status === 401) {
-        // console.log(error);
+        setIsLoading(false);
+        setIsDisabled(false);
         notify(error.response.data, "error");
+        setAdminUniqueId("");
       } else {
         //eslint-disable-next-line no-console
         console.log(error);
+        setErrorStatus(error.response.status);
+        setErrorMsg(error.response.data);
       }
     }
   }
 
   useEffect(() => {
-    notify();
+    if (location.state?.fromForgotPassword) {
+      notify("OTP Sent to Registered E-Mail...");
+    }
   }, []);
   if (isLoading) {
     return <Loader />;
+  }
+  if (errorStatus === 401 || errorStatus === 500) {
+    return <Errors status={errorStatus} message={errorMsg} />;
   }
   return (
     <div className=" bg-[#e0e7ff] flex justify-center items-center p-5 max-h-screen">
@@ -97,6 +101,7 @@ function AdminResetPassword() {
               name="uniqueId"
               className={` py-2 px-4 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${adminUniqueId ? "bg-[#e0e7ff]" : "bg-gray-200"}`}
               value={adminUniqueId}
+              disabled={isDisabled}
               onChange={(e) => {
                 setAdminUniqueId(e.target.value);
                 //console.log(uniqueToken);
@@ -112,6 +117,7 @@ function AdminResetPassword() {
               name="otp"
               className={` py-2 px-4 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${otp ? "bg-[#e0e7ff]" : "bg-gray-200"}`}
               value={otp}
+              disabled={isDisabled}
               maxLength={6}
               minLength={6}
               onChange={(e) => {
@@ -130,6 +136,7 @@ function AdminResetPassword() {
                 name="password"
                 className={` py-2 px-4 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${adminPassword ? "bg-[#e8f0ff]" : "bg-gray-200"}`}
                 value={adminPassword}
+                disabled={isDisabled}
                 onChange={(e) => {
                   setAdminPassword(e.target.value);
                   //console.log(password);
@@ -151,6 +158,7 @@ function AdminResetPassword() {
           <div className="w-full flex justify-center mt-0.5">
             <button
               type="submit"
+              disabled={isDisabled}
               className="bg-blue-600 p-2 w-1/2 rounded-full text-xl text-white font-bold hover:scale-105 hover:cursor-pointer hover:bg-blue-700 hover:ease-in-out"
             >
               Reset Password

@@ -59,7 +59,8 @@ function AdminSignUpPage() {
         navigate("/admin/profile");
       }, 4000);
     } catch (error) {
-      // console.log(error);
+      //eslint-disable-next-line no-console
+      console.log(error);
       // 🔴 NETWORK ERROR (backend unreachable)
       if (!error.response) {
         setIsLoading(false);
@@ -118,6 +119,7 @@ function AdminSignUpPage() {
               name="name"
               className={` py-2 px-4 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${adminName ? "bg-[#e0e7ff]" : "bg-gray-200"}`}
               value={adminName}
+              disabled={isDisabled}
               onChange={(e) => {
                 setAdminName(e.target.value);
                 //console.log(name);
@@ -133,6 +135,7 @@ function AdminSignUpPage() {
               name="email"
               className={` py-2 px-4 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${adminEmail ? "bg-[#e8f0ff]" : "bg-gray-200"}`}
               value={adminEmail}
+              disabled={isDisabled}
               onChange={(e) => {
                 setAdminEmail(e.target.value);
                 //console.log(email);
@@ -155,6 +158,7 @@ function AdminSignUpPage() {
                 name="password"
                 className={` py-2 px-4 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${adminPassword ? "bg-[#e8f0ff]" : "bg-gray-200"}`}
                 value={adminPassword}
+                disabled={isDisabled}
                 onChange={(e) => {
                   setAdminPassword(e.target.value);
                   //console.log(password);
@@ -181,6 +185,7 @@ function AdminSignUpPage() {
               name="phone"
               className={` py-2 px-4 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${adminPhone ? "bg-[#e8f0ff]" : "bg-gray-200"}`}
               value={adminPhone}
+              disabled={isDisabled}
               onChange={(e) => {
                 setAdminPhone(e.target.value);
                 //console.log(name);
@@ -198,6 +203,7 @@ function AdminSignUpPage() {
               name="address"
               className={` py-2 px-4 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${adminAddress ? "bg-[#e8f0ff]" : "bg-gray-200"}`}
               value={adminAddress}
+              disabled={isDisabled}
               onChange={(e) => {
                 setAdminAddress(e.target.value);
                 //console.log(name);

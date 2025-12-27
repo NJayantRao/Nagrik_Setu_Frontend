@@ -19,11 +19,9 @@ function UserResetPassword() {
     setErrorMsg,
     errorStatus,
     setErrorStatus,
-    isDisabled,
-    setIsDisabled,
   } = useContext(UserDataContext);
-  const [loading, setLoading] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
   const [otp, setOtp] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
@@ -36,11 +34,6 @@ function UserResetPassword() {
         `${import.meta.env.VITE_LOCAL_URL}/user/resetPassword`,
         { uniqueToken, otp, newPassword: password }
       );
-      // console.log(uniqueToken);
-
-      // console.log(response);
-
-      // console.log(response.data);
       setUniqueToken("");
       setOtp("");
       setPassword("");
@@ -106,6 +99,7 @@ function UserResetPassword() {
               name="uniqueId"
               className={` py-2 px-4 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${uniqueToken ? "bg-[#e0e7ff]" : "bg-gray-200"}`}
               value={uniqueToken}
+              disabled={isDisabled}
               onChange={(e) => {
                 setUniqueToken(e.target.value);
                 //console.log(uniqueToken);
@@ -121,6 +115,7 @@ function UserResetPassword() {
               name="otp"
               className={` py-2 px-4 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${otp ? "bg-[#e0e7ff]" : "bg-gray-200"}`}
               value={otp}
+              disabled={isDisabled}
               maxLength={6}
               minLength={6}
               onChange={(e) => {
@@ -139,6 +134,7 @@ function UserResetPassword() {
                 name="password"
                 className={` py-2 px-4 rounded-xl w-full text-gray-600 text-sm shadow-sm focus:outline-none focus:ring-2 focus:bg-[#e0e7ff] focus:ring-blue-400 ${password ? "bg-[#e8f0ff]" : "bg-gray-200"}`}
                 value={password}
+                disabled={isDisabled}
                 onChange={(e) => {
                   setPassword(e.target.value);
                   //console.log(password);
@@ -160,6 +156,7 @@ function UserResetPassword() {
           <div className="w-full flex justify-center mt-0.5">
             <button
               type="submit"
+              disabled={isDisabled}
               className="bg-blue-600 p-2 w-3/4 rounded-xl sm:rounded-full text-lg sm:text-xl text-white font-bold hover:scale-105 hover:cursor-pointer hover:bg-blue-700 hover:ease-in-out"
             >
               Reset Password

@@ -14,7 +14,6 @@ function Home() {
 
   return (
     <div className="relative h-screen w-full bg-[#e0e7ff] flex items-center justify-center overflow-hidden">
-      
       {/* Watermark */}
       <motion.h1
         initial={{ opacity: 0 }}
@@ -27,7 +26,6 @@ function Home() {
 
       {/* Main Content */}
       <div className="z-10 text-center px-4 sm:px-10">
-
         {/* Title */}
         <motion.h1
           initial={{ opacity: 0, y: 24 }}
@@ -65,7 +63,7 @@ function Home() {
         >
           <button
             onClick={() => (window.location.href = "/user/signup")}
-            className="bg-white text-[#1D4ED8] font-bold px-6 py-3 rounded-xl shadow-lg hover:shadow-2xl hover:scale-105 transition-all"
+            className="bg-white text-[#1D4ED8] font-bold px-6 py-3 rounded-xl shadow-lg hover:shadow-2xl hover:scale-105 transition-all hover:cursor-pointer"
           >
             Get Started
           </button>

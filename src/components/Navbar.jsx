@@ -18,10 +18,7 @@ function Navbar() {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <div
-      className="bg-[#1D4ED8] w-full h-12 sm:h-25 px-2 py-3 flex items-center justify-between sm:justify-around shadow-xl text-gray-300 text-xl font-bold"
-      onClick={(e) => {}}
-    >
+    <div className="bg-[#1D4ED8] w-full h-12 sm:h-25 px-2 py-3 flex items-center justify-between sm:justify-around shadow-xl text-gray-300 text-xl font-bold sticky top-0 z-50">
       <div className="sm:hidden flex gap-3">
         <Menu
           onClick={() => {

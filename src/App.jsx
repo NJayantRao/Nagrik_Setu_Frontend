@@ -35,7 +35,7 @@ function App() {
   const { setIsLoginClicked, isLoginClicked } = useContext(UserDataContext);
   return (
     <div
-      className="h-screen w-full bg-[#e0e7ff] relative"
+      className="min-h-screen w-full bg-[#e0e7ff] relative"
       onClick={() => {
         if (isLoginClicked) {
           setIsLoginClicked(!isLoginClicked);

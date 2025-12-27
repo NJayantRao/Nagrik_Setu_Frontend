@@ -62,7 +62,14 @@ function UserLoginPage() {
         setErrorMsg("Server is unreachable");
         return;
       }
-      if (error.response?.status === 401) {
+      if (
+        error.response.status === 401 &&
+        error.response?.data === "Incorrect password"
+      ) {
+        setIsLoading(false);
+        setIsDisabled(false);
+        notify(error.response.data, "error");
+      } else if (error.response?.status === 401) {
         setIsLoading(false);
         setIsDisabled(false);
         notify(error.response.data, "error");
@@ -71,10 +78,6 @@ function UserLoginPage() {
         setTimeout(() => {
           navigate("/user/signup");
         }, 4000);
-      } else if (error.response?.status === 402) {
-        setIsLoading(false);
-        setIsDisabled(false);
-        notify(error.response.data, "error");
       } else {
         setIsLoading(false);
         setIsDisabled(false);
@@ -165,6 +168,7 @@ function UserLoginPage() {
           <div className="w-full flex justify-center mt-0.5">
             <button
               type="submit"
+              disabled={isDisabled}
               className="bg-blue-600 p-2 w-1/2 rounded-xl sm:rounded-full text-xl text-white font-bold hover:scale-105 hover:cursor-pointer hover:bg-blue-700 hover:ease-in-out"
             >
               Login
