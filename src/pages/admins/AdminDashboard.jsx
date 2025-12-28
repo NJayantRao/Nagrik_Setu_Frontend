@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Navbar from "../../components/common/Navbar";
 import {
   Eye,
@@ -11,46 +11,57 @@ import {
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import AdminSidebar from "../../components/sidebars/AdminSidebar";
-import Search from "../../components/SearchBar";
 import SearchBar from "../../components/SearchBar";
 import AdminStatCard from "../../components/cards/AdminStatCard";
 import PieChart from "../../components/charts/PieChart";
 import Bargraph from "../../components/charts/Bargraph";
+import { AdminDataContext } from "../../context/AdminContext";
 
 function AdminDashboard() {
   const navigate = useNavigate();
-  const [name, setName] = useState("");
+  // const [name, setName] = useState("");
+  const { adminName, setAdminName } = useContext(AdminDataContext);
+  const [countFiled, setCountFiled] = useState(0);
+  const [countInProgress, setCountInProgress] = useState(0);
+  const [countResolved, setCountResolved] = useState(0);
+  const [countRejected, setCountRejected] = useState(0);
+  const [totalComplaints, seTotalComplaints] = useState(0);
+  const [complaintsList, setcomplaintsList] = useState([]);
   const statCardInfo = [
     {
       title: "Total Complaints",
       icon: FileText,
       bgColor: "bg-[#e8eaef]",
       textColor: "text-[#193366]",
+      count: totalComplaints,
     },
     {
       title: "In-Progress",
       icon: FileClock,
       bgColor: "bg-[#fef5e6]",
       textColor: "text-[#f9a006]",
+      count: countInProgress,
     },
     {
       title: "Resolved",
       icon: FileCheck,
       bgColor: "bg-[#e8f9ef]",
       textColor: "text-[#16a34a]",
+      count: countResolved,
     },
     {
       title: "Rejected",
       icon: FileX,
       bgColor: "bg-[#fff0f0]",
       textColor: "text-red-600",
+      count: countRejected,
     },
   ];
   const complaintStats = {
-    filed: 56,
-    inProgress: 22,
-    resolved: 31,
-    rejected: 9,
+    filed: countFiled,
+    inProgress: countInProgress,
+    resolved: countResolved,
+    rejected: countRejected,
   };
   const departmentStats = {
     departments: ["Roads", "Water", "Electricity", "Sanitation"],
@@ -58,54 +69,143 @@ function AdminDashboard() {
     resolved: [30, 21, 20, 15],
   };
 
-  // useEffect(() => {
-  //   async function fetchUserInfo() {
-  //     try {
-  //       const token = JSON.parse(localStorage.getItem("token"));
-  //       const response = await axios.get(
-  //         `${import.meta.env.VITE_LOCAL_URL}/user/profile`,
-  //         {
-  //           headers: {
-  //             Authorization: `Bearer ${token}`,
-  //           },
-  //         }
-  //       );
-  //       // console.log(response.data);
-  //       setName(response.data.name);
-  //       setEmail(response.data.email);
-  //       setUniqueToken(response.data.uniqueToken);
-  //       setPhone(response.data.phone);
-  //       setAddress(response.data.address);
-  //       setId(response.data.id);
-  //       // console.log(id);
-  //     } catch (error) {
-  //       // console.log(error);
-  //       // 🔴 NETWORK ERROR (backend unreachable)
-  //       if (!error.response) {
-  //         notify("Server is Unreachable. Please try again later.", "error");
-  //         setErrorStatus(500);
-  //         setErrorMsg("Server is unreachable");
-  //         return;
-  //       }
-  //       if (error.response?.status === 401) {
-  //         // console.log(error);
-  //         setErrorStatus(error.response.status);
-  //         setErrorMsg(error.response.data);
-  //         // console.log(errorStatus);
-  //       } else {
-  //         // console.log(error);
-  //         setErrorStatus(error.response.status);
-  //         setErrorMsg(error.response.data);
-  //       }
-  //     }
-  //   }
-  //   fetchUserInfo();
-  // }, []);
+  useEffect(() => {
+    async function fetchUserInfo() {
+      try {
+        const token = JSON.parse(localStorage.getItem("token"));
+        const response = await axios.get(
+          `${import.meta.env.VITE_LOCAL_URL}/admin/profile`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        // console.log(response.data);
+        setAdminName(response.data.name);
+      } catch (error) {
+        // console.log(error);
+        // 🔴 NETWORK ERROR (backend unreachable)
+        if (!error.response) {
+          // notify("Server is Unreachable. Please try again later.", "error");
+          // setErrorStatus(500);
+          // setErrorMsg("Server is unreachable");
+          return;
+        }
+        if (error.response?.status === 401) {
+          // console.log(error);
+          // setErrorStatus(error.response.status);
+          // setErrorMsg(error.response.data);
+          // console.log(errorStatus);
+        } else {
+          // console.log(error);
+          // setErrorStatus(error.response.status);
+          // setErrorMsg(error.response.data);
+        }
+      }
+    }
+    fetchUserInfo();
+  }, []);
+
+  useEffect(() => {
+    async function fetchComplaintsInfo() {
+      try {
+        const token = JSON.parse(localStorage.getItem("token"));
+        const response = await axios.get(
+          `${import.meta.env.VITE_LOCAL_URL}/admin/complaints`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        // console.log(response.data.complaints);
+        let f = 0,
+          ip = 0,
+          r = 0,
+          rej = 0;
+
+        response.data.complaints.forEach((ele) => {
+          if (ele.status === "Filed" || ele.status === "Acknowledged") f++;
+          else if (ele.status === "In-Progress") ip++;
+          else if (ele.status === "Resolved") r++;
+          else if (ele.status === "Rejected") rej++;
+        });
+
+        setCountFiled(f);
+        setCountInProgress(ip);
+        setCountResolved(r);
+        setCountRejected(rej);
+        seTotalComplaints(response.data.complaints.length);
+        setcomplaintsList(response.data.complaints);
+      } catch (error) {
+        // console.log(error);
+        // 🔴 NETWORK ERROR (backend unreachable)
+        if (!error.response) {
+          // notify("Server is Unreachable. Please try again later.", "error");
+          // setErrorStatus(500);
+          // setErrorMsg("Server is unreachable");
+          return;
+        }
+        if (error.response?.status === 401) {
+          // console.log(error);
+          // setErrorStatus(error.response.status);
+          // setErrorMsg(error.response.data);
+          // console.log(errorStatus);
+        } else {
+          // console.log(error);
+          // setErrorStatus(error.response.status);
+          // setErrorMsg(error.response.data);
+        }
+      }
+    }
+
+    fetchComplaintsInfo();
+    // console.log(totalComplaints,countFiled,countInProgress,countResolved,countRejected);
+  }, []);
+
+  useEffect(() => {
+    async function fetchDepartmentInfo() {
+      try {
+        const token = JSON.parse(localStorage.getItem("token"));
+        const response = await axios.get(
+          `${import.meta.env.VITE_LOCAL_URL}/admin/departments`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        // console.log(response.data);
+      } catch (error) {
+        // console.log(error);
+        // 🔴 NETWORK ERROR (backend unreachable)
+        if (!error.response) {
+          // notify("Server is Unreachable. Please try again later.", "error");
+          // setErrorStatus(500);
+          // setErrorMsg("Server is unreachable");
+          return;
+        }
+        if (error.response?.status === 401) {
+          // console.log(error);
+          // setErrorStatus(error.response.status);
+          // setErrorMsg(error.response.data);
+          // console.log(errorStatus);
+        } else {
+          // console.log(error);
+          // setErrorStatus(error.response.status);
+          // setErrorMsg(error.response.data);
+        }
+      }
+    }
+
+    fetchDepartmentInfo();
+  }, []);
   return (
     <div className="flex bg-[#f9fafb]">
       <AdminSidebar />
       <div className="w-4/5 shadow-2xl">
-        <SearchBar />
+        <SearchBar name={adminName} />
         <div className="px-6 py-3 mt-2">
           <h2 className="text-3xl font-bold">Dashboard</h2>
           <h4 className="text-lg font-medium text-[#706e7d]">
@@ -120,6 +220,7 @@ function AdminDashboard() {
                   title={ele.title}
                   icon={ele.icon}
                   textColor={ele.textColor}
+                  count={ele.count}
                 />
               );
             })}

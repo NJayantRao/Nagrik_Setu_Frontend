@@ -1,9 +1,11 @@
 import AdminSidebar from "../../components/sidebars/AdminSidebar";
 import SearchBar from "../../components/SearchBar";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import {
   ChevronLeft,
   ChevronRight,
+  CircleEllipsis,
+  Ellipsis,
   FileCheck,
   FileClock,
   FileText,
@@ -12,8 +14,17 @@ import {
 } from "lucide-react";
 import AdminStatCard from "../../components/cards/AdminStatCard";
 import axios from "axios";
+import { AdminDataContext } from "../../context/AdminContext";
+import { formatDateIST } from "../../utils/formatTime";
+import ComplaintActionModal from "../../components/modals/ComplaintActionModal";
+import UpdateStatusModal from "../../components/modals/UpdateStatusModal";
+import { useLocation } from "react-router-dom";
+import ViewComplaintModal from "../../components/modals/ViewComplaintModal";
+import DeleteComplaintModal from "../../components/modals/DeleteComplaint";
 
 function AdminComplaints() {
+  const location = useLocation();
+  const { adminName } = useContext(AdminDataContext);
   const [search, setSearch] = useState("");
   const [countInProgress, setCountInProgress] = useState(0);
   const [countResolved, setCountResolved] = useState(0);
@@ -21,6 +32,7 @@ function AdminComplaints() {
   const [totalComplaints, seTotalComplaints] = useState(0);
   const [complaintsList, setcomplaintsList] = useState([]);
   const [currIndex, setCurrIndex] = useState(1);
+  const [selectedComplaint, setSelectedComplaint] = useState("");
   const rowsPerPage = 10;
   const startIndex = (currIndex - 1) * rowsPerPage;
   const endIndex = startIndex + rowsPerPage;
@@ -70,6 +82,7 @@ function AdminComplaints() {
       curData.departmentName?.toLowerCase().includes(search.toLowerCase()) ||
       curData.status?.toLowerCase().includes(search.toLowerCase())
   );
+  //refactoring
   useEffect(() => {
     async function fetchComplaintsInfo() {
       try {
@@ -127,13 +140,13 @@ function AdminComplaints() {
 
     fetchComplaintsInfo();
     // console.log(totalComplaints,countFiled,countInProgress,countResolved,countRejected);
-  }, []);
+  }, [location.pathname]);
 
   return (
     <div className="flex bg-[#f9fafb]">
       <AdminSidebar />
       <div className="w-4/5 shadow-2xl">
-        <SearchBar />
+        <SearchBar name={adminName} />
         <div className="px-6 py-3 mt-2">
           <h2 className="text-3xl font-bold">Complaint Management</h2>
           <h4 className="text-lg font-medium text-[#706e7d]">
@@ -210,14 +223,15 @@ function AdminComplaints() {
                     </div>
                   </div>
                   <div className="overflow-x-auto">
-                    <table className="max-w-[80vw] sm:min-w-[700px] w-full text-sm">
+                    <table className="max-w-[80vw] sm:min-w-[700px] w-full text-sm text-center">
                       <thead>
-                        <tr className="text-gray-500 whitespace-nowrap">
-                          <th className="text-left pb-3">Complaint ID</th>
-                          <th className="text-left pb-3">Title</th>
-                          <th className="text-left pb-3">Department</th>
-                          <th className="text-left pb-3">Status</th>
-                          <th className="text-left pb-3">Actions</th>
+                        <tr className="text-gray-500 text-lg whitespace-nowrap border-b">
+                          <th className="py-3 font-medium">Complaint ID</th>
+                          <th className="py-3 font-medium">Title</th>
+                          <th className="py-3 font-medium">Department</th>
+                          <th className="py-3 font-medium">Registered At</th>
+                          <th className="py-3 font-medium">Status</th>
+                          <th className="py-3 font-medium">Actions</th>
                         </tr>
                       </thead>
 
@@ -225,32 +239,43 @@ function AdminComplaints() {
                         {searchData.map((item, i) => (
                           <tr
                             key={i}
-                            className="border-t text-gray-700 whitespace-nowrap"
+                            className="border-b text-gray-700 whitespace-nowrap hover:bg-gray-50 transition"
                           >
-                            <td className="py-3 truncate overflow-hidden text-ellipsis whitespace-nowrap max-w-[15vw]">
+                            <td className="py-3 max-w-[15vw] truncate">
                               {item.uniqueToken}
                             </td>
 
-                            <td className=" truncate overflow-hidden text-ellipsis whitespace-nowrap max-w-[15vw] ">
+                            <td className="py-3 max-w-[15vw] truncate">
                               {item.title}
                             </td>
 
-                            <td className="truncate overflow-hidden text-ellipsis whitespace-nowrap max-w-[15vw]">
+                            <td className="py-3 max-w-[15vw] truncate">
                               {item.departmentName}
                             </td>
 
-                            <td>
-                              <span
-                                className={`px-3 py-1 rounded-full inline-block text-xs font-medium ${colorInfo[item.status]}`}
-                              >
-                                {item.status}
-                              </span>
+                            <td className="py-3 max-w-[15vw] truncate">
+                              {formatDateIST(item.createdAt)}
                             </td>
 
-                            <td>
-                              <button className="bg-blue-100 text-blue-700 px-3 py-1 rounded-lg text-xs">
-                                View
-                              </button>
+                            <td className="py-3">
+                              <div className="flex justify-center">
+                                <span
+                                  className={`px-3 py-1 rounded-full text-xs font-medium ${colorInfo[item.status]}`}
+                                >
+                                  {item.status}
+                                </span>
+                              </div>
+                            </td>
+
+                            <td className="py-3">
+                              <div
+                                className="flex justify-center"
+                                onClick={() => {
+                                  setSelectedComplaint(item);
+                                }}
+                              >
+                                <ComplaintActionModal info={item._id} />
+                              </div>
                             </td>
                           </tr>
                         ))}
@@ -258,6 +283,9 @@ function AdminComplaints() {
                     </table>
                   </div>
                 </div>
+                <UpdateStatusModal info={selectedComplaint} />
+                <ViewComplaintModal info={selectedComplaint} />
+                <DeleteComplaintModal info={selectedComplaint} />
               </div>
             </div>
           </div>

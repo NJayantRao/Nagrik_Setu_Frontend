@@ -1,7 +1,7 @@
 import { Search } from "lucide-react";
 import BackgroundLetterAvatars from "../components/TextAvatar";
 
-const SearchBar = () => {
+const SearchBar = ({ name }) => {
   return (
     <div className="  bg-[#eef2f7] p-2 shadow-lg flex items-center justify-between backdrop-blur-md">
       <div className="bg-[#f7f9fa] p-3 rounded-xl flex items-center shadow-sm w-3/4">
@@ -15,9 +15,9 @@ const SearchBar = () => {
       <div className="flex gap-4 p-2 items-center">
         <div className="flex flex-col">
           <h2 className="text-lg font-bold text-[#475569]">Admin Account</h2>
-          <p className="text-[#1e293b] font-semibold">Rahul Sharma</p>
+          <p className="text-[#1e293b] font-semibold">{name}</p>
         </div>
-        <BackgroundLetterAvatars string={"Rahul Sharma"} />
+        <BackgroundLetterAvatars string={name} />
       </div>
     </div>
   );
