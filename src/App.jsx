@@ -41,7 +41,7 @@ function App() {
   const { setIsLoginClicked, isLoginClicked } = useContext(UserDataContext);
   return (
     <div
-      className="min-h-screen w-full bg-[#e0e7ff] relative"
+      className="min-h-screen w-full bg-[#e0e7ff] relative hide-scrollbar"
       onClick={() => {
         if (isLoginClicked) {
           setIsLoginClicked(!isLoginClicked);

@@ -12,7 +12,7 @@ const features = [
     icon: FileWarning,
     title: "Easy Reporting",
     description:
-      "Submit complaints with photos, location, and detailed descriptions in just a few taps.",
+      "Submit complaints with photos and detailed descriptions in just a few taps.",
   },
   {
     icon: Search,
@@ -20,23 +20,12 @@ const features = [
     description:
       "Track the status of your complaints in real-time with transparent updates.",
   },
-  {
-    icon: Bell,
-    title: "Smart Notifications",
-    description:
-      "Stay informed with instant notifications on complaint status and resolutions.",
-  },
+
   {
     icon: Shield,
     title: "Secure & Private",
     description:
-      "Your data is protected with enterprise-grade security and privacy measures.",
-  },
-  {
-    icon: MessageSquare,
-    title: "Direct Communication",
-    description:
-      "Communicate directly with concerned departments for faster resolutions.",
+      "Your data is kept safe with strong security and privacy practices.",
   },
   {
     icon: BarChart3,

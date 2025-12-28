@@ -33,7 +33,7 @@ const steps = [
 
 const HowItWorksSection = () => {
   return (
-    <section id="how-it-works" className="py-20 lg:py-32 bg-muted/30">
+    <section id="how-it-works" className="my-20 py-4  bg-[#f4f6f7]">
       <div className="container mx-auto px-4 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
