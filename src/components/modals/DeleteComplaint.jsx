@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { notify } from "../../utils/notify";
 
-const DeleteComplaintModal = ({ info }) => {
+const DeleteComplaintModal = ({ info, refresh }) => {
   const handleDelete = async () => {
     try {
       const token = JSON.parse(localStorage.getItem("token"));
@@ -17,6 +17,7 @@ const DeleteComplaintModal = ({ info }) => {
       );
 
       notify("Complaint deleted successfully", "error");
+      refresh((prev) => !prev);
 
       document.getElementById("delete_complaint_modal").close();
     } catch (error) {

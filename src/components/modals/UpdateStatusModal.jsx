@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { notify } from "../../utils/notify";
 
-const UpdateStatusModal = ({ info }) => {
+const UpdateStatusModal = ({ info, refresh }) => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const [isRejected, setIsRejected] = useState(false);
@@ -27,11 +27,17 @@ const UpdateStatusModal = ({ info }) => {
         notify(response.data.msg);
         document.getElementById("update_status_modal").close();
         navigate("/admin/complaints");
+        refresh((prev) => !prev);
       }, 4000);
+
       // console.log(response.data);
     } catch (error) {
       //eslint-disable-next-line
       console.log(error);
+      setIsLoading(false);
+
+      notify(error.response.data, "error");
+      document.getElementById("update_status_modal").close();
     }
   }
 
@@ -51,13 +57,18 @@ const UpdateStatusModal = ({ info }) => {
       setTimeout(() => {
         setIsRejected(false);
         notify(response.data.msg);
-        document.getElementById("my_modal_3").close();
+        document.getElementById("update_status_modal").close();
         navigate("/admin/complaints");
+        refresh((prev) => !prev);
       }, 4000);
       // console.log(response.data);
     } catch (error) {
       //eslint-disable-next-line
       console.log(error);
+      setIsLoading(false);
+
+      notify(error.response.data, "error");
+      document.getElementById("update_status_modal").close();
     }
   }
 

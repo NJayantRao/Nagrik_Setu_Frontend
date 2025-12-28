@@ -3,7 +3,7 @@ import axios from "axios";
 import { Building2, X } from "lucide-react";
 import { notify } from "../utils/notify";
 
-function AddDepartmentModal() {
+function AddDepartmentModal({ refresh }) {
   const [deptName, setDeptName] = useState("");
   const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
@@ -36,6 +36,7 @@ function AddDepartmentModal() {
       notify("Department Added Successfully", "success");
       setDeptName("");
       setDescription("");
+      refresh((prev) => !prev);
 
       document.getElementById("add_department_modal").close();
     } catch (error) {

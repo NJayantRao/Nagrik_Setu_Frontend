@@ -23,6 +23,7 @@ const LogoutButton = () => {
             }
           );
           localStorage.removeItem("token");
+          localStorage.removeItem("adminName");
           // console.log(response);
           notify(response.data, "success");
           navigate("/");

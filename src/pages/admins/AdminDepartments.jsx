@@ -19,6 +19,7 @@ import UpdateDepartmentModal from "../../components/modals/UpdateDepartment";
 import DepartmentAction from "../../components/dropdowns/DepartmentAction";
 import { notify } from "../../utils/notify";
 import Loader from "../../components/common/Loaders";
+import Errors from "../../components/common/Errors";
 
 function AdminDepartments() {
   const { errorStatus, setErrorStatus, errorMsg, setErrorMsg } =
@@ -28,6 +29,7 @@ function AdminDepartments() {
   const [deparmentList, setDeparmentList] = useState([]);
   const [selectedDepartment, setSelectedDepartment] = useState("");
   const selected = selectedDepartment;
+  const [refreshKey, setRefreshKey] = useState(false);
 
   useEffect(() => {
     async function fetchDepartments() {
@@ -69,7 +71,7 @@ function AdminDepartments() {
       }
     }
     fetchDepartments();
-  }, []);
+  }, [refreshKey]);
   // console.log(selectedDepartment);
   if (isLoading) {
     return <Loader />;
@@ -138,6 +140,7 @@ function AdminDepartments() {
                         key={idx}
                         selected={setSelectedDepartment}
                         department={ele}
+                        refresh={setRefreshKey}
                       />
                     );
                   })}
@@ -146,7 +149,7 @@ function AdminDepartments() {
             </div>
           </div>
         </div>
-        <AddDepartmentModal />
+        <AddDepartmentModal refresh={setRefreshKey} />
       </div>
     </div>
   );

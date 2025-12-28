@@ -35,6 +35,7 @@ function AdminComplaints() {
   const [countRejected, setCountRejected] = useState(0);
   const [totalComplaints, seTotalComplaints] = useState(0);
   const [complaintsList, setcomplaintsList] = useState([]);
+  const [refreshKey, setRefreshKey] = useState(false);
   const [currIndex, setCurrIndex] = useState(1);
   const [selectedComplaint, setSelectedComplaint] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -57,7 +58,7 @@ function AdminComplaints() {
       count: totalComplaints,
     },
     {
-      title: "In-Progress",
+      title: "Pending",
       icon: FileClock,
       bgColor: "bg-[#fef5e6]",
       textColor: "text-[#f9a006]",
@@ -148,7 +149,7 @@ function AdminComplaints() {
 
     fetchComplaintsInfo();
     // console.log(totalComplaints,countFiled,countInProgress,countResolved,countRejected);
-  }, [location.pathname]);
+  }, [refreshKey]);
 
   if (isLoading) {
     return <Loader />;
@@ -299,9 +300,15 @@ function AdminComplaints() {
                     </table>
                   </div>
                 </div>
-                <UpdateStatusModal info={selectedComplaint} />
+                <UpdateStatusModal
+                  info={selectedComplaint}
+                  refresh={setRefreshKey}
+                />
                 <ViewComplaintModal info={selectedComplaint} />
-                <DeleteComplaintModal info={selectedComplaint} />
+                <DeleteComplaintModal
+                  info={selectedComplaint}
+                  refresh={setRefreshKey}
+                />
               </div>
             </div>
           </div>

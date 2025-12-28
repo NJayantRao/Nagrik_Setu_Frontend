@@ -47,7 +47,7 @@ function AdminDashboard() {
       count: totalComplaints,
     },
     {
-      title: "In-Progress",
+      title: "Pending",
       icon: FileClock,
       bgColor: "bg-[#fef5e6]",
       textColor: "text-[#f9a006]",
@@ -141,8 +141,12 @@ function AdminDashboard() {
           rej = 0;
 
         response.data.complaints.forEach((ele) => {
-          if (ele.status === "Filed" || ele.status === "Acknowledged") f++;
-          else if (ele.status === "In-Progress") ip++;
+          if (
+            ele.status === "Filed" ||
+            ele.status === "Acknowledged" ||
+            ele.status === "In-Progress"
+          )
+            ip++;
           else if (ele.status === "Resolved") r++;
           else if (ele.status === "Rejected") rej++;
         });

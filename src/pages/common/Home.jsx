@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { Typewriter } from "react-simple-typewriter";
 import { motion } from "framer-motion";
+import FeaturesSection from "../../components/landing/Features";
+import Footer from "../../components/landing/Footer";
+import HowItWorksSection from "../../components/landing/HowItWorks";
 
 function Home() {
   const [phrases] = useState([
@@ -13,7 +16,7 @@ function Home() {
   ]);
 
   return (
-    <div className="relative h-screen w-full bg-[#e0e7ff] flex items-center justify-center overflow-hidden">
+    <div className="relative min-h-screen w-full bg-[#e0e7ff] flex items-center justify-center overflow-hidden">
       {/* Watermark */}
       <motion.h1
         initial={{ opacity: 0 }}
@@ -25,7 +28,7 @@ function Home() {
       </motion.h1>
 
       {/* Main Content */}
-      <div className="z-10 text-center px-4 sm:px-10">
+      <div className="z-10 text-center px-4 sm:px-10 sm:mt-30">
         {/* Title */}
         <motion.h1
           initial={{ opacity: 0, y: 24 }}
@@ -68,6 +71,11 @@ function Home() {
             Get Started
           </button>
         </motion.div>
+        <div className="hidden sm:block">
+          <FeaturesSection />
+          <HowItWorksSection />
+          <Footer />
+        </div>
       </div>
     </div>
   );

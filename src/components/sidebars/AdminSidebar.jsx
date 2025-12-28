@@ -54,7 +54,7 @@ const AdminSidebar = () => {
             navigate("/admin/departments");
           }}
         >
-          <Building2 size={30} />
+          <Building2 size={36} />
           <h3>Department Management</h3>
         </button>
 
