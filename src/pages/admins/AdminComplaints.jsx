@@ -21,10 +21,14 @@ import UpdateStatusModal from "../../components/modals/UpdateStatusModal";
 import { useLocation } from "react-router-dom";
 import ViewComplaintModal from "../../components/modals/ViewComplaintModal";
 import DeleteComplaintModal from "../../components/modals/DeleteComplaint";
+import { notify } from "../../utils/notify";
+import Loader from "../../components/common/Loaders";
+import Errors from "../../components/common/Errors";
 
 function AdminComplaints() {
   const location = useLocation();
-  const { adminName } = useContext(AdminDataContext);
+  const { errorStatus, setErrorStatus, errorMsg, setErrorMsg } =
+    useContext(AdminDataContext);
   const [search, setSearch] = useState("");
   const [countInProgress, setCountInProgress] = useState(0);
   const [countResolved, setCountResolved] = useState(0);
@@ -33,9 +37,11 @@ function AdminComplaints() {
   const [complaintsList, setcomplaintsList] = useState([]);
   const [currIndex, setCurrIndex] = useState(1);
   const [selectedComplaint, setSelectedComplaint] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const rowsPerPage = 10;
   const startIndex = (currIndex - 1) * rowsPerPage;
   const endIndex = startIndex + rowsPerPage;
+  const adminName = JSON.parse(localStorage.getItem("adminName"));
   const colorInfo = {
     Filed: "bg-blue-100 text-blue-700 border border-blue-200",
     "In-Progress": "bg-amber-100 text-amber-700 border border-amber-200",
@@ -86,6 +92,7 @@ function AdminComplaints() {
   useEffect(() => {
     async function fetchComplaintsInfo() {
       try {
+        setIsLoading(true);
         const token = JSON.parse(localStorage.getItem("token"));
         const response = await axios.get(
           `${import.meta.env.VITE_LOCAL_URL}/admin/complaints`,
@@ -96,6 +103,7 @@ function AdminComplaints() {
           }
         );
         // console.log(response.data.complaints);
+        setIsLoading(false);
         let ip = 0,
           r = 0,
           rej = 0;
@@ -120,20 +128,20 @@ function AdminComplaints() {
         // console.log(error);
         // 🔴 NETWORK ERROR (backend unreachable)
         if (!error.response) {
-          // notify("Server is Unreachable. Please try again later.", "error");
-          // setErrorStatus(500);
-          // setErrorMsg("Server is unreachable");
+          notify("Server is Unreachable. Please try again later.", "error");
+          setErrorStatus(500);
+          setErrorMsg("Server is unreachable");
           return;
         }
         if (error.response?.status === 401) {
           // console.log(error);
-          // setErrorStatus(error.response.status);
-          // setErrorMsg(error.response.data);
+          setErrorStatus(error.response.status);
+          setErrorMsg(error.response.data);
           // console.log(errorStatus);
         } else {
-          // console.log(error);
-          // setErrorStatus(error.response.status);
-          // setErrorMsg(error.response.data);
+          // console.log(error);F
+          setErrorStatus(error.response.status);
+          setErrorMsg(error.response.data);
         }
       }
     }
@@ -141,6 +149,14 @@ function AdminComplaints() {
     fetchComplaintsInfo();
     // console.log(totalComplaints,countFiled,countInProgress,countResolved,countRejected);
   }, [location.pathname]);
+
+  if (isLoading) {
+    return <Loader />;
+  }
+
+  if (errorStatus === 401 || errorStatus === 500) {
+    return <Errors status={errorStatus} message={errorMsg} />;
+  }
 
   return (
     <div className="flex bg-[#f9fafb]">

@@ -7,8 +7,10 @@ import {
   UsersRound,
   LogOut,
   Settings,
+  Building2,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import LogoutButton from "../buttons/AdminLogout";
 
 const AdminSidebar = () => {
   const navigate = useNavigate();
@@ -49,22 +51,13 @@ const AdminSidebar = () => {
           className="flex gap-3 items-center hover:bg-[#faa005] hover:text-black 
   focus:bg-[#faa005] focus:text-black px-4 py-2 text-left text-lg font-semibold rounded-xl cursor-pointer"
           onClick={() => {
-            navigate("/admin/usersList");
+            navigate("/admin/departments");
           }}
         >
-          <UsersRound size={30} />
-          <h3>User Management</h3>
+          <Building2 size={30} />
+          <h3>Department Management</h3>
         </button>
-        <button
-          className="flex gap-3 items-center hover:bg-[#faa005] hover:text-black 
-  focus:bg-[#faa005] focus:text-black px-4 py-2 text-left text-lg font-semibold rounded-xl cursor-pointer"
-          onClick={() => {
-            navigate("/admin/staff");
-          }}
-        >
-          <UserRoundCog size={30} />
-          <h3>Staff Management</h3>
-        </button>
+
         <button
           className="flex gap-3 items-center hover:bg-[#faa005] hover:text-black 
   focus:bg-[#faa005] focus:text-black px-4 py-2 text-left text-lg font-semibold rounded-xl cursor-pointer"
@@ -77,13 +70,7 @@ const AdminSidebar = () => {
         </button>
         <hr className="w-full my-2  border-[#5d6d8a]" />
 
-        <div
-          className="flex gap-3 items-center hover:bg-[#e42020] hover:text-white 
-  focus:bg-[#faa005] focus:text-black px-4 py-2 align-text-bottom text-lg font-semibold rounded-xl"
-        >
-          <LogOut size={30} />
-          <h3>Logout</h3>
-        </div>
+        <LogoutButton />
       </div>
     </div>
   );

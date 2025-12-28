@@ -31,6 +31,7 @@ const AdminResetPassword = lazy(
 import "react-toastify/dist/ReactToastify.css";
 import Loader from "./components/common/Loaders";
 import AdminDashboard from "./pages/admins/AdminDashboard";
+import AdminDepartments from "./pages/admins/AdminDepartments";
 import AdminComplaints from "./pages/admins/AdminComplaints";
 import AdminUsersList from "./pages/admins/AdminUsersList";
 import AdminStaff from "./pages/admins/AdminStaff";
@@ -97,7 +98,11 @@ function App() {
             ></Route>
             <Route path="/admin/usersList" element={<AdminUsersList />}></Route>
             <Route path="/admin/staff" element={<AdminStaff />}></Route>
-            <Route path="/admin/settings" element={<Adminsettings />}></Route>
+            <Route path="/admin/settings" element={<ErrorPage />}></Route>
+            <Route
+              path="/admin/departments"
+              element={<AdminDepartments />}
+            ></Route>
             <Route path="*" element={<ErrorPage />}></Route>
           </Route>
         </Routes>

@@ -16,11 +16,22 @@ import AdminStatCard from "../../components/cards/AdminStatCard";
 import PieChart from "../../components/charts/PieChart";
 import Bargraph from "../../components/charts/Bargraph";
 import { AdminDataContext } from "../../context/AdminContext";
+import { notify } from "../../utils/notify";
+import Loader from "../../components/common/Loaders";
+import Errors from "../../components/common/Errors";
 
 function AdminDashboard() {
   const navigate = useNavigate();
   // const [name, setName] = useState("");
-  const { adminName, setAdminName } = useContext(AdminDataContext);
+  const {
+    adminName,
+    setAdminName,
+    errorStatus,
+    setErrorStatus,
+    errorMsg,
+    setErrorMsg,
+  } = useContext(AdminDataContext);
+  const [isLoading, setIsLoading] = useState(false);
   const [countFiled, setCountFiled] = useState(0);
   const [countInProgress, setCountInProgress] = useState(0);
   const [countResolved, setCountResolved] = useState(0);
@@ -72,6 +83,7 @@ function AdminDashboard() {
   useEffect(() => {
     async function fetchUserInfo() {
       try {
+        setIsLoading(true);
         const token = JSON.parse(localStorage.getItem("token"));
         const response = await axios.get(
           `${import.meta.env.VITE_LOCAL_URL}/admin/profile`,
@@ -83,24 +95,27 @@ function AdminDashboard() {
         );
         // console.log(response.data);
         setAdminName(response.data.name);
+        setIsLoading(false);
+        localStorage.setItem("adminName", JSON.stringify(adminName));
       } catch (error) {
+        setIsLoading(false);
         // console.log(error);
         // 🔴 NETWORK ERROR (backend unreachable)
         if (!error.response) {
-          // notify("Server is Unreachable. Please try again later.", "error");
-          // setErrorStatus(500);
-          // setErrorMsg("Server is unreachable");
+          notify("Server is Unreachable. Please try again later.", "error");
+          setErrorStatus(500);
+          setErrorMsg("Server is unreachable");
           return;
         }
         if (error.response?.status === 401) {
           // console.log(error);
-          // setErrorStatus(error.response.status);
-          // setErrorMsg(error.response.data);
+          setErrorStatus(error.response.status);
+          setErrorMsg(error.response.data);
           // console.log(errorStatus);
         } else {
           // console.log(error);
-          // setErrorStatus(error.response.status);
-          // setErrorMsg(error.response.data);
+          setErrorStatus(error.response.status);
+          setErrorMsg(error.response.data);
         }
       }
     }
@@ -140,23 +155,8 @@ function AdminDashboard() {
         setcomplaintsList(response.data.complaints);
       } catch (error) {
         // console.log(error);
-        // 🔴 NETWORK ERROR (backend unreachable)
-        if (!error.response) {
-          // notify("Server is Unreachable. Please try again later.", "error");
-          // setErrorStatus(500);
-          // setErrorMsg("Server is unreachable");
-          return;
-        }
-        if (error.response?.status === 401) {
-          // console.log(error);
-          // setErrorStatus(error.response.status);
-          // setErrorMsg(error.response.data);
-          // console.log(errorStatus);
-        } else {
-          // console.log(error);
-          // setErrorStatus(error.response.status);
-          // setErrorMsg(error.response.data);
-        }
+        setErrorMsg(error.response.data);
+        setErrorStatus(error.response.status);
       }
     }
 
@@ -178,29 +178,20 @@ function AdminDashboard() {
         );
         // console.log(response.data);
       } catch (error) {
-        // console.log(error);
-        // 🔴 NETWORK ERROR (backend unreachable)
-        if (!error.response) {
-          // notify("Server is Unreachable. Please try again later.", "error");
-          // setErrorStatus(500);
-          // setErrorMsg("Server is unreachable");
-          return;
-        }
-        if (error.response?.status === 401) {
-          // console.log(error);
-          // setErrorStatus(error.response.status);
-          // setErrorMsg(error.response.data);
-          // console.log(errorStatus);
-        } else {
-          // console.log(error);
-          // setErrorStatus(error.response.status);
-          // setErrorMsg(error.response.data);
-        }
+        setErrorMsg(error.response.data);
+        setErrorStatus(error.response.status);
       }
     }
 
     fetchDepartmentInfo();
   }, []);
+  if (isLoading) {
+    return <Loader />;
+  }
+
+  if (errorStatus === 401 || errorStatus === 500) {
+    return <Errors status={errorStatus} message={errorMsg} />;
+  }
   return (
     <div className="flex bg-[#f9fafb]">
       <AdminSidebar />
