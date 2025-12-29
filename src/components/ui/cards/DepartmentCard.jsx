@@ -71,7 +71,7 @@ const DepartmentCard = ({ department, refresh }) => {
       {/* Info */}
       <div className="mt-4 space-y-2 text-sm text-gray-600">
         <div className="flex items-center gap-2">
-          <span className="text-lg font-semibold">Desc. :</span>
+          <span className="text-lg font-semibold">Desc.:</span>
           {department.description}
         </div>
       </div>
