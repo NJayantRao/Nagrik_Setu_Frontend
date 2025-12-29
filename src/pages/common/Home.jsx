@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Typewriter } from "react-simple-typewriter";
 import { motion } from "framer-motion";
-import FeaturesSection from "../../components/landing/Features";
 import Footer from "../../components/landing/Footer";
-import HowItWorksSection from "../../components/landing/HowItWorks";
 
 function Home() {
   const navigate = useNavigate();

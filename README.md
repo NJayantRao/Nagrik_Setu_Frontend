@@ -18,7 +18,6 @@ It provides a seamless experience for **reporting civic issues, tracking complai
 - [Future Enhancements](#future-enhancements)
 - [Contributions](#contributions)
 
-
 ---
 
 ## 🔍 Overview
@@ -27,8 +26,8 @@ The Nagrik Setu Frontend delivers a **modern, accessible, and scalable UI** that
 
 It serves two primary user roles:
 
-* 📱 **Citizens** – report and track civic issues
-* 🗂️ **Administrators** – review, manage, and resolve complaints
+- 📱 **Citizens** – report and track civic issues
+- 🗂️ **Administrators** – review, manage, and resolve complaints
 
 The frontend emphasizes **clarity, speed, transparency, and trust**, ensuring every interaction feels simple and purposeful.
 
@@ -38,32 +37,32 @@ The frontend emphasizes **clarity, speed, transparency, and trust**, ensuring ev
 
 ### 🧑‍💻 Citizen-Facing Features
 
-* Secure user registration & login
-* Complaint submission with:
+- Secure user registration & login
+- Complaint submission with:
+  - Image upload
+  - Category & description
 
-  * Image upload
-  * Category & description
-* Real-time complaint tracking
-* Status indicators (Filed → In Progress → Resolved)
-* Personal complaint history dashboard
+- Real-time complaint tracking
+- Status indicators (Filed → In Progress → Resolved)
+- Personal complaint history dashboard
 
 ### 🛠️ Admin-Facing Features
 
-* Secure admin authentication
-* Centralized complaint listing
-* Filter complaints by:
+- Secure admin authentication
+- Centralized complaint listing
+- Filter complaints by:
+  - Status
+  - Category
 
-  * Status
-  * Category
-* Update complaint status
-* Visual dashboards for quick insights
+- Update complaint status
+- Visual dashboards for quick insights
 
 ### 🎨 UI & UX
 
-* Fully responsive design (mobile-first)
-* Clean, minimal layout for civic clarity
-* Consistent color system symbolizing trust & governance
-* Smooth transitions and intuitive navigation
+- Fully responsive design (mobile-first)
+- Clean, minimal layout for civic clarity
+- Consistent color system symbolizing trust & governance
+- Smooth transitions and intuitive navigation
 
 ---
 
@@ -71,30 +70,30 @@ The frontend emphasizes **clarity, speed, transparency, and trust**, ensuring ev
 
 ### Frontend Framework
 
-* React.js
-* Vite (fast development & build)
+- React.js
+- Vite (fast development & build)
 
 ### Styling
 
-* Tailwind CSS
-* Custom utility-based design system
+- Tailwind CSS
+- Custom utility-based design system
 
 ### Routing
 
-* React Router DOM
+- React Router DOM
 
 ### State Management
 
-* React Context API
+- React Context API
 
 ### API Communication
 
-* Axios
+- Axios
 
 ### Icons & UI Enhancements
 
-* Lucide React
-* Toast notifications for user feedback
+- Lucide React
+- Toast notifications for user feedback
 
 ---
 
@@ -155,10 +154,10 @@ The Citizen Interface focuses on **simplicity and accessibility**, enabling user
 
 Citizens can:
 
-* Register & log in securely
-* Upload images directly from their device
-* Track all submitted complaints
-* Receive clear visual status updates
+- Register & log in securely
+- Upload images directly from their device
+- Track all submitted complaints
+- Receive clear visual status updates
 
 The goal is to **reduce friction** and encourage civic participation.
 
@@ -170,11 +169,11 @@ The Admin Dashboard provides a **central command panel** for authorities to effi
 
 Admins can:
 
-* View all citizen complaints
-* Monitor real-time status updates
-* Filter & sort issues
-* Update complaint resolution stages
-* Maintain accountability and transparency
+- View all citizen complaints
+- Monitor real-time status updates
+- Filter & sort issues
+- Update complaint resolution stages
+- Maintain accountability and transparency
 
 All admin actions are protected using **JWT-based authentication** via the backend.
 
@@ -184,10 +183,10 @@ All admin actions are protected using **JWT-based authentication** via the backe
 
 Nagrik Setu’s frontend is designed around:
 
-* **Trust** – calm colors & structured layouts
-* **Clarity** – minimal UI, zero clutter
-* **Accessibility** – responsive, readable, inclusive
-* **Scalability** – modular components & clean architecture
+- **Trust** – calm colors & structured layouts
+- **Clarity** – minimal UI, zero clutter
+- **Accessibility** – responsive, readable, inclusive
+- **Scalability** – modular components & clean architecture
 
 The visual identity symbolizes a **bridge (Setu)** — connecting citizens and governance seamlessly.
 
@@ -195,12 +194,12 @@ The visual identity symbolizes a **bridge (Setu)** — connecting citizens and g
 
 ## 🚀 Future Enhancements
 
-* Dark mode support
-* Real-time notifications using WebSockets
-* Advanced analytics dashboards for admins
-* Map-based issue visualization
-* Staff-specific dashboards
-* Progressive Web App (PWA) support
+- Dark mode support
+- Real-time notifications using WebSockets
+- Advanced analytics dashboards for admins
+- Map-based issue visualization
+- Staff-specific dashboards
+- Progressive Web App (PWA) support
 
 ---
 

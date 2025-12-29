@@ -1,3 +1,7 @@
+/**
+ * Displays a formatted time stamp
+ */
+
 export function formatDateIST(isoString) {
   const date = new Date(isoString);
 
