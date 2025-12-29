@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 import { House, FileText, FilePlusCorner, User, LogOut } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { notify } from "../../utils/notify";
+import { notify } from "../../../utils/notify";
 
 const LogoutButton = () => {
   const navigate = useNavigate();

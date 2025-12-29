@@ -1,10 +1,10 @@
 import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import Topbar from "../../components/Topbar";
-import Sidebar from "../../components/Sidebar";
+import Topbar from "../../components/common/Topbar";
+import Sidebar from "../../components/users/layout/Sidebar";
 import { UserDataContext } from "../../context/UserContext";
-import ImageUploader from "../../components/ImageUploader";
+import ImageUploader from "../../components/common/ImageUploader";
 import { notify } from "../../utils/notify";
 import Errors from "../../components/common/Errors";
 import DeleteModal from "../../components/modals/DeleteModal";
@@ -75,7 +75,7 @@ function ComplaintsRegister() {
       }, 4000);
 
       setTimeout(() => {
-        navigate("/user/profile");
+        navigate("/user/dashboard");
       }, 5000);
     } catch (error) {
       // console.log(error);
@@ -261,7 +261,7 @@ function ComplaintsRegister() {
                   type="submit"
                   className="bg-blue-600 py-1 px-2 sm:p-2 w-1/2 rounded-xl sm:rounded-full text-lg sm:text-xl text-white font-bold hover:scale-105 hover:cursor-pointer hover:bg-blue-700 hover:ease-in-out mb-3"
                 >
-                  {registered ? "Registering..." : "Registered"}
+                  {registered ? "Registering..." : "Register"}
                 </button>
               </div>
             </form>

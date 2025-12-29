@@ -49,7 +49,7 @@ function UserLoginPage() {
         setIsLoading(false);
         setIsDisabled(false);
         notify("Logged-In Successfully...", "success");
-        navigate("/user/profile");
+        navigate("/user/dashboard");
       }, 4000);
     } catch (error) {
       // console.log(error);

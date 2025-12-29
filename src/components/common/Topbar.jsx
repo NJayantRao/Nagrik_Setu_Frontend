@@ -1,14 +1,10 @@
 import { useNavigate } from "react-router-dom";
-import ImageAvatars from "./ImageAvatar";
-import LeftSection from "./LeftSection";
 import BackgroundLetterAvatars from "./TextAvatar";
 import { Menu, House, FileText, User } from "lucide-react";
 import { useState, useContext, useEffect } from "react";
-import { UserDataContext } from "../context/UserContext";
-import axios from "axios";
-import { toast } from "react-toastify";
-import LogoutButton from "./buttons/LogoutButton";
-import DeleteButton from "./buttons/DeleteButton";
+import { UserDataContext } from "../../context/UserContext";
+import LogoutButton from "../ui/buttons/LogoutButton";
+import DeleteButton from "../ui/buttons/DeleteButton";
 
 function Topbar({ name }) {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
@@ -73,7 +69,7 @@ function Topbar({ name }) {
             <div
               className=" px-2 py-1 flex gap-2 bg-[#A7F3D0] rounded-xl mb-2"
               onClick={(e) => {
-                navigate("/");
+                navigate("/user/dashboard");
               }}
             >
               <House size={20} strokeWidth={1.2} />

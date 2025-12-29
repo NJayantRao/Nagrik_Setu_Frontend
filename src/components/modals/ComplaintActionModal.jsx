@@ -24,7 +24,7 @@ const ComplaintActionDropdown = ({ info }) => {
       {/* Dropdown */}
       <div
         tabIndex={0}
-        className="dropdown-content z-50 w-40 rounded-xl bg-white shadow-lg border border-gray-100 text-center"
+        className="dropdown-content z-50 w-42 rounded-xl bg-white shadow-lg border border-gray-100 text-center"
       >
         <ul className="menu p-2 text-sm text-gray-800">
           {/* Primary actions */}

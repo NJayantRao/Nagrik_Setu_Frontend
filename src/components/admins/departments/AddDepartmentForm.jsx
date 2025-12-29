@@ -1,7 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { Building2, X } from "lucide-react";
-import { notify } from "../utils/notify";
+import { notify } from "../../../utils/notify";
 
 function AddDepartmentModal({ refresh }) {
   const [deptName, setDeptName] = useState("");

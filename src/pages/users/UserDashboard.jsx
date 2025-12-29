@@ -1,13 +1,18 @@
-import { useEffect, useState, useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import Topbar from "../../components/common/Topbar";
 import Sidebar from "../../components/users/layout/Sidebar";
-import MyComplaints from "../../components/users/layout/MyComplaints";
+import UserMain from "../../components/users/layout/UserMain";
 import { UserDataContext } from "../../context/UserContext";
 import { notify } from "../../utils/notify";
 import Errors from "../../components/common/Errors";
 
-function UserComplaints() {
+function UserDashboard() {
+  const [countFiled, setCountFiled] = useState(0);
+  const [countInProgress, setCountInProgress] = useState(0);
+  const [countResolved, setCountResolved] = useState(0);
+  const [countRejected, setCountRejected] = useState(0);
+  const [complaintList, setComplaintList] = useState([]);
   const {
     setName,
     setEmail,
@@ -17,19 +22,12 @@ function UserComplaints() {
     name,
     email,
     uniqueToken,
-    id,
     setId,
     errorMsg,
     setErrorMsg,
     errorStatus,
     setErrorStatus,
   } = useContext(UserDataContext);
-  const [countFiled, setCountFiled] = useState(0);
-  const [countInProgress, setCountInProgress] = useState(0);
-  const [countResolved, setCountResolved] = useState(0);
-  const [countRejected, setCountRejected] = useState(0);
-  const [complaintList, setComplaintList] = useState([]);
-
   useEffect(() => {
     async function fetchUserInfo() {
       try {
@@ -107,32 +105,32 @@ function UserComplaints() {
         // console.log(countFiled, countInProgress, countRejected, countResolved);
       } catch (error) {
         // console.log(error);
-        setErrorStatus(error.response.status);
-        setErrorMsg(error.response.data);
+        setErrorStatus(500);
+        setErrorMsg("Something went wrong");
       }
     };
 
     fetchComplaintsInfo();
   }, []);
+
   if (errorStatus === 401 || errorStatus === 500) {
     return <Errors status={errorStatus} message={errorMsg} />;
   }
-
   return (
     <div className="h-screen w-full overflow-hidden ">
       <Topbar name={name} />
       <div className="flex ">
         <Sidebar email={email} uniqueToken={uniqueToken} />
-        <MyComplaints
-          complaints={complaintList}
+        <UserMain
           filed={countFiled}
           inProgress={countInProgress}
           resolved={countResolved}
           rejected={countRejected}
+          complaintList={complaintList}
         />
       </div>
     </div>
   );
 }
 
-export default UserComplaints;
+export default UserDashboard;

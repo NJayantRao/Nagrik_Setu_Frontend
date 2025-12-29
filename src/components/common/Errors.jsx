@@ -27,7 +27,7 @@ function Errors({ status, message }) {
           <button
             onClick={() => navigate("/")}
             className="bg-white text-[#1D4ED8] font-bold px-6 py-3 rounded-xl shadow-lg 
-                     hover:shadow-2xl hover:scale-105 transition-all text-lg sm:text-xl"
+                     hover:shadow-2xl hover:scale-105 transition-all text-lg sm:text-xl cursor-pointer"
           >
             Go to Home
           </button>
@@ -35,7 +35,7 @@ function Errors({ status, message }) {
           <button
             onClick={() => navigate(-1)}
             className="bg-[#1D4ED8] text-white font-bold px-6 py-3 rounded-xl shadow-lg 
-                     hover:shadow-2xl hover:scale-105 transition-all text-lg sm:text-xl"
+                     hover:shadow-2xl hover:scale-105 transition-all text-lg sm:text-xl cursor-pointer"
           >
             Go Back
           </button>

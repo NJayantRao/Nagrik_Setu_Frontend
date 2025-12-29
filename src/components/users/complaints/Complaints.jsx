@@ -29,7 +29,7 @@ function Complaints(props) {
         </div>
       </div>
       <div className="flex gap-2 justify-end sm:justify-start items-center absolute right-5 sm:right-10 w-40">
-        <div >
+        <div>
           <Icon size={40} strokeWidth={1.5} />
         </div>
         <div className="hidden sm:block font-semibold text-xl text-[#1F2937]">

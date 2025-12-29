@@ -30,7 +30,7 @@ export default function SettingsWIP() {
   useEffect(() => {
     setTimeout(() => {
       navigate("/admin/dashboard");
-    }, 7000);
+    }, 5000);
   }, []);
   return (
     <div className="h-screen w-full bg-gradient-to-br from-[#f9fafb] to-[#eef2ff] flex items-center justify-center relative overflow-hidden">

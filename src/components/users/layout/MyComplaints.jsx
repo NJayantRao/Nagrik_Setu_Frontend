@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Search, FileText, FileClock, FileCheck, FileX } from "lucide-react";
-import DeleteModal from "./modals/DeleteModal";
+import DeleteModal from "../../modals/DeleteModal";
 
 function MyComplaints({ filed, inProgress, resolved, rejected, complaints }) {
   // console.log(complaints);
@@ -23,7 +23,7 @@ function MyComplaints({ filed, inProgress, resolved, rejected, complaints }) {
     <div className="min-h-screen w-full bg-gray-100 p-6 ">
       {/* Top Navigation */}
       <div className="flex justify-between items-center mb-4">
-        <h1 className="text-xlsm:text-3xl font-semibold text-[#1E3A8A]">
+        <h1 className="text-xl sm:text-3xl font-semibold text-[#1E3A8A]">
           My Complaints
         </h1>
       </div>
@@ -108,14 +108,16 @@ function MyComplaints({ filed, inProgress, resolved, rejected, complaints }) {
           {/* Recent Complaints Table */}
           <div className="bg-white rounded-xl p-4 sm:p-6 h-[40vh] shadow-sm relative overflow-y-auto">
             <div className="overflow-x-auto">
-              <table className="max-w-[80vw] sm:min-w-[700px] w-full text-sm">
+              <table className="max-w-[80vw] sm:min-w-[700px] w-full text-sm text-center">
                 <thead>
-                  <tr className="text-gray-500 whitespace-nowrap">
-                    <th className="text-left pb-3">Complaint ID</th>
-                    <th className="text-left pb-3">Title</th>
-                    <th className="text-left pb-3">Department</th>
-                    <th className="text-left pb-3">Status</th>
-                    <th className="text-left pb-3">Actions</th>
+                  <tr className="text-gray-500 whitespace-nowrap border-b">
+                    <th className="pb-3 font-semibold text-lg ">
+                      Complaint ID
+                    </th>
+                    <th className="pb-3 font-semibold text-lg ">Title</th>
+                    <th className="pb-3 font-semibold text-lg ">Department</th>
+                    <th className="pb-3 font-semibold text-lg ">Status</th>
+                    <th className="pb-3 font-semibold text-lg ">Actions</th>
                   </tr>
                 </thead>
 
@@ -123,21 +125,21 @@ function MyComplaints({ filed, inProgress, resolved, rejected, complaints }) {
                   {searchData.map((item, i) => (
                     <tr
                       key={i}
-                      className="border-t text-gray-700 whitespace-nowrap"
+                      className="border-t text-gray-700 whitespace-nowrap hover:bg-gray-50 transition"
                     >
-                      <td className="py-3 truncate overflow-hidden text-ellipsis whitespace-nowrap max-w-[15vw]">
+                      <td className="py-3 max-w-[15vw] truncate mx-auto">
                         {item.uniqueToken}
                       </td>
 
-                      <td className=" truncate overflow-hidden text-ellipsis whitespace-nowrap max-w-[15vw] ">
+                      <td className="py-3 max-w-[15vw] truncate mx-auto">
                         {item.title}
                       </td>
 
-                      <td className="truncate overflow-hidden text-ellipsis whitespace-nowrap max-w-[15vw]">
+                      <td className="py-3 max-w-[15vw] truncate mx-auto">
                         {item.departmentName}
                       </td>
 
-                      <td>
+                      <td className="py-3">
                         <span
                           className={`px-3 py-1 rounded-full inline-block text-xs font-medium ${colorInfo[item.status]}`}
                         >
@@ -145,8 +147,8 @@ function MyComplaints({ filed, inProgress, resolved, rejected, complaints }) {
                         </span>
                       </td>
 
-                      <td>
-                        <button className="bg-blue-100 text-blue-700 px-3 py-1 rounded-lg text-xs">
+                      <td className="py-3">
+                        <button className="bg-blue-100 text-blue-700 px-3 py-1 rounded-lg text-xs hover:bg-blue-200 transition">
                           View
                         </button>
                       </td>

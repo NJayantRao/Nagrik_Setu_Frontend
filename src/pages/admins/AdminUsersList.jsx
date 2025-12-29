@@ -1,11 +1,9 @@
-import AdminSidebar from "../../components/sidebars/AdminSidebar";
-import SearchBar from "../../components/SearchBar";
+import AdminSidebar from "../../components/admins/layout/AdminSidebar";
+import SearchBar from "../../components/admins/layout/SearchBar";
 import { FileCheck, FileClock, FileText, FileX, Search } from "lucide-react";
-import AdminStatCard from "../../components/cards/AdminStatCard";
 import { AdminDataContext } from "../../context/AdminContext";
 import { useContext } from "react";
-import UserCard from "../../components/cards/UserCard";
-import DepartmentCard from "../../components/cards/DepartmentCard";
+import DepartmentCard from "../../components/ui/cards/DepartmentCard";
 
 function AdminUsersList() {
   const { adminName } = useContext(AdminDataContext);

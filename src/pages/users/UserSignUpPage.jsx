@@ -56,7 +56,7 @@ function UserSignUpPage() {
         notify("Account Created Successfully...", "success");
         setIsLoading(false);
         setIsDisabled(false);
-        navigate("/user/profile");
+        navigate("/user/dashboard");
       }, 4000);
     } catch (error) {
       // console.log(error);

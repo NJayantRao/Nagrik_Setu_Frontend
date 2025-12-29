@@ -7,9 +7,9 @@ import {
   Ellipsis,
   Trash2,
 } from "lucide-react";
-import DepartmentAction from "../dropdowns/DepartmentAction";
+import DepartmentAction from "../../ui/dropdowns/DepartmentAction";
 import axios from "axios";
-import { notify } from "../../utils/notify";
+import { notify } from "../../../utils/notify";
 
 const DepartmentCard = ({ department, refresh }) => {
   async function handleDelete() {

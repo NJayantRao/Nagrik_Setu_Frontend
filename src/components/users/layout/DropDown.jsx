@@ -14,7 +14,7 @@ const DropDown = ({ isLoginClicked }) => {
       <div
         className="flex items-center gap-3 px-4 py-3 text-gray-700 font-bold bg-[#D1FAE5] rounded-2xl transition cursor-pointer hover:scale-105 hover:bg-[#A7F3D0]"
         onClick={() => {
-          navigate("/user/profile");
+          navigate("/user/dashboard");
         }}
       >
         <House size={28} absoluteStrokeWidth />

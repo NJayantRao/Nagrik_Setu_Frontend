@@ -1,5 +1,5 @@
 import { Search } from "lucide-react";
-import BackgroundLetterAvatars from "../components/TextAvatar";
+import BackgroundLetterAvatars from "../../common/TextAvatar";
 
 const SearchBar = ({ name }) => {
   return (

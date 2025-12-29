@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { notify } from "../utils/notify";
+import { notify } from "../../utils/notify";
 
 function ImageUploader({ image, setImage, preview, setPreview }) {
   const [isDisabled, setIsDisabled] = useState(false);
@@ -27,7 +27,7 @@ function ImageUploader({ image, setImage, preview, setPreview }) {
           <img
             src={`${preview ? preview : "/image_upload.svg"}`}
             alt="image_upload"
-            className="h-10 sm:h-15 w-full"
+            className="h-10 sm:h-15 w-full rounded-lg"
           />
           <div className="bg-blue-600 rounded-lg px-2 py-1 text-gray-200 font-semibold">
             <input

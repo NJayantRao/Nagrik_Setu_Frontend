@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Typewriter } from "react-simple-typewriter";
 import { motion } from "framer-motion";
 import FeaturesSection from "../../components/landing/Features";
@@ -6,6 +7,7 @@ import Footer from "../../components/landing/Footer";
 import HowItWorksSection from "../../components/landing/HowItWorks";
 
 function Home() {
+  const navigate = useNavigate();
   const [phrases] = useState([
     "Together for a Better Community",
     "Report Issues Effortlessly",
@@ -67,8 +69,8 @@ function Home() {
             className="mt-10"
           >
             <button
-              onClick={() => (window.location.href = "/user/signup")}
-              className="bg-white text-[#1D4ED8] font-bold px-6 py-3 rounded-xl shadow-lg hover:shadow-2xl hover:scale-105 transition-all"
+              onClick={() => navigate("/user/signup")}
+              className="bg-white text-[#1D4ED8] font-bold px-6 py-3 rounded-xl shadow-lg hover:shadow-2xl hover:scale-105 transition-all cursor-pointer"
             >
               Get Started
             </button>

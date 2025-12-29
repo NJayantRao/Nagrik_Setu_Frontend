@@ -10,7 +10,7 @@ import {
   Building2,
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import LogoutButton from "../buttons/AdminLogout";
+import LogoutButton from "../../ui/buttons/AdminLogout";
 
 const AdminSidebar = () => {
   const navigate = useNavigate();

@@ -36,6 +36,7 @@ import AdminComplaints from "./pages/admins/AdminComplaints";
 import AdminUsersList from "./pages/admins/AdminUsersList";
 import AdminStaff from "./pages/admins/AdminStaff";
 import Adminsettings from "./pages/admins/AdminSettings";
+import UserDashboard from "./pages/users/UserDashboard";
 
 function App() {
   const { setIsLoginClicked, isLoginClicked } = useContext(UserDataContext);
@@ -82,6 +83,7 @@ function App() {
           </Route>
           <Route element={<NoNavbarLayout />}>
             <Route path="/user/profile" element={<UserProfile />}></Route>
+            <Route path="/user/dashboard" element={<UserDashboard />}></Route>
             <Route
               path="/user/profile/complaints"
               element={<UserComplaints />}

@@ -1,18 +1,21 @@
 import { useNavigate } from "react-router-dom";
 
 function LeftSection() {
-  const navigate= useNavigate()
+  const navigate = useNavigate();
   return (
-    <div className="w-1/5 flex justify-center gap-2 sm:gap-4 items-center" onClick={()=>{
-      navigate("/")
-    }}>
+    <div
+      className="w-1/5 flex justify-center gap-2 sm:gap-4 items-center"
+      onClick={() => {
+        navigate("/");
+      }}
+    >
       <img
         src="https://res.cloudinary.com/dpwqlb3d7/image/upload/v1764314433/My%20Brand/Gemini_Generated_Image_o5l8fro5l8fro5l8_s8srd9.png"
         alt="Nagrik setu"
-        className=" h-10 w-10 sm:h-20 sm:w-20 rounded-full hover:cursor-pointer"
+        className=" h-10 w-10 sm:h-15 sm:w-15 rounded-full hover:cursor-pointer"
       />
       <div className="hover:cursor-pointer relative dropdown text-lg whitespace-nowrap sm:whitespace-break-spaces">
-        <h1 >Nagrik Setu</h1>
+        <h1>Nagrik Setu</h1>
       </div>
     </div>
   );

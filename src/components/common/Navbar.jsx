@@ -1,6 +1,5 @@
-import LeftSection from "../LeftSection";
-import RightSection from "../RightSection";
-import Button from "../buttons/Button";
+import LeftSection from "../common/LeftSection";
+import Button from "../../components/ui/buttons/Button";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserDataContext } from "../../context/UserContext";
@@ -18,7 +17,7 @@ function Navbar() {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <div className="bg-[#1D4ED8] w-full h-12 sm:h-25 px-2 py-3 flex items-center justify-between sm:justify-around shadow-xl text-gray-300 text-xl font-bold sticky top-0 z-50">
+    <div className="bg-[#1D4ED8] w-full h-12 sm:h-20 px-2 py-3 flex items-center justify-between sm:justify-around shadow-xl text-gray-300 text-xl font-bold sticky top-0 z-50">
       <div className="sm:hidden flex gap-3">
         <Menu
           onClick={() => {
