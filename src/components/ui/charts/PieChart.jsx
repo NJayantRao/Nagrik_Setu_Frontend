@@ -1,7 +1,4 @@
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { Doughnut, Pie } from "react-chartjs-2";
-
-ChartJS.register(ArcElement, Tooltip, Legend);
+import { Doughnut } from "react-chartjs-2";
 
 function PieChart({ stats }) {
   const data = {
@@ -28,17 +25,14 @@ function PieChart({ stats }) {
         position: "bottom",
         labels: {
           boxWidth: 14,
-          font: {
-            size: 14,
-            weight: "600",
-          },
+          font: { size: 14, weight: "600" },
         },
       },
     },
   };
 
   return (
-    <div className="bg-white p-4 rounded-xl shadow-sm w-full max-w-md h-full">
+    <div className="bg-white p-4 rounded-xl shadow-sm w-full max-w-md h-[300px]">
       <Doughnut data={data} options={options} />
     </div>
   );

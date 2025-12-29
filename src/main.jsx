@@ -5,6 +5,7 @@ import "./index.css";
 import App from "./App.jsx";
 import UserContext from "./context/UserContext.jsx";
 import AdminContext from "./context/AdminContext.jsx";
+import "./utils/chartSetup";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>

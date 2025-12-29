@@ -1,24 +1,4 @@
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  LineElement,
-  PointElement,
-  Tooltip,
-  Legend,
-} from "chart.js";
 import { Chart } from "react-chartjs-2";
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  LineElement,
-  PointElement,
-  Tooltip,
-  Legend
-);
 
 function DepartmentPerformanceChart({ data }) {
   const chartData = {
@@ -30,8 +10,8 @@ function DepartmentPerformanceChart({ data }) {
         data: data.filed,
         backgroundColor: "#60a5fa",
         borderRadius: 6,
-        barPercentage: 1, // gap between Filed & Resolved
-        categoryPercentage: 0.6, // gap between departments
+        barPercentage: 1,
+        categoryPercentage: 0.6,
         barThickness: 12,
       },
       {
@@ -55,10 +35,7 @@ function DepartmentPerformanceChart({ data }) {
         position: "bottom",
         labels: {
           boxWidth: 10,
-          font: {
-            size: 11,
-            weight: "500",
-          },
+          font: { size: 11, weight: "500" },
         },
       },
       tooltip: {
@@ -68,22 +45,14 @@ function DepartmentPerformanceChart({ data }) {
     },
     scales: {
       x: {
-        grid: {
-          display: false,
-        },
-        ticks: {
-          font: {
-            size: 11,
-          },
-        },
+        grid: { display: false },
+        ticks: { font: { size: 11 } },
       },
       y: {
         beginAtZero: true,
         ticks: {
           stepSize: 10,
-          font: {
-            size: 11,
-          },
+          font: { size: 11 },
         },
         grid: {
           color: "#f1f5f9",
@@ -93,7 +62,7 @@ function DepartmentPerformanceChart({ data }) {
   };
 
   return (
-    <div className="bg-white p-4 rounded-xl shadow-sm w-full h-full">
+    <div className="bg-white p-4 rounded-xl shadow-sm w-full h-[300px]">
       <Chart type="bar" data={chartData} options={options} />
     </div>
   );
