@@ -41,7 +41,6 @@ const ComplaintsRegister = lazy(
  */
 const AdminSignUpPage = lazy(() => import("./pages/admins/AdminSignUpPage"));
 const AdminLoginPage = lazy(() => import("./pages/admins/AdminLoginPage"));
-const AdminProfile = lazy(() => import("./pages/admins/AdminProfile"));
 const AdminForgotPassword = lazy(
   () => import("./pages/admins/AdminForgotPassword")
 );
@@ -131,7 +130,6 @@ function App() {
               path="/user/profile/complaints/Register"
               element={<ComplaintsRegister />}
             />
-            <Route path="/admin/profile" element={<AdminProfile />} />
             <Route path="/admin/dashboard" element={<AdminDashboard />} />
             <Route path="/admin/complaints" element={<AdminComplaints />} />
             <Route path="/admin/usersList" element={<AdminUsersList />} />
