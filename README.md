@@ -13,14 +13,14 @@ It provides a seamless experience for **reporting civic issues, tracking complai
 - [Tech Stack](#tech-stack)
 - [How It Works](#how-it-works)
 - [Setup Instructions](#setup-instructions)
-- [Admin Dashboard Integration](#admin-dashboard-integration)
-- [Citizen App Integration](#citizen-app-integration)
+- [Citizen App Interface](#citizen-app-interface)
+- [Admin Dashboard Interface](#admin-dashboard-interface)
 - [Future Enhancements](#future-enhancements)
 - [Contributions](#contributions)
 
 ---
 
-## 🔍 Overview
+## 🔍 Overview <a id="overview"></a>
 
 The Nagrik Setu Frontend delivers a **modern, accessible, and scalable UI** that connects directly with the Nagrik Setu Backend APIs.
 
@@ -33,7 +33,7 @@ The frontend emphasizes **clarity, speed, transparency, and trust**, ensuring ev
 
 ---
 
-## ⭐ Key Features
+## ⭐ Key Features <a id="key-features"></a>
 
 ### 🧑‍💻 Citizen-Facing Features
 
@@ -66,7 +66,7 @@ The frontend emphasizes **clarity, speed, transparency, and trust**, ensuring ev
 
 ---
 
-## 🧰 Tech Stack
+## 🧰 Tech Stack <a id="tech-stack"></a>
 
 ### Frontend Framework
 
@@ -97,7 +97,7 @@ The frontend emphasizes **clarity, speed, transparency, and trust**, ensuring ev
 
 ---
 
-## 🔄 Application Flow
+## 🔄 How it works <a id="how-it-works"></a>
 
 ### Citizen Flow
 
@@ -119,7 +119,7 @@ The frontend acts as a **real-time visual layer**, ensuring transparency between
 
 ---
 
-## ⚙️ Setup Instructions
+## ⚙️ Setup Instructions <a id="setup-instructions"></a>
 
 ### 1️⃣ Clone the Repository
 
@@ -148,7 +148,7 @@ http://localhost:5173
 
 ---
 
-## 📱 Citizen App Interface
+## 📱 Citizen App Interface <a id="citizen-app-interface"></a>
 
 The Citizen Interface focuses on **simplicity and accessibility**, enabling users to raise issues in just a few steps.
 
@@ -163,7 +163,7 @@ The goal is to **reduce friction** and encourage civic participation.
 
 ---
 
-## 🖥️ Admin Dashboard Interface
+## 🖥️ Admin Dashboard Interface <a id="admin-dashboard-interface"></a>
 
 The Admin Dashboard provides a **central command panel** for authorities to efficiently manage issues.
 
@@ -192,7 +192,7 @@ The visual identity symbolizes a **bridge (Setu)** — connecting citizens and g
 
 ---
 
-## 🚀 Future Enhancements
+## 🚀 Future Enhancements <a id="future-enhancements"></a>
 
 - Dark mode support
 - Real-time notifications using WebSockets
@@ -203,7 +203,7 @@ The visual identity symbolizes a **bridge (Setu)** — connecting citizens and g
 
 ---
 
-## 🤝 Contributions
+## 🤝 Contributions <a id="contributions"></a>
 
 Contributions are always welcome!
 
