@@ -42,9 +42,7 @@ function AdminComplaints() {
   const rowsPerPage = 10;
   const startIndex = (currIndex - 1) * rowsPerPage;
   const endIndex = startIndex + rowsPerPage;
-  const visibleData = complaintsList.slice(startIndex, endIndex);
   const adminName = JSON.parse(localStorage.getItem("adminName"));
-
   const colorInfo = {
     Filed: "bg-blue-100 text-blue-700 border border-blue-200",
     "In-Progress": "bg-amber-100 text-amber-700 border border-amber-200",
@@ -83,14 +81,15 @@ function AdminComplaints() {
     },
   ];
 
-  const searchData = visibleData.filter(
+  const searchData = complaintsList.filter(
     (curData) =>
       curData.uniqueToken?.toLowerCase().includes(search.toLowerCase()) ||
       curData.title?.toLowerCase().includes(search.toLowerCase()) ||
       curData.departmentName?.toLowerCase().includes(search.toLowerCase()) ||
       curData.status?.toLowerCase().includes(search.toLowerCase())
   );
-
+  const visibleData = searchData.slice(startIndex, endIndex);
+  const totalpages = Math.ceil(searchData.length / rowsPerPage);
   /* ================= FETCH COMPLAINTS ================= */
   useEffect(() => {
     async function fetchComplaintsInfo() {
@@ -140,6 +139,10 @@ function AdminComplaints() {
 
     fetchComplaintsInfo();
   }, [refreshKey]);
+
+  useEffect(() => {
+    setCurrIndex(1);
+  }, [search]);
 
   if (isLoading) return <Loader />;
   if (errorStatus === 401 || errorStatus === 500)
@@ -216,16 +219,20 @@ function AdminComplaints() {
               <div className="bg-white p-3 rounded-xl flex gap-2 items-center shadow-sm">
                 <ChevronLeft
                   className={`cursor-pointer ${
-                    currIndex === 1 ? "opacity-40" : ""
+                    currIndex === 1 ? "opacity-50" : ""
                   }`}
                   size={26}
                   onClick={() => currIndex > 1 && setCurrIndex((p) => p - 1)}
                 />
                 <span className="text-xl font-bold">{currIndex}</span>
                 <ChevronRight
-                  className="cursor-pointer"
+                  className={`cursor-pointer ${
+                    currIndex === totalpages ? "opacity-50" : ""
+                  }`}
                   size={26}
-                  onClick={() => setCurrIndex((p) => p + 1)}
+                  onClick={() =>
+                    currIndex < totalpages && setCurrIndex((p) => p + 1)
+                  }
                 />
               </div>
             </div>
@@ -244,7 +251,7 @@ function AdminComplaints() {
                   </tr>
                 </thead>
                 <tbody>
-                  {searchData.map((item, i) => (
+                  {visibleData.map((item, i) => (
                     <motion.tr
                       key={i}
                       initial={{ opacity: 0, y: 8 }}

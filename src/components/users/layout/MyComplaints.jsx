@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Search,
   FileText,
@@ -11,10 +11,24 @@ import {
 import DeleteModal from "../../modals/DeleteModal";
 import { formatDateIST } from "../../../utils/formatTime";
 
-function MyComplaints({ filed, inProgress, resolved, rejected, complaints }) {
+function MyComplaints({
+  filed,
+  inProgress,
+  resolved,
+  rejected,
+  complaints,
+  currIndex,
+  setCurrIndex,
+}) {
   // console.log(complaints);
   const [search, setSearch] = useState("");
-  const [currIndex, setCurrIndex] = useState(1);
+  const rowsPerPage = 3;
+  const startIndex = (currIndex - 1) * rowsPerPage;
+  const endIndex = startIndex + rowsPerPage;
+  useEffect(() => {
+    // console.log("current idx is",currIndex);
+  }, [currIndex]);
+
   const colorInfo = {
     Filed: "bg-blue-100 text-blue-700 border border-blue-200",
     Acknowledged: "bg-indigo-100 text-indigo-700 border border-indigo-200",
@@ -22,78 +36,6 @@ function MyComplaints({ filed, inProgress, resolved, rejected, complaints }) {
     Resolved: "bg-green-100 text-green-700 border border-green-200",
     Rejected: "bg-red-100 text-red-700 border border-red-200",
   };
-  const dummyComplaints = [
-    {
-      uniqueToken: "CIV-DELH-10293847",
-      status: "Filed",
-      title: "Overflowing garbage near main road",
-      departmentName: "Municipal Corporation",
-      createdAt: "2025-01-01T10:15:00Z",
-    },
-    {
-      uniqueToken: "CIV-MUMB-29384756",
-      status: "Acknowledged",
-      title: "Street light not working for 3 days",
-      departmentName: "Electricity Department",
-      createdAt: "2025-01-02T08:40:00Z",
-    },
-    {
-      uniqueToken: "CIV-BENG-84736251",
-      status: "In-Progress",
-      title: "Water leakage from underground pipeline",
-      departmentName: "Water Supply Department",
-      createdAt: "2025-01-03T12:10:00Z",
-    },
-    {
-      uniqueToken: "CIV-CHEN-56473829",
-      status: "Resolved",
-      title: "Potholes causing traffic congestion",
-      departmentName: "Public Works Department",
-      createdAt: "2025-01-04T09:25:00Z",
-    },
-    {
-      uniqueToken: "CIV-HYDR-91827364",
-      status: "Rejected",
-      title: "Illegal parking blocking residential entry",
-      departmentName: "Traffic Police",
-      createdAt: "2025-01-05T14:50:00Z",
-    },
-    {
-      uniqueToken: "CIV-PUNE-73645281",
-      status: "Filed",
-      title: "Open drain creating foul smell",
-      departmentName: "Health & Sanitation",
-      createdAt: "2025-01-06T11:30:00Z",
-    },
-    {
-      uniqueToken: "CIV-JAIP-38475629",
-      status: "Acknowledged",
-      title: "Damaged footpath near bus stop",
-      departmentName: "Urban Development Authority",
-      createdAt: "2025-01-07T16:05:00Z",
-    },
-    {
-      uniqueToken: "CIV-LUCK-56483920",
-      status: "In-Progress",
-      title: "Low water pressure in residential area",
-      departmentName: "Water Supply Department",
-      createdAt: "2025-01-08T07:55:00Z",
-    },
-    {
-      uniqueToken: "CIV-NOIDA-82736491",
-      status: "Resolved",
-      title: "Broken park bench posing safety risk",
-      departmentName: "Parks & Recreation",
-      createdAt: "2025-01-09T18:20:00Z",
-    },
-    {
-      uniqueToken: "CIV-INDB-19283746",
-      status: "Filed",
-      title: "Stray dogs creating disturbance at night",
-      departmentName: "Animal Control Department",
-      createdAt: "2025-01-10T21:10:00Z",
-    },
-  ];
 
   const searchData = complaints.filter(
     (curData) =>
@@ -102,6 +44,11 @@ function MyComplaints({ filed, inProgress, resolved, rejected, complaints }) {
       curData.departmentName.toLowerCase().includes(search.toLowerCase()) ||
       curData.status.toLowerCase().includes(search.toLowerCase())
   );
+  const visiblePages = searchData.slice(startIndex, endIndex);
+  const totalpages = Math.ceil(searchData.length / rowsPerPage);
+  useEffect(() => {
+    setCurrIndex(1);
+  }, [search]);
   return (
     <div className="min-h-screen w-full bg-gray-100 p-6 ">
       {/* Top Navigation */}
@@ -112,8 +59,8 @@ function MyComplaints({ filed, inProgress, resolved, rejected, complaints }) {
       </div>
 
       {/* Search Bar */}
-      <div className="mb-6">
-        <div className="bg-white p-3 rounded-xl flex items-center shadow-sm">
+      <div className="mb-6 flex gap-3">
+        <div className="bg-white p-3 rounded-xl flex items-center shadow-sm w-full sm:w-[70vw]">
           <Search className="text-gray-400 mr-2" />
           <input
             type="text"
@@ -123,6 +70,21 @@ function MyComplaints({ filed, inProgress, resolved, rejected, complaints }) {
             onChange={(e) => {
               setSearch(e.target.value);
             }}
+          />
+        </div>
+        <div className="bg-white p-3 rounded-xl sm:flex gap-2 items-center shadow-sm hidden">
+          <ChevronLeft
+            className={`cursor-pointer ${currIndex === 1 ? "opacity-40" : ""}`}
+            size={26}
+            onClick={() => currIndex > 1 && setCurrIndex((p) => p - 1)}
+          />
+          <span className="text-xl font-bold">{currIndex}</span>
+          <ChevronRight
+            className={`cursor-pointer ${
+              currIndex === totalpages ? "opacity-40" : ""
+            }`}
+            size={26}
+            onClick={() => currIndex < totalpages && setCurrIndex((p) => p + 1)}
           />
         </div>
       </div>
@@ -190,7 +152,7 @@ function MyComplaints({ filed, inProgress, resolved, rejected, complaints }) {
 
           {/* ===================== MOBILE CARDS ===================== */}
           <div className="sm:hidden space-y-4 max-h-[75vh] overflow-y-auto pb-20">
-            {dummyComplaints.slice(0, 3).map((item, i) => (
+            {visiblePages.map((item, i) => (
               <div
                 key={i}
                 className="bg-white rounded-2xl p-4 shadow-md space-y-3 border border-gray-100 transition hover:shadow-lg"
@@ -251,15 +213,21 @@ function MyComplaints({ filed, inProgress, resolved, rejected, complaints }) {
 
                 <ChevronRight
                   size={22}
-                  className="text-gray-700 hover:text-blue-600 transition"
-                  onClick={() => setCurrIndex((p) => p + 1)}
+                  className={` transition ${
+                    currIndex < totalpages
+                      ? "text-gray-300"
+                      : "text-gray-700 hover:text-blue-600"
+                  }`}
+                  onClick={() =>
+                    currIndex < totalpages && setCurrIndex((p) => p + 1)
+                  }
                 />
               </div>
             </div>
           </div>
 
           {/* Recent Complaints Table */}
-          <div className="bg-white rounded-xl p-4 hidden sm:block sm:p-6 h-[40vh] shadow-sm relative overflow-y-auto">
+          <div className="bg-white rounded-xl p-4 hidden sm:block sm:p-6 max-h-[40vh] shadow-sm relative overflow-y-auto">
             <div className="overflow-x-auto">
               <table className="max-w-[80vw] sm:min-w-[700px] w-full text-sm text-center">
                 <thead>
@@ -278,7 +246,7 @@ function MyComplaints({ filed, inProgress, resolved, rejected, complaints }) {
                 </thead>
 
                 <tbody>
-                  {searchData.map((item, i) => (
+                  {visiblePages.map((item, i) => (
                     <tr
                       key={i}
                       className="border-t text-gray-700 whitespace-nowrap hover:bg-gray-50 transition"

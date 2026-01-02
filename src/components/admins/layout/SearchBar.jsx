@@ -8,6 +8,7 @@ const SearchBar = ({ name }) => {
         <Search className="text-gray-400 mr-2" />
         <input
           type="text"
+          disabled={true}
           placeholder="Search your complaints,users,staff..."
           className="w-full outline-none text-lg"
         />

@@ -29,6 +29,8 @@ function UserComplaints() {
   const [countResolved, setCountResolved] = useState(0);
   const [countRejected, setCountRejected] = useState(0);
   const [complaintList, setComplaintList] = useState([]);
+  const [currIndex, setCurrIndex] = useState(1);
+  // const [refreshKey,setRefreshKey]= useState(false)
 
   useEffect(() => {
     async function fetchUserInfo() {
@@ -113,7 +115,7 @@ function UserComplaints() {
     };
 
     fetchComplaintsInfo();
-  }, []);
+  }, [currIndex]);
   if (errorStatus === 401 || errorStatus === 500) {
     return <Errors status={errorStatus} message={errorMsg} />;
   }
@@ -129,6 +131,8 @@ function UserComplaints() {
           inProgress={countInProgress}
           resolved={countResolved}
           rejected={countRejected}
+          currIndex={currIndex}
+          setCurrIndex={setCurrIndex}
         />
       </div>
     </div>
