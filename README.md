@@ -77,6 +77,7 @@ The frontend emphasizes **clarity, speed, transparency, and trust**, ensuring ev
 
 - Tailwind CSS
 - Custom utility-based design system
+- DaisyUI for reusable and accessible UI components
 
 ### Routing
 
