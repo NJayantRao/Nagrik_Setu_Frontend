@@ -28,13 +28,12 @@ function UserForgotPassword() {
         { uniqueToken }
       );
 
-      setTimeout(() => {
-        setIsSending(false);
-        setUniqueToken("");
-        navigate("/user/resetPassword", {
-          state: { fromForgotPassword: true },
-        });
-      }, 4000);
+      setIsSending(false);
+      setUniqueToken("");
+      navigate("/user/resetPassword", {
+        state: { fromForgotPassword: true },
+      });
+
       // console.log(uniqueId);
     } catch (error) {
       // console.log(error);

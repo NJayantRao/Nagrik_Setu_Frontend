@@ -52,12 +52,10 @@ function AdminSignUpPage() {
 
       localStorage.setItem("token", JSON.stringify(token));
 
-      setTimeout(() => {
-        setIsLoading(false);
-        setIsDisabled(false);
-        notify("Admin Account Created!", "success");
-        navigate("/admin/dashboard");
-      }, 4000);
+      setIsLoading(false);
+      setIsDisabled(false);
+      notify("Admin Account Created!", "success");
+      navigate("/admin/dashboard");
     } catch (error) {
       //eslint-disable-next-line no-console
       console.log(error);

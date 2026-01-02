@@ -38,11 +38,10 @@ function UserResetPassword() {
       setOtp("");
       setPassword("");
       notify("Password Saved Successfully...", "success");
-      setTimeout(() => {
-        setIsDisabled(false);
-        setIsLoading(false);
-        navigate("/user/login");
-      }, 4000);
+
+      setIsDisabled(false);
+      setIsLoading(false);
+      navigate("/user/login");
     } catch (error) {
       // console.log(error);
       // 🔴 NETWORK ERROR (backend unreachable)

@@ -39,11 +39,9 @@ function AdminResetPassword() {
       setOtp("");
       setAdminPassword("");
 
-      setTimeout(() => {
-        setIsDisabled(false);
-        setIsLoading(false);
-        navigate("/admin/login");
-      }, 4000);
+      setIsDisabled(false);
+      setIsLoading(false);
+      navigate("/admin/login");
     } catch (error) {
       //eslint-disable-next-line no-console
       console.log(error);

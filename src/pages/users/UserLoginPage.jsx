@@ -45,12 +45,10 @@ function UserLoginPage() {
 
       localStorage.setItem("token", JSON.stringify(token));
 
-      setTimeout(() => {
-        setIsLoading(false);
-        setIsDisabled(false);
-        notify("Logged-In Successfully...", "success");
-        navigate("/user/dashboard");
-      }, 4000);
+      setIsLoading(false);
+      setIsDisabled(false);
+      notify("Logged-In Successfully...", "success");
+      navigate("/user/dashboard");
     } catch (error) {
       // console.log(error);
       // 🔴 NETWORK ERROR (backend unreachable)
@@ -178,9 +176,9 @@ function UserLoginPage() {
             <div className="flex justify-center gap-1 text-center w-full text-base">
               <div>
                 <h2>
-                  Don't have an Account?{" "}
+                  Don't have an Account?
                   <span
-                    className="font-bold text-gray-700 hover:cursor-pointer hover:font-bold hover:text-gray-700"
+                    className="font-bold text-gray-700 hover:cursor-pointer hover:font-bold hover:text-gray-700 whitespace-nowrap"
                     onClick={() => {
                       navigate("/user/signup");
                     }}

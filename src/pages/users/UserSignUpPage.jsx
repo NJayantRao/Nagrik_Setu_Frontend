@@ -52,12 +52,10 @@ function UserSignUpPage() {
 
       localStorage.setItem("token", JSON.stringify(token));
 
-      setTimeout(() => {
-        notify("Account Created Successfully...", "success");
-        setIsLoading(false);
-        setIsDisabled(false);
-        navigate("/user/dashboard");
-      }, 4000);
+      notify("Account Created Successfully...", "success");
+      setIsLoading(false);
+      setIsDisabled(false);
+      navigate("/user/dashboard");
     } catch (error) {
       // console.log(error);
       // 🔴 NETWORK ERROR (backend unreachable)
