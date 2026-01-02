@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import DeleteModal from "../../modals/DeleteModal";
 import { formatDateIST } from "../../../utils/formatTime";
+import ViewComplaintModal from "../../modals/ViewComplaintModal";
 
 function MyComplaints({
   filed,
@@ -22,6 +23,7 @@ function MyComplaints({
 }) {
   // console.log(complaints);
   const [search, setSearch] = useState("");
+  const [selectedComplaint, setSelectedComplaint] = useState("");
   const rowsPerPage = 3;
   const startIndex = (currIndex - 1) * rowsPerPage;
   const endIndex = startIndex + rowsPerPage;
@@ -184,7 +186,13 @@ function MyComplaints({
                 </p>
 
                 {/* CTA */}
-                <button className="w-full mt-2 bg-blue-50 text-blue-700 py-2 rounded-xl text-sm font-semibold hover:bg-blue-100 transition">
+                <button
+                  className="w-full mt-2 bg-blue-50 text-blue-700 py-2 rounded-xl text-sm font-semibold hover:bg-blue-100 transition"
+                  onClick={() => {
+                    document.getElementById("view_modal").showModal();
+                    setSelectedComplaint(item);
+                  }}
+                >
                   View Complaint
                 </button>
               </div>
@@ -214,7 +222,7 @@ function MyComplaints({
                 <ChevronRight
                   size={22}
                   className={` transition ${
-                    currIndex < totalpages
+                    currIndex === totalpages
                       ? "text-gray-300"
                       : "text-gray-700 hover:text-blue-600"
                   }`}
@@ -278,7 +286,13 @@ function MyComplaints({
                         </span>
                       </td>
                       <td className="py-3">
-                        <button className="bg-blue-100 text-blue-700 px-3 py-1 rounded-lg text-xs hover:bg-blue-200 transition cursor-pointer">
+                        <button
+                          className="bg-blue-100 text-blue-700 px-3 py-1 rounded-lg text-xs hover:bg-blue-200 transition cursor-pointer"
+                          onClick={() => {
+                            document.getElementById("view_modal").showModal();
+                            setSelectedComplaint(item);
+                          }}
+                        >
                           View
                         </button>
                       </td>
@@ -290,6 +304,7 @@ function MyComplaints({
           </div>
         </div>
       </div>
+      <ViewComplaintModal info={selectedComplaint} />
       <DeleteModal />
     </div>
   );

@@ -20,7 +20,7 @@ const ViewComplaintModal = ({ info }) => {
         }
       );
       setTimeout(() => {
-        document.getElementById("update_status_modal").close();
+        document.getElementById("view_modal").close();
         navigate("/admin/complaints");
       }, 4000);
       // console.log(response.data);
@@ -32,12 +32,12 @@ const ViewComplaintModal = ({ info }) => {
 
   return (
     <dialog id="view_modal" className="modal">
-      <div className="modal-box max-w-xl rounded-2xl p-6 bg-white h-[80vh] overflow-x-hidden">
+      <div className="modal-box max-w-xl rounded-2xl p-6 bg-white sm:h-[80vh] overflow-x-hidden">
         {/* Header */}
         <div className="flex justify-between items-start mb-4">
           <div>
             <h2 className="text-2xl font-semibold text-black">
-              Update Complaint Status
+              View Complaint
             </h2>
             <p className="text-sm text-gray-500 mt-1">
               Update the status for complaint{" "}
@@ -78,8 +78,10 @@ const ViewComplaintModal = ({ info }) => {
                 <span className="text-sm font-semibold text-gray-900">
                   Department:
                 </span>{" "}
-                {info.departmentName} <span className="mx-2">|</span>
-                <span className="text-sm font-semibold text-gray-900">
+                {info.departmentName}{" "}
+              </p>
+              <p className="text-sm text-gray-600 mt-1">
+                <span className="text-sm font-semibold text-gray-900 ">
                   Status:
                 </span>{" "}
                 {info.status}
