@@ -16,16 +16,16 @@ import {
   ArrowLeft,
   Menu,
   X,
+  CircleQuestionMark,
 } from "lucide-react";
 
 const sections = [
   { id: "introduction", label: "Introduction", icon: BookOpen },
+  { id: "why-nagrik-setu", label: "Why Nagrik Setu", icon: CircleQuestionMark },
   { id: "getting-started", label: "Getting Started", icon: Rocket },
   { id: "filing-complaint", label: "Filing a Complaint", icon: FileText },
-  { id: "tracking-status", label: "Tracking Status", icon: MapPin },
   { id: "user-roles", label: "User Roles", icon: Users },
   { id: "faqs", label: "FAQs", icon: HelpCircle },
-  { id: "support", label: "Support & Contact", icon: Headphones },
 ];
 const CheckIcon = () => (
   <svg
@@ -46,7 +46,7 @@ const faqs = [
   {
     question: "How long does it take to resolve a complaint?",
     answer:
-      "Resolution time varies based on the complexity and department. Simple complaints may be resolved within 7-14 days, while complex issues may take 30-60 days. You can track the progress in real-time through your dashboard.",
+      "Resolution time depends on the nature of the issue and the concerned department. While some complaints may be resolved quickly, others may take longer due to on-ground verification or resource requirements. You can track the progress of your complaint in real time from the My Complaints section.",
   },
   {
     question: "Can I file multiple complaints at once?",
@@ -54,9 +54,9 @@ const faqs = [
       "Yes, you can file multiple complaints. Each complaint is tracked separately with its own unique ID. We recommend filing separate complaints for unrelated issues for better tracking and resolution.",
   },
   {
-    question: "What documents do I need to attach?",
+    question: "What documents or evidence do I need to attach?",
     answer:
-      "Required documents vary by complaint type. Generally, you should attach any evidence supporting your complaint (photos, documents, receipts). The system will guide you on mandatory attachments for each category.",
+      "Upload photos that support your complaint, such as images of the issue. Providing clear evidence helps authorities understand and address the issue more effectively.",
   },
   {
     question: "Is my information kept confidential?",
@@ -64,14 +64,24 @@ const faqs = [
       "Yes, we take data privacy seriously. Your personal information is protected under our privacy policy and relevant data protection laws. Only authorized personnel handling your complaint can access your details.",
   },
   {
-    question: "Can I withdraw a complaint after filing?",
+    question: "Will my complaint be visible to the public?",
     answer:
-      "Yes, you can withdraw a complaint before it reaches the resolved stage. Navigate to your complaint details and select the 'Withdraw Complaint' option. You'll be asked to provide a reason for withdrawal.",
+      "No, Complaints are not publicly visible. Only authorized authorities can view complaint details required for resolution.",
   },
   {
-    question: "What if I'm not satisfied with the resolution?",
+    question: "Can I edit my complaint after submitting it?",
     answer:
-      "If you're dissatisfied with the resolution, you can escalate the complaint within 7 days of receiving the resolution. The escalated complaint will be reviewed by senior officials for further action.",
+      "Currently, complaints cannot be edited once submitted. Please review all details carefully before final submission.",
+  },
+  {
+    question: "What types of issues can I report?",
+    answer:
+      "You can report public service issues such as road and infrastructure problems, water supply and sanitation issues, electricity and streetlight problems, and other civic service concerns.",
+  },
+  {
+    question: "Will I receive updates about my complaint?",
+    answer:
+      "Yes, You can track updates and status changes directly from the My Complaints section. Important updates may also be communicated via email.",
   },
 ];
 
@@ -79,6 +89,7 @@ const Documentation = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [activeSection, setActiveSection] = useState("introduction");
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -125,7 +136,23 @@ const Documentation = () => {
           <div className="flex items-center justify-between h-16 lg:h-20">
             <div className="flex items-center gap-4">
               <div className="flex items-center gap-2">
-                <div className="w-10 h-10 rounded-xl bg-[#193366] flex items-center justify-center">
+                <button
+                  className="lg:hidden p-2"
+                  onClick={() => setSidebarOpen(!sidebarOpen)}
+                  aria-label="Toggle sidebar"
+                >
+                  {sidebarOpen ? (
+                    <X className="w-6 h-6" />
+                  ) : (
+                    <Menu className="w-6 h-6" />
+                  )}
+                </button>
+                <div
+                  className="w-10 h-10 rounded-xl bg-[#193366] flex items-center justify-center"
+                  onClick={() => {
+                    navigate("/");
+                  }}
+                >
                   <span className="text-[#fbfcfd] font-heading font-bold text-xl">
                     N
                   </span>
@@ -147,23 +174,12 @@ const Documentation = () => {
                   size="sm"
                   className="gap-2 flex items-center"
                 >
-                  <ArrowLeft className="w-6 h-6" />
+                  <ArrowLeft className="w-6 h-6 hidden sm:inline" />
                   <span className="hidden sm:inline font-semibold">
                     Back to Home
                   </span>
                 </button>
               </Link>
-              <button
-                className="lg:hidden p-2"
-                onClick={() => setSidebarOpen(!sidebarOpen)}
-                aria-label="Toggle sidebar"
-              >
-                {sidebarOpen ? (
-                  <X className="w-6 h-6" />
-                ) : (
-                  <Menu className="w-6 h-6" />
-                )}
-              </button>
             </div>
           </div>
         </div>
@@ -177,14 +193,13 @@ const Documentation = () => {
           }`}
         >
           <div className="p-4 h-full overflow-y-auto">
-            Search
             <div className="relative mb-6">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
               <input
                 placeholder="Search documentation..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10"
+                className="pl-10  p-2 rounded-lg outline-0 focus:outline-2 focus:outline-black"
               />
             </div>
             {/* Navigation */}
@@ -198,8 +213,8 @@ const Documentation = () => {
                     onClick={() => scrollToSection(section.id)}
                     className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left transition-all ${
                       isActive
-                        ? "bg-primary text-primary-foreground"
-                        : "text-muted-foreground hover:bg-secondary hover:text-foreground"
+                        ? "bg-[#193366] text-[#ffffff]"
+                        : "text-[#676f7e] hover:bg-[#193366] hover:text-[#ffffff]"
                     }`}
                   >
                     <Icon className="w-4 h-4 flex-shrink-0" />
@@ -215,17 +230,17 @@ const Documentation = () => {
         {/* Mobile Overlay */}
         {sidebarOpen && (
           <div
-            className="fixed inset-0 bg-background/80 backdrop-blur-sm z-30 lg:hidden"
+            className="fixed inset-0 bg-[#f9fafb]/80 backdrop-blur-sm z-30 lg:hidden"
             onClick={() => setSidebarOpen(false)}
           />
         )}
 
         {/* Main Content */}
-        <main className="flex-1 min-w-0 p-6 lg:p-12">
-          <div className="max-w-3xl mx-auto">
+        <main className="flex-1 min-w-0 p-6 lg:p-12 overflow-x-hidden">
+          <div className="max-w-3xl mx-auto w-full">
             {/* Introduction */}
-            <section id="introduction" className="mb-16 scroll-mt-24">
-              <h1 className="font-heading text-4xl lg:text-5xl font-bold text-[#141d2e] mb-6">
+            <section id="introduction" className="mb-10 scroll-mt-24">
+              <h1 className="font-heading text-4xl lg:text-5xl font-bold text-[#141d2e] mb-6 text-center">
                 Welcome to Nagrik Setu
               </h1>
               <p className="text-lg text-[#676f7e] mb-8 leading-relaxed">
@@ -237,33 +252,8 @@ const Documentation = () => {
                 transparent, efficient and accountable.
               </p>
 
-              {/* <div className="grid sm:grid-cols-2 gap-4 mb-8">
-                <Card className="border-border shadow-soft">
-                  <CardContent className="p-6">
-                    <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
-                      <Users className="w-6 h-6 text-primary" />
-                    </div>
-                    <h3 className="font-heading font-semibold text-lg mb-2">For Citizens</h3>
-                    <p className="text-sm text-muted-foreground">
-                      File and track complaints easily. Get real-time updates on your grievances.
-                    </p>
-                  </CardContent>
-                </Card>
-                <Card className="border-border shadow-soft">
-                  <CardContent className="p-6">
-                    <div className="w-12 h-12 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
-                      <FileText className="w-6 h-6 text-accent" />
-                    </div>
-                    <h3 className="font-heading font-semibold text-lg mb-2">For Authorities</h3>
-                    <p className="text-sm text-muted-foreground">
-                      Manage complaints efficiently with our comprehensive dashboard and tools.
-                    </p>
-                  </CardContent>
-                </Card>
-              </div> */}
-
-              <div className="p-4 bg-[#edf0f3]/2 border border-[#96a3b0] rounded-lg flex gap-3">
-                <Info className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+              <div className="p-4 bg-[#6293c5]/2 border border-[#749ac1] rounded-lg flex gap-3">
+                <Info className="w-6 h-6 text-primary flex-shrink-0 mt-0.5" />
                 <div>
                   <h4 className="font-semibold text-foreground mb-1">
                     New to Nagrik Setu?
@@ -273,6 +263,166 @@ const Documentation = () => {
                     create your account and file your first complaint.
                   </p>
                 </div>
+              </div>
+            </section>
+
+            {/* Why Nagrik Setu */}
+            <section id="why-nagrik-setu" className="mb-16 scroll-mt-24">
+              <div className="flex gap-2">
+                <AlertTriangle className="h-8 w-8 text-[#193366]" />
+                <h2 className="font-heading text-3xl font-bold text-[#141d2e] mb-6">
+                  Why Nagrik Setu
+                </h2>
+              </div>
+
+              <p className="text-[#676f7e] mb-8 leading-relaxed">
+                Before understanding the need for <strong>Nagrik Setu</strong>,
+                it is important to examine how grievance and complaint systems
+                currently function across India and why they often fail
+                citizens.
+              </p>
+
+              <div className="flex flex-col gap-3 mb-5">
+                <div className="rounded-2xl border border-[#e0e6eb] bg-white p-6 space-y-4">
+                  {/* Header */}
+                  <div className="flex items-center gap-2">
+                    <div className="w-9 h-9 rounded-full text-white flex items-center justify-center font-bold text-xl">
+                      1️⃣
+                    </div>
+                    <h3 className="text-lg font-semibold text-[#141d2e]">
+                      Identifying the Concerned Authority
+                    </h3>
+                  </div>
+                  <p className="text-[#676f7e] mb-4 leading-relaxed">
+                    In many{" "}
+                    <strong className="text-[#141d2e]">
+                      rural and under-developed regions
+                    </strong>
+                    , the first challenge itself is identifying <em>who</em> is
+                    responsible for a problem.
+                  </p>
+                  {/* Content */}
+                  <ul className="list-disc ml-6 space-y-2 text-[#141d2e]">
+                    <li>
+                      <strong className="text-[#141d2e]">
+                        Potholes / Damaged roads
+                      </strong>{" "}
+                      - Public Works Department (PWD) or Municipal Engineering
+                    </li>
+                    <li>
+                      <strong className="text-[#141d2e]">
+                        Garbage overflow
+                      </strong>{" "}
+                      - Sanitation Department or Urban Local Body
+                    </li>
+                    <li>
+                      <strong className="text-[#141d2e]">
+                        Streetlights not working
+                      </strong>{" "}
+                      - Electricity Department or Municipal Corporation
+                    </li>
+                  </ul>
+                  <p className="text-[#676f7e] mt-4 leading-relaxed">
+                    Once the authority is identified, citizens are often
+                    required to
+                    <strong className="text-[#141d2e]">
+                      {" "}
+                      physically visit government offices
+                    </strong>
+                    , stand in long queues, and navigate unclear
+                    procedures—making the process frustrating, time-consuming,
+                    and discouraging.
+                  </p>
+                </div>
+
+                <div className="rounded-2xl border border-[#e0e6eb] bg-white p-6 space-y-4">
+                  {/* Header */}
+                  <div className="flex items-center gap-2">
+                    <div className="w-9 h-9 rounded-full text-white flex items-center justify-center font-bold text-xl">
+                      2️⃣
+                    </div>
+                    <h3 className="text-lg font-semibold text-[#141d2e]">
+                      Toll-Free Helpline Numbers
+                    </h3>
+                  </div>
+
+                  <p className="text-[#676f7e] mb-4 leading-relaxed">
+                    In{" "}
+                    <strong className="text-[#141d2e]">
+                      sub-urban and urban areas
+                    </strong>
+                    , grievance reporting is sometimes possible via helpline
+                    numbers.
+                  </p>
+
+                  {/* Content */}
+                  <ul className="list-disc ml-6 space-y-2 text-[#141d2e]">
+                    <li>Calls often go unanswered</li>
+                    <li>Waiting times are long</li>
+                    <li>No proper complaint tracking</li>
+                    <li>Citizens rarely receive resolution updates</li>
+                  </ul>
+
+                  <p className="text-[#676f7e] mt-4 leading-relaxed">
+                    This results in complaints being raised—but not effectively
+                    resolved.
+                  </p>
+                </div>
+
+                <div className="rounded-2xl border border-[#e0e6eb] bg-white p-6 space-y-4">
+                  {/* Header */}
+                  <div className="flex items-center gap-2">
+                    <div className="w-9 h-9 rounded-full text-white flex items-center justify-center font-bold text-xl">
+                      3️⃣
+                    </div>
+                    <h3 className="text-lg font-semibold text-[#141d2e]">
+                      Fragmented Websites & Apps
+                    </h3>
+                  </div>
+
+                  <p className="text-[#676f7e] mb-4 leading-relaxed">
+                    Some{" "}
+                    <strong className="text-[#141d2e]">developed cities</strong>{" "}
+                    provide online grievance portals or mobile applications for
+                    public issue reporting.
+                  </p>
+
+                  {/* Content */}
+                  <ul className="list-disc ml-6 space-y-2 text-[#141d2e]">
+                    <li>Restricted to specific cities or regions</li>
+                    <li>
+                      Mainly focused on sanitation or garbage-related issues
+                    </li>
+                    <li>No unified platform for all public grievances</li>
+                    <li>Many complaints remain unaddressed or unresolved</li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* Solution Highlight */}
+              <div className="p-5 bg-[#edf0f3] border border-[#d0d7de] rounded-lg">
+                <h3 className="font-semibold text-lg text-[#141d2e] mb-2">
+                  🌉 How Nagrik Setu Solves This
+                </h3>
+
+                <p className="text-[#676f7e] leading-relaxed">
+                  <strong className="text-[#141d2e]">Nagrik Setu</strong>{" "}
+                  provides a single, unified, and transparent platform where
+                  citizens can report any public service issue without worrying
+                  about departments, track complaint status in real time, and
+                  ensure accountability through structured workflows.
+                </p>
+
+                <p className="text-[#676f7e] mt-3 leading-relaxed">
+                  It eliminates fragmentation, reduces dependency on physical
+                  visits or unanswered helplines, and brings grievance redressal
+                  into a
+                  <strong className="text-[#141d2e]">
+                    {" "}
+                    citizen-first digital ecosystem
+                  </strong>
+                  .
+                </p>
               </div>
             </section>
 
@@ -472,6 +622,79 @@ const Documentation = () => {
                     </li>
                   </ol>
                 </div>
+                <div className="rounded-2xl border border-[#e0e6eb] bg-white p-6 space-y-4">
+                  {/* Header */}
+                  <div className="flex items-center gap-4">
+                    <div className="w-9 h-9 rounded-full bg-[#193366] text-white flex items-center justify-center font-bold text-lg">
+                      5
+                    </div>
+                    <h3 className="text-lg font-semibold text-[#141d2e]">
+                      Logout
+                    </h3>
+                  </div>
+                  {/* Content */}
+                  <ol className="list-decimal ml-12 space-y-2 text-[#676f7e] text-lg leading-relaxed">
+                    <li>
+                      Click the{" "}
+                      <strong className="text-[#141d2e]">
+                        profile icon (mobile)
+                      </strong>{" "}
+                      or open the{" "}
+                      <strong className="text-[#141d2e]">
+                        sidebar (desktop)
+                      </strong>
+                      .
+                    </li>
+                    <li>
+                      Select <strong className="text-[#141d2e]">Logout</strong>{" "}
+                      from the menu.
+                    </li>
+                    <li>You will be securely signed out of your account.</li>
+                  </ol>
+                </div>
+                <div className="rounded-2xl border border-[#e0e6eb] bg-white p-6 space-y-4">
+                  {/* Header */}
+                  <div className="flex items-center gap-4">
+                    <div className="w-9 h-9 rounded-full bg-[#193366] text-white flex items-center justify-center font-bold text-lg">
+                      6
+                    </div>
+                    <h3 className="text-lg font-semibold text-[#141d2e]">
+                      Delete Account
+                    </h3>
+                  </div>
+                  {/* Content */}
+                  <ol className="list-decimal ml-12 space-y-2 text-[#676f7e] text-lg leading-relaxed">
+                    <li>
+                      Click the{" "}
+                      <strong className="text-[#141d2e]">
+                        profile icon (mobile)
+                      </strong>{" "}
+                      or open the{" "}
+                      <strong className="text-[#141d2e]">
+                        sidebar (desktop)
+                      </strong>
+                      .
+                    </li>
+                    <li>
+                      Select{" "}
+                      <strong className="text-[#141d2e]">Delete Account</strong>{" "}
+                      from the menu.
+                    </li>
+                    <li>
+                      Confirm your action to permanently delete your account.
+                    </li>
+                  </ol>
+                </div>
+                <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-lg flex gap-3">
+                  <AlertTriangle className="w-8 h-8 text-red-600 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <h4 className="font-semibold text-foreground mb-1">Note</h4>
+                    <p className="text-sm text-muted-foreground">
+                      Account deletion is permanent and will remove all
+                      associated data, including complaints and history.
+                    </p>
+                  </div>
+                </div>
               </div>
             </section>
 
@@ -486,7 +709,7 @@ const Documentation = () => {
                 simple and takes less than 5 minutes.
               </p>
 
-              <div className="mb-8 flex justify-center">
+              <div className="mb-4 flex justify-center">
                 <ul className="timeline timeline-horizontal gap-6">
                   {/* Filed */}
                   <li className="flex-1">
@@ -563,178 +786,90 @@ const Documentation = () => {
               </div>
             </section>
 
-            {/* Tracking Status */}
-            {/* <section id="tracking-status" className="mb-16 scroll-mt-24">
-              <h2 className="font-heading text-3xl font-bold text-foreground mb-6 flex items-center gap-3">
-                <MapPin className="w-8 h-8 text-primary" />
-                Tracking Complaint Status
-              </h2>
-              <p className="text-muted-foreground mb-8">
-                Stay informed about your complaint's progress with our real-time tracking system.
-              </p>
-
-              <Card className="border-border mb-8">
-                <CardContent className="p-6">
-                  <h4 className="font-heading font-semibold text-lg mb-4">Complaint Status Stages</h4>
-                  <div className="space-y-4">
-                    <div className="flex items-start gap-4">
-                      <div className="w-3 h-3 rounded-full bg-yellow-500 mt-1.5 flex-shrink-0" />
-                      <div>
-                        <h5 className="font-semibold text-foreground">Pending</h5>
-                        <p className="text-sm text-muted-foreground">
-                          Complaint has been submitted and is awaiting review by the concerned department.
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-4">
-                      <div className="w-3 h-3 rounded-full bg-blue-500 mt-1.5 flex-shrink-0" />
-                      <div>
-                        <h5 className="font-semibold text-foreground">In Progress</h5>
-                        <p className="text-sm text-muted-foreground">
-                          Complaint has been assigned to an officer and work is underway.
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-4">
-                      <div className="w-3 h-3 rounded-full bg-green-500 mt-1.5 flex-shrink-0" />
-                      <div>
-                        <h5 className="font-semibold text-foreground">Resolved</h5>
-                        <p className="text-sm text-muted-foreground">
-                          The issue has been addressed and the complaint is marked as resolved.
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-4">
-                      <div className="w-3 h-3 rounded-full bg-red-500 mt-1.5 flex-shrink-0" />
-                      <div>
-                        <h5 className="font-semibold text-foreground">Rejected</h5>
-                        <p className="text-sm text-muted-foreground">
-                          Complaint could not be processed. Reason will be provided in the details.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              <div className="grid sm:grid-cols-2 gap-4">
-                <Card className="border-border">
-                  <CardContent className="p-6">
-                    <h4 className="font-semibold text-foreground mb-3">Track by Complaint ID</h4>
-                    <p className="text-sm text-muted-foreground">
-                      Enter your complaint ID in the tracking section to view the current status, 
-                      assigned officer details, and timeline.
-                    </p>
-                  </CardContent>
-                </Card>
-                <Card className="border-border">
-                  <CardContent className="p-6">
-                    <h4 className="font-semibold text-foreground mb-3">SMS/Email Updates</h4>
-                    <p className="text-sm text-muted-foreground">
-                      Receive automatic notifications on your registered mobile/email whenever 
-                      there's an update on your complaint.
-                    </p>
-                  </CardContent>
-                </Card>
-              </div>
-            </section> */}
-
             {/* User Roles */}
-            {/* <section id="user-roles" className="mb-16 scroll-mt-24">
-              <h2 className="font-heading text-3xl font-bold text-foreground mb-6 flex items-center gap-3">
-                <Users className="w-8 h-8 text-primary" />
+            <section id="user-roles" className="mb-16 scroll-mt-24">
+              <h2 className="font-heading text-3xl font-bold text-[#141d2e] mb-6 flex items-center gap-3">
+                <Users className="w-10 h-10 text-[141d2e]" />
                 User Roles
               </h2>
-              <p className="text-muted-foreground mb-8">
-                Nagrik Setu has different user roles with specific permissions and capabilities.
+              <p className="text-[#676f7e] mb-8">
+                Nagrik Setu has different user roles with specific permissions
+                and capabilities.
               </p>
 
               <div className="grid gap-6">
-                <Card className="border-border overflow-hidden">
+                <div className="border-border overflow-hidden shadow-lg rounded-xl">
                   <div className="h-2 bg-blue-500" />
-                  <CardContent className="p-6">
-                    <h3 className="font-heading font-semibold text-xl mb-3">👤 Citizen</h3>
-                    <p className="text-muted-foreground mb-4">
+                  <div className="p-6">
+                    <h3 className="font-heading font-semibold text-xl mb-3">
+                      👤 Citizen
+                    </h3>
+                    <p className="text-[#000000] mb-4">
                       Regular users who file and track complaints.
                     </p>
                     <ul className="space-y-2 text-sm text-muted-foreground">
                       <li className="flex items-center gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-green-500" /> File new complaints
+                        <CheckCircle2 className="w-4 h-4 text-green-500" /> File
+                        new complaints
                       </li>
                       <li className="flex items-center gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-green-500" /> Track complaint status
+                        <CheckCircle2 className="w-4 h-4 text-green-500" />{" "}
+                        Track complaint status
                       </li>
                       <li className="flex items-center gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-green-500" /> View complaint history
+                        <CheckCircle2 className="w-4 h-4 text-green-500" /> View
+                        complaint history
                       </li>
                       <li className="flex items-center gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-green-500" /> Provide feedback on resolution
+                        <CheckCircle2 className="w-4 h-4 text-green-500" />{" "}
+                        Provide feedback on resolution
                       </li>
                       <li className="flex items-center gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-green-500" /> Escalate unresolved complaints
+                        <CheckCircle2 className="w-4 h-4 text-green-500" />{" "}
+                        Escalate unresolved complaints
                       </li>
                     </ul>
-                  </CardContent>
-                </Card>
+                  </div>
+                </div>
 
-                <Card className="border-border overflow-hidden">
+                <div className="border-border overflow-hidden shadow-lg rounded-xl">
                   <div className="h-2 bg-green-500" />
-                  <CardContent className="p-6">
-                    <h3 className="font-heading font-semibold text-xl mb-3">🏛️ Authority/Staff</h3>
+                  <div className="p-6">
+                    <h3 className="font-heading font-semibold text-xl mb-3">
+                      🏛️ Authority(Admins)
+                    </h3>
                     <p className="text-muted-foreground mb-4">
                       Government officials who handle and resolve complaints.
                     </p>
                     <ul className="space-y-2 text-sm text-muted-foreground">
                       <li className="flex items-center gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-green-500" /> View assigned complaints
+                        <CheckCircle2 className="w-4 h-4 text-green-500" /> View
+                        assigned complaints
                       </li>
                       <li className="flex items-center gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-green-500" /> Update complaint status
+                        <CheckCircle2 className="w-4 h-4 text-green-500" />{" "}
+                        Update complaint status
                       </li>
                       <li className="flex items-center gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-green-500" /> Add resolution notes
+                        <CheckCircle2 className="w-4 h-4 text-green-500" /> Add
+                        resolution notes
                       </li>
                       <li className="flex items-center gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-green-500" /> Transfer complaints to other departments
+                        <CheckCircle2 className="w-4 h-4 text-green-500" />{" "}
+                        Transfer complaints to other departments
                       </li>
                       <li className="flex items-center gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-green-500" /> View department analytics
+                        <CheckCircle2 className="w-4 h-4 text-green-500" /> View
+                        department analytics
                       </li>
                     </ul>
-                  </CardContent>
-                </Card>
-
-                <Card className="border-border overflow-hidden">
-                  <div className="h-2 bg-purple-500" />
-                  <CardContent className="p-6">
-                    <h3 className="font-heading font-semibold text-xl mb-3">⚙️ Administrator</h3>
-                    <p className="text-muted-foreground mb-4">
-                      System administrators with full access to manage the platform.
-                    </p>
-                    <ul className="space-y-2 text-sm text-muted-foreground">
-                      <li className="flex items-center gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-green-500" /> Manage all complaints
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-green-500" /> Manage users and staff
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-green-500" /> View system-wide analytics
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-green-500" /> Configure departments and categories
-                      </li>
-                      <li className="flex items-center gap-2">
-                        <CheckCircle2 className="w-4 h-4 text-green-500" /> Generate reports
-                      </li>
-                    </ul>
-                  </CardContent>
-                </Card>
+                  </div>
+                </div>
               </div>
-            </section> */}
+            </section>
 
             {/* FAQs */}
-            {/* <section id="faqs" className="mb-16 scroll-mt-24">
+            <section id="faqs" className="mb-5 scroll-mt-24">
               <h2 className="font-heading text-3xl font-bold text-foreground mb-6 flex items-center gap-3">
                 <HelpCircle className="w-8 h-8 text-primary" />
                 Frequently Asked Questions
@@ -743,96 +878,73 @@ const Documentation = () => {
                 Find answers to common questions about using Nagrik Setu.
               </p>
 
-              <Accordion type="single" collapsible className="w-full">
-                {faqs.map((faq, index) => (
-                  <AccordionItem key={index} value={`item-${index}`} className="border-border">
-                    <AccordionTrigger className="text-left font-medium hover:no-underline">
-                      {faq.question}
-                    </AccordionTrigger>
-                    <AccordionContent className="text-muted-foreground">
-                      {faq.answer}
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
-            </section> */}
+              {faqs.map((ele, idx) => {
+                return (
+                  <details
+                    key={idx}
+                    className="group collapse bg-base-100 border-b border-[#e0e6eb] rounded-sm shadow-sm"
+                  >
+                    <summary className="collapse-title font-semibold flex items-center justify-between cursor-pointer">
+                      <span>{ele.question}</span>
 
-            {/* Support */}
-            {/* <section id="support" className="mb-16 scroll-mt-24">
-              <h2 className="font-heading text-3xl font-bold text-foreground mb-6 flex items-center gap-3">
-                <Headphones className="w-8 h-8 text-primary" />
-                Support & Contact
-              </h2>
-              <p className="text-muted-foreground mb-8">
-                Need help? Our support team is here to assist you.
-              </p>
+                      {/* Down Arrow */}
+                      <svg
+                        className="h-4 w-4 text-gray-500 transition-transform duration-300 group-open:rotate-180"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        viewBox="0 0 24 24"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          d="M19 9l-7 7-7-7"
+                        />
+                      </svg>
+                    </summary>
 
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-                <Card className="border-border text-center">
-                  <CardContent className="p-6">
-                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                      <Headphones className="w-6 h-6 text-primary" />
+                    <div className="collapse-content text-sm text-[#676f7e] font-semibold">
+                      {ele.answer}
                     </div>
-                    <h4 className="font-semibold text-foreground mb-2">Helpline</h4>
-                    <p className="text-primary font-semibold">1800-XXX-XXXX</p>
-                    <p className="text-xs text-muted-foreground mt-1">Toll-free, 24/7</p>
-                  </CardContent>
-                </Card>
-
-                <Card className="border-border text-center">
-                  <CardContent className="p-6">
-                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                      <FileText className="w-6 h-6 text-primary" />
-                    </div>
-                    <h4 className="font-semibold text-foreground mb-2">Email Support</h4>
-                    <p className="text-primary font-semibold text-sm">support@nagriksetu.gov.in</p>
-                    <p className="text-xs text-muted-foreground mt-1">Response within 24 hours</p>
-                  </CardContent>
-                </Card>
-
-                <Card className="border-border text-center sm:col-span-2 lg:col-span-1">
-                  <CardContent className="p-6">
-                    <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                      <MapPin className="w-6 h-6 text-primary" />
-                    </div>
-                    <h4 className="font-semibold text-foreground mb-2">Visit Us</h4>
-                    <p className="text-sm text-muted-foreground">
-                      Nagrik Setu Office<br />
-                      Government Complex, Sector 1
-                    </p>
-                  </CardContent>
-                </Card>
+                  </details>
+                );
+              })}
+            </section>
+            <div className="p-3 bg-yellow-500/10 border border-yellow-500/20 rounded-lg flex gap-3">
+              <AlertTriangle className="w-8 h-8 text-yellow-600 flex-shrink-0 mt-0.5" />
+              <div>
+                <h4 className="font-semibold text-foreground mb-1">
+                  {" "}
+                  Privacy & Usage Note
+                </h4>
+                <p className="text-sm text-muted-foreground">
+                  Nagrik Setu collects only the information required to process
+                  complaints and improve public service delivery.
+                  <br /> User data is handled responsibly and in accordance with
+                  applicable data protection standards.
+                </p>
               </div>
-
-              <div className="p-6 bg-card border border-border rounded-lg">
-                <h4 className="font-heading font-semibold text-lg mb-4">Office Hours</h4>
-                <div className="grid sm:grid-cols-2 gap-4 text-sm">
-                  <div>
-                    <p className="font-medium text-foreground">Monday - Friday</p>
-                    <p className="text-muted-foreground">9:00 AM - 6:00 PM</p>
-                  </div>
-                  <div>
-                    <p className="font-medium text-foreground">Saturday</p>
-                    <p className="text-muted-foreground">10:00 AM - 2:00 PM</p>
-                  </div>
-                  <div className="sm:col-span-2">
-                    <p className="font-medium text-foreground">Sunday & Public Holidays</p>
-                    <p className="text-muted-foreground">Closed (Helpline available)</p>
-                  </div>
-                </div>
-              </div>
-            </section> */}
-
-            {/* Footer */}
-            <div className="text-center py-8 border-t border-border">
-              <p className="text-muted-foreground text-sm">
-                Can't find what you're looking for?{" "}
-                <a href="#support" className="text-primary hover:underline">
-                  Contact our support team
-                </a>
-              </p>
             </div>
           </div>
+          <footer className="mt-16 border-t border-[#193366] bg-gradient-to-r from-[#193366] to-[#1f3f7a]">
+            <div className="max-w-3xl mx-auto px-6 py-6 text-center">
+              <p className="text-sm font-semibold tracking-wide text-white">
+                © {new Date().getFullYear()} Nagrik Setu
+              </p>
+
+              <p className="text-sm text-[#c7d2e0] mt-1">
+                A citizen-centric grievance redressal platform for transparent
+                governance
+              </p>
+
+              <p className="text-xs text-[#9fb4d6] mt-2">
+                Need help?{" "}
+                <span className="underline cursor-pointer hover:text-white">
+                  Visit the FAQs
+                </span>
+              </p>
+            </div>
+          </footer>
         </main>
       </div>
     </div>
