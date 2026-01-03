@@ -90,7 +90,11 @@ function UserDashboard() {
 
         response.data.forEach((ele) => {
           if (ele.status === "Filed") f++;
-          else if (ele.status === "In-Progress") ip++;
+          else if (
+            ele.status === "In-Progress" ||
+            ele.status === "Acknowledged"
+          )
+            ip++;
           else if (ele.status === "Resolved") r++;
           else if (ele.status === "Rejected") rej++;
         });

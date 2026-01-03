@@ -45,6 +45,7 @@ function AdminComplaints() {
   const adminName = JSON.parse(localStorage.getItem("adminName"));
   const colorInfo = {
     Filed: "bg-blue-100 text-blue-700 border border-blue-200",
+    Acknowledged: "bg-indigo-100 text-indigo-700 border border-indigo-200",
     "In-Progress": "bg-amber-100 text-amber-700 border border-amber-200",
     Resolved: "bg-green-100 text-green-700 border border-green-200",
     Rejected: "bg-red-100 text-red-700 border border-red-200",
