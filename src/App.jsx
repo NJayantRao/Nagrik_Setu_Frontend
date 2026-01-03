@@ -3,6 +3,7 @@ import { lazy, Suspense, useContext } from "react";
 import { UserDataContext } from "./context/UserContext";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Documentation from "./pages/docs/Documentation";
 
 /**
  * Lazy-loaded layout components
@@ -136,6 +137,7 @@ function App() {
             <Route path="/admin/staff" element={<AdminStaff />} />
             <Route path="/admin/settings" element={<Adminsettings />} />
             <Route path="/admin/departments" element={<AdminDepartments />} />
+            <Route path="/documentation" element={<Documentation />} />
             <Route path="*" element={<ErrorPage />} />
           </Route>
         </Routes>
