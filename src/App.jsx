@@ -69,6 +69,8 @@ const Adminsettings = lazy(() => import("./pages/admins/AdminSettings"));
  */
 const UserDashboard = lazy(() => import("./pages/users/UserDashboard"));
 
+const StaffLogin = lazy(() => import("./pages/staffs/StaffLogin.jsx"));
+
 function App() {
   /**
    * Global UI state from context
@@ -138,6 +140,7 @@ function App() {
             <Route path="/admin/settings" element={<Adminsettings />} />
             <Route path="/admin/departments" element={<AdminDepartments />} />
             <Route path="/documentation" element={<Documentation />} />
+            <Route path="/staff/login" element={<StaffLogin />} />
             <Route path="*" element={<ErrorPage />} />
           </Route>
         </Routes>
