@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import axios from "axios";
+import { UserDataContext } from "../../context/UserContext";
+import { notify } from "../../utils/notify";
 import Topbar from "../../components/common/Topbar";
 import Sidebar from "../../components/users/layout/Sidebar";
 import UserMain from "../../components/users/layout/UserMain";
-import { UserDataContext } from "../../context/UserContext";
-import { notify } from "../../utils/notify";
 import Errors from "../../components/common/Errors";
 
 function UserDashboard() {

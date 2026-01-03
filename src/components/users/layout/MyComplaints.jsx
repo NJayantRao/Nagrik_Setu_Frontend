@@ -8,8 +8,8 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
-import DeleteModal from "../../modals/DeleteModal";
 import { formatDateIST } from "../../../utils/formatTime";
+import DeleteModal from "../../modals/DeleteModal";
 import ViewComplaintModal from "../../modals/ViewComplaintModal";
 
 function MyComplaints({

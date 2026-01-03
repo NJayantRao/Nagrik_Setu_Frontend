@@ -1,11 +1,11 @@
 import { useEffect, useState, useContext } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { UserDataContext } from "../../context/UserContext";
+import { notify } from "../../utils/notify";
 import Topbar from "../../components/common/Topbar";
 import Sidebar from "../../components/users/layout/Sidebar";
-import { UserDataContext } from "../../context/UserContext";
 import ImageUploader from "../../components/common/ImageUploader";
-import { notify } from "../../utils/notify";
 import Errors from "../../components/common/Errors";
 import DeleteModal from "../../components/modals/DeleteModal";
 

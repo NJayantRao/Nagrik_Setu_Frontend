@@ -1,15 +1,7 @@
-import {
-  Building2,
-  Users,
-  FileText,
-  MoreHorizontal,
-  CheckCircle,
-  Ellipsis,
-  Trash2,
-} from "lucide-react";
-import DepartmentAction from "../../ui/dropdowns/DepartmentAction";
+import { Building2, CheckCircle, Trash2 } from "lucide-react";
 import axios from "axios";
 import { notify } from "../../../utils/notify";
+import DepartmentAction from "../../ui/dropdowns/DepartmentAction";
 
 const DepartmentCard = ({ department, refresh }) => {
   async function handleDelete() {

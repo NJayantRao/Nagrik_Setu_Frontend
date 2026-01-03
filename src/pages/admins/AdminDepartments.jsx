@@ -1,13 +1,13 @@
-import AdminSidebar from "../../components/admins/layout/AdminSidebar";
-import SearchBar from "../../components/admins/layout/SearchBar";
-import { Building2, Search } from "lucide-react";
-import { AdminDataContext } from "../../context/AdminContext";
 import { useContext, useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import DepartmentCard from "../../components/ui/cards/DepartmentCard";
-import AddDepartmentModal from "../../components/admins/departments/AddDepartmentForm";
+import { Building2, Search } from "lucide-react";
 import axios from "axios";
 import { notify } from "../../utils/notify";
+import { AdminDataContext } from "../../context/AdminContext";
+import AdminSidebar from "../../components/admins/layout/AdminSidebar";
+import SearchBar from "../../components/admins/layout/SearchBar";
+import DepartmentCard from "../../components/ui/cards/DepartmentCard";
+import AddDepartmentModal from "../../components/admins/departments/AddDepartmentForm";
 import Loader from "../../components/common/Loaders";
 import Errors from "../../components/common/Errors";
 

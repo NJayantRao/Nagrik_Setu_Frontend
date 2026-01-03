@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import { Building2, X } from "lucide-react";
+import axios from "axios";
 import { notify } from "../../utils/notify";
 
 function UpdateDepartmentModal({ department, info }) {

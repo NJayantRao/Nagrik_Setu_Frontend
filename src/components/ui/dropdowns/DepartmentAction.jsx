@@ -1,13 +1,4 @@
-import {
-  Eye,
-  Pencil,
-  Clock,
-  Loader2,
-  CheckCircle,
-  XCircle,
-  Trash2,
-  Ellipsis,
-} from "lucide-react";
+import { Pencil, Trash2, Ellipsis } from "lucide-react";
 
 const DepartmentAction = (props) => {
   return (

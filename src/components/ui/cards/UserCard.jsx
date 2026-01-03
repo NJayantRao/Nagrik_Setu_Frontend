@@ -1,4 +1,4 @@
-import { Mail, Phone, MapPin, MoreHorizontal, CheckCircle } from "lucide-react";
+import { Mail, Phone, CheckCircle } from "lucide-react";
 
 const UserCard = ({ user }) => {
   return (

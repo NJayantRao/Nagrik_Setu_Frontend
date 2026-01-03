@@ -1,8 +1,8 @@
-import { useNavigate } from "react-router-dom";
-import BackgroundLetterAvatars from "./TextAvatar";
-import { Menu, House, FileText, User } from "lucide-react";
 import { useState, useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { House, FileText, User } from "lucide-react";
 import { UserDataContext } from "../../context/UserContext";
+import BackgroundLetterAvatars from "./TextAvatar";
 import LogoutButton from "../ui/buttons/LogoutButton";
 import DeleteButton from "../ui/buttons/DeleteButton";
 

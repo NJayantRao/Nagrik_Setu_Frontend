@@ -1,6 +1,6 @@
+import { FileCheck, FileClock, FileText, FileX, Search } from "lucide-react";
 import AdminSidebar from "../../components/admins/layout/AdminSidebar";
 import SearchBar from "../../components/admins/layout/SearchBar";
-import { FileCheck, FileClock, FileText, FileX, Search } from "lucide-react";
 import AdminStatCard from "../../components/ui/cards/AdminStatCard";
 function AdminStaff() {
   const statCardInfo = [

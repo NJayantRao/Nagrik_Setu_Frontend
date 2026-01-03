@@ -1,10 +1,10 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { AdminDataContext } from "../../context/AdminContext";
 import { Eye, EyeOff } from "lucide-react";
-import Loader from "../../components/common/Loaders";
 import axios from "axios";
+import { AdminDataContext } from "../../context/AdminContext";
 import { notify } from "../../utils/notify";
+import Loader from "../../components/common/Loaders";
 import Errors from "../../components/common/Errors";
 
 function AdminLoginPage() {

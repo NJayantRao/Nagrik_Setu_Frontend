@@ -1,10 +1,10 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserDataContext } from "../../context/UserContext";
 import { Eye, EyeOff } from "lucide-react";
-import Loader from "../../components/common/Loaders";
 import axios from "axios";
+import { UserDataContext } from "../../context/UserContext";
 import { notify } from "../../utils/notify";
+import Loader from "../../components/common/Loaders";
 import Errors from "../../components/common/Errors";
 
 function UserLoginPage() {

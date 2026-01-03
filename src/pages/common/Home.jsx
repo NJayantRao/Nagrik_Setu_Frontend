@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Typewriter } from "react-simple-typewriter";
 import { motion } from "framer-motion";
-import Footer from "../../components/landing/Footer";
 import { BookOpen, SquareArrowOutUpRight } from "lucide-react";
+import Footer from "../../components/landing/Footer";
 
 function Home() {
   const navigate = useNavigate();

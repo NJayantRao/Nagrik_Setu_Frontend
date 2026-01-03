@@ -1,8 +1,7 @@
-import React, { useEffect } from "react";
-import { X, Clock, CircleCheckBig, XCircle } from "lucide-react";
-import axios from "axios";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { X, CircleCheckBig, XCircle } from "lucide-react";
+import axios from "axios";
 import { notify } from "../../utils/notify";
 
 const UpdateStatusModal = ({ info, refresh }) => {

@@ -1,8 +1,8 @@
-import ComplaintCard from "../../users/cards/ComplaintCard";
-import { FileText, FileClock, FileCheck, FileX, Plus } from "lucide-react";
-import Complaints from "../complaints/Complaints";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { FileText, FileClock, FileCheck, FileX, Plus } from "lucide-react";
+import ComplaintCard from "../../users/cards/ComplaintCard";
+import Complaints from "../complaints/Complaints";
 import DeleteModal from "../../modals/DeleteModal";
 
 function UserMain({ filed, inProgress, resolved, rejected, complaintList }) {

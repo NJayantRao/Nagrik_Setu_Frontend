@@ -1,12 +1,4 @@
-import {
-  Search,
-  Bell,
-  User,
-  FileText,
-  FileClock,
-  FileCheck,
-  FileX,
-} from "lucide-react";
+import { FileText } from "lucide-react";
 
 function StatCard() {
   return (
