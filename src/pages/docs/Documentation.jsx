@@ -17,13 +17,18 @@ import {
   Menu,
   X,
   CircleQuestionMark,
+  MapPinCheck,
 } from "lucide-react";
 
 const sections = [
   { id: "introduction", label: "Introduction", icon: BookOpen },
   { id: "why-nagrik-setu", label: "Why Nagrik Setu", icon: CircleQuestionMark },
   { id: "getting-started", label: "Getting Started", icon: Rocket },
-  { id: "filing-complaint", label: "Filing a Complaint", icon: FileText },
+  {
+    id: "tracking-complaint-status",
+    label: "Tracking Complaint Status",
+    icon: MapPinCheck,
+  },
   { id: "user-roles", label: "User Roles", icon: Users },
   { id: "faqs", label: "FAQs", icon: HelpCircle },
 ];
@@ -699,14 +704,17 @@ const Documentation = () => {
             </section>
 
             {/* Filing a Complaint */}
-            <section id="filing-complaint" className="mb-16 scroll-mt-24">
+            <section
+              id="tracking-complaint-status"
+              className="mb-16 scroll-mt-24"
+            >
               <h2 className="font-heading text-3xl font-bold text-foreground mb-6 flex items-center gap-3">
-                <FileText className="w-8 h-8 text-primary" />
-                Filing a Complaint
+                <MapPinCheck className="w-10 h-10 text-primary" />
+                Tracking Complaint Status
               </h2>
               <p className="text-muted-foreground mb-8">
-                Learn how to file a complaint step by step. The process is
-                simple and takes less than 5 minutes.
+                Stay informed about your complaint's progress with our real-time
+                tracking system.
               </p>
 
               <div className="mb-4 flex justify-center">
