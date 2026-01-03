@@ -28,6 +28,7 @@ const UserForgotPassword = lazy(
   () => import("./pages/users/UserForgotpassword")
 );
 const UserResetPassword = lazy(() => import("./pages/users/UserResetPassword"));
+const UserDashboard = lazy(() => import("./pages/users/UserDashboard"));
 
 /**
  * User complaint-related pages
@@ -60,15 +61,12 @@ const Loader = lazy(() => import("./components/common/Loaders"));
 const AdminDashboard = lazy(() => import("./pages/admins/AdminDashboard"));
 const AdminDepartments = lazy(() => import("./pages/admins/AdminDepartments"));
 const AdminComplaints = lazy(() => import("./pages/admins/AdminComplaints"));
-const AdminUsersList = lazy(() => import("./pages/admins/AdminUsersList"));
 const AdminStaff = lazy(() => import("./pages/admins/AdminStaff"));
 const Adminsettings = lazy(() => import("./pages/admins/AdminSettings"));
 
 /**
- * User dashboard page
+ * Staff Login WIP page
  */
-const UserDashboard = lazy(() => import("./pages/users/UserDashboard"));
-
 const StaffLogin = lazy(() => import("./pages/staffs/StaffLogin.jsx"));
 
 function App() {
@@ -135,7 +133,6 @@ function App() {
             />
             <Route path="/admin/dashboard" element={<AdminDashboard />} />
             <Route path="/admin/complaints" element={<AdminComplaints />} />
-            <Route path="/admin/usersList" element={<AdminUsersList />} />
             <Route path="/admin/staff" element={<AdminStaff />} />
             <Route path="/admin/settings" element={<Adminsettings />} />
             <Route path="/admin/departments" element={<AdminDepartments />} />

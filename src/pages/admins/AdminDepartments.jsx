@@ -20,6 +20,13 @@ function AdminDepartments() {
   const [deparmentList, setDeparmentList] = useState([]);
   const [selectedDepartment, setSelectedDepartment] = useState("");
   const [refreshKey, setRefreshKey] = useState(false);
+  const [search, setSearch] = useState("");
+
+  const searchData = deparmentList.filter(
+    (curData) =>
+      curData.name?.toLowerCase().includes(search.toLowerCase()) ||
+      curData.description?.toLowerCase().includes(search.toLowerCase())
+  );
 
   useEffect(() => {
     async function fetchDepartments() {
@@ -107,11 +114,14 @@ function AdminDepartments() {
                 <input
                   type="text"
                   placeholder="Search departments"
+                  value={search}
                   className="w-full outline-none text-sm"
+                  onChange={(e) => {
+                    setSearch(e.target.value);
+                  }}
                 />
               </div>
             </div>
-            {/* Dummy Data*/}
             {/* ================= DEPARTMENT GRID ================= */}
             <motion.div
               className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
@@ -123,7 +133,7 @@ function AdminDepartments() {
                 },
               }}
             >
-              {deparmentList.map((ele, idx) => (
+              {searchData.map((ele, idx) => (
                 <motion.div
                   key={idx}
                   variants={{

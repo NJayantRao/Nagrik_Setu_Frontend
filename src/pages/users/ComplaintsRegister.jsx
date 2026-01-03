@@ -18,8 +18,6 @@ function ComplaintsRegister() {
     name,
     email,
     uniqueToken,
-    id,
-    setId,
     errorMsg,
     setErrorMsg,
     errorStatus,
