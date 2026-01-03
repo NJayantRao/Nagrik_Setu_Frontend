@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Typewriter } from "react-simple-typewriter";
 import { motion } from "framer-motion";
 import Footer from "../../components/landing/Footer";
+import { BookOpen, SquareArrowOutUpRight } from "lucide-react";
 
 function Home() {
   const navigate = useNavigate();
@@ -82,15 +83,31 @@ function Home() {
           <motion.div
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="mt-10"
+            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+            className="mt-10 flex justify-center"
           >
-            <button
-              onClick={() => navigate("/user/signup")}
-              className="bg-white text-[#1D4ED8] font-bold px-8 py-4 rounded-xl shadow-xl hover:shadow-2xl hover:scale-105 transition-all"
-            >
-              Get Started
-            </button>
+            <div className="flex flex-col sm:flex-row items-center gap-4">
+              {/* Primary CTA */}
+              <button
+                onClick={() => navigate("/user/signup")}
+                className="w-45 bg-white text-[#1D4ED8] font-bold px-6 py-3 rounded-xl shadow-lg 
+                 hover:shadow-2xl hover:scale-105 transition-all cursor-pointer flex justify-center items-center gap-2"
+              >
+                Get Started
+                <SquareArrowOutUpRight size={24} />
+              </button>
+
+              {/* Secondary CTA */}
+              <button
+                onClick={() => navigate("/documentation")}
+                className="w-45 bg-[#1D4ED8] text-white font-bold px-6 py-3 rounded-xl shadow-lg 
+                 hover:shadow-2xl hover:scale-105 transition-all cursor-pointer
+                 flex items-center justify-center gap-2"
+              >
+                <BookOpen size={28} />
+                Read Docs
+              </button>
+            </div>
           </motion.div>
         </div>
       </section>

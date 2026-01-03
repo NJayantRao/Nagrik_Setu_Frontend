@@ -16,6 +16,7 @@ const NoNavbarLayout = lazy(() => import("./layout/NoNavbarLayout"));
  */
 const Home = lazy(() => import("./pages/common/Home"));
 const ErrorPage = lazy(() => import("./pages/common/ErrorPage"));
+const Documentation = lazy(() => import("./pages/docs/Documentation"));
 
 /**
  * User authentication & profile pages
@@ -136,6 +137,7 @@ function App() {
             <Route path="/admin/staff" element={<AdminStaff />} />
             <Route path="/admin/settings" element={<Adminsettings />} />
             <Route path="/admin/departments" element={<AdminDepartments />} />
+            <Route path="/documentation" element={<Documentation />} />
             <Route path="*" element={<ErrorPage />} />
           </Route>
         </Routes>
