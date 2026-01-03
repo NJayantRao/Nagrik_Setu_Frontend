@@ -251,19 +251,6 @@ const Documentation = () => {
                 digital system.. Our mission is to make public service delivery
                 transparent, efficient and accountable.
               </p>
-
-              <div className="p-4 bg-[#6293c5]/2 border border-[#749ac1] rounded-lg flex gap-3">
-                <Info className="w-6 h-6 text-primary flex-shrink-0 mt-0.5" />
-                <div>
-                  <h4 className="font-semibold text-foreground mb-1">
-                    New to Nagrik Setu?
-                  </h4>
-                  <p className="text-sm text-muted-foreground">
-                    Start with the Getting Started section below to learn how to
-                    create your account and file your first complaint.
-                  </p>
-                </div>
-              </div>
             </section>
 
             {/* Why Nagrik Setu */}
@@ -276,8 +263,9 @@ const Documentation = () => {
               </div>
 
               <p className="text-[#676f7e] mb-8 leading-relaxed">
-                Before understanding the need for <strong>Nagrik Setu</strong>,
-                it is important to examine how grievance and complaint systems
+                Before understanding the need for{" "}
+                <strong className="text-[#141d2e]">Nagrik Setu</strong>, it is
+                important to examine how grievance and complaint systems
                 currently function across India and why they often fail
                 citizens.
               </p>
@@ -425,10 +413,22 @@ const Documentation = () => {
                 </p>
               </div>
             </section>
+            <div className="p-4 bg-[#6293c5]/2 border border-[#749ac1] rounded-lg flex gap-3 mb-8">
+              <Info className="w-6 h-6 text-primary flex-shrink-0 mt-0.5" />
+              <div>
+                <h4 className="font-semibold text-foreground mb-1">
+                  New to Nagrik Setu?
+                </h4>
+                <p className="text-sm text-muted-foreground">
+                  Start with the Getting Started section below to learn how to
+                  create your account and file your first complaint.
+                </p>
+              </div>
+            </div>
 
             {/* Getting Started */}
             <section id="getting-started" className="mb-16 scroll-mt-24">
-              <h2 className="font-heading text-3xl font-bold text-[#141d2e] mb-6 flex items-center gap-3">
+              <h2 className="font-heading text-3xl font-bold text-[#141d2e] mb-4 flex items-center gap-3">
                 <Rocket className="w-8 h-8 text-[#193366]" />
                 Getting Started
               </h2>
