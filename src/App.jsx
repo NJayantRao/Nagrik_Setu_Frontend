@@ -3,7 +3,6 @@ import { lazy, Suspense, useContext } from "react";
 import { UserDataContext } from "./context/UserContext";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Documentation from "./pages/docs/Documentation";
 
 /**
  * Lazy-loaded layout components
@@ -17,6 +16,7 @@ const NoNavbarLayout = lazy(() => import("./layout/NoNavbarLayout"));
  */
 const Home = lazy(() => import("./pages/common/Home"));
 const ErrorPage = lazy(() => import("./pages/common/ErrorPage"));
+const Documentation = lazy(() => import("./pages/docs/Documentation"));
 
 /**
  * User authentication & profile pages

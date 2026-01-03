@@ -172,7 +172,7 @@ const Documentation = () => {
                 <button
                   variant="ghost"
                   size="sm"
-                  className="gap-2 flex items-center"
+                  className="gap-2 flex items-center cursor-pointer"
                 >
                   <ArrowLeft className="w-6 h-6 hidden sm:inline" />
                   <span className="hidden sm:inline font-semibold">
@@ -240,7 +240,7 @@ const Documentation = () => {
           <div className="max-w-3xl mx-auto w-full">
             {/* Introduction */}
             <section id="introduction" className="mb-10 scroll-mt-24">
-              <h1 className="font-heading text-4xl lg:text-5xl font-bold text-[#141d2e] mb-6 text-center">
+              <h1 className="font-heading text-4xl lg:text-5xl font-bold text-[#141d2e] mb-6 text-center sm:text-left">
                 Welcome to Nagrik Setu
               </h1>
               <p className="text-lg text-[#676f7e] mb-8 leading-relaxed">
