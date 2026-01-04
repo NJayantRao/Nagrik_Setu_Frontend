@@ -1,6 +1,6 @@
 import LeftSection from "../common/LeftSection";
 import Button from "../../components/ui/buttons/Button";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserDataContext } from "../../context/UserContext";
 import {
@@ -16,6 +16,18 @@ function Navbar() {
   const { isLoginClicked, setIsLoginClicked } = useContext(UserDataContext);
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 640);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <div className="bg-[#1D4ED8] w-full h-12 sm:h-20 px-2 py-3 flex items-center justify-between sm:justify-around shadow-xl text-gray-300 text-xl font-bold sticky top-0 z-50">
       <div className="sm:hidden flex gap-3">
@@ -103,10 +115,10 @@ function Navbar() {
         <h1>Contact Us</h1>
       </div>
       <div className=" sm:mr-2 relative ">
-        <Button />
+        <Button isMobile={isMobile} />
         <div
           className="sm:w-60 w-40 absolute bg-gray-200 right-0 text-sm sm:text-lg flex flex-col gap-2 rounded-md shadow-xl p-1 sm:p-5 text-black hover:cursor-pointer z-50"
-          style={{ display: isLoginClicked ? "block" : "none" }}
+          style={{ display: isLoginClicked && !isMobile ? "block" : "none" }}
         >
           <div
             className=" hover:bg-gray-100 px-3 py-1"
