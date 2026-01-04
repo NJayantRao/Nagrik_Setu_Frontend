@@ -10,20 +10,14 @@ import Errors from "../../components/common/Errors";
 function UserResetPassword() {
   const navigate = useNavigate();
   const location = useLocation();
-  const {
-    setUniqueToken,
-    uniqueToken,
-    password,
-    setPassword,
-    errorMsg,
-    setErrorMsg,
-    errorStatus,
-    setErrorStatus,
-  } = useContext(UserDataContext);
+  const { setUniqueToken, uniqueToken, password, setPassword } =
+    useContext(UserDataContext);
   const [isLoading, setIsLoading] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
   const [otp, setOtp] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [errorMsg, setErrorMsg] = useState(false);
+  const [errorStatus, setErrorStatus] = useState(false);
 
   async function submitHandler(e) {
     e.preventDefault();

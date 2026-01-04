@@ -11,20 +11,8 @@ import DeleteModal from "../../components/modals/DeleteModal";
 
 function ComplaintsRegister() {
   const navigate = useNavigate();
-  const {
-    setName,
-    setEmail,
-    setUniqueToken,
-    name,
-    email,
-    uniqueToken,
-    errorMsg,
-    setErrorMsg,
-    errorStatus,
-    setErrorStatus,
-    isDisabled,
-    setIsDisabled,
-  } = useContext(UserDataContext);
+  const { setName, setEmail, setUniqueToken, name, email, uniqueToken } =
+    useContext(UserDataContext);
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [image, setImage] = useState(null);
@@ -32,6 +20,9 @@ function ComplaintsRegister() {
   const [departmentId, setDepartmentId] = useState("");
   const [departmentList, setDepartmentList] = useState([]);
   const [registered, setRegistered] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
+  const [errorMsg, setErrorMsg] = useState(false);
+  const [errorStatus, setErrorStatus] = useState(false);
 
   const submitHandler = async (e) => {
     e.preventDefault();

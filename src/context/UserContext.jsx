@@ -11,9 +11,6 @@ function UserContext(props) {
   const [phone, setPhone] = useState("");
   const [uniqueToken, setUniqueToken] = useState("");
   const [id, setId] = useState("");
-  const [errorStatus, setErrorStatus] = useState(null);
-  const [errorMsg, setErrorMsg] = useState("");
-  const [isDisabled, setIsDisabled] = useState(false);
   return (
     <div>
       <UserDataContext.Provider
@@ -34,12 +31,6 @@ function UserContext(props) {
           uniqueToken,
           id,
           setId,
-          errorMsg,
-          setErrorMsg,
-          errorStatus,
-          setErrorStatus,
-          isDisabled,
-          setIsDisabled,
         }}
       >
         {props.children}

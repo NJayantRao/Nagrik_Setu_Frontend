@@ -7,16 +7,11 @@ import Errors from "../../components/common/Errors";
 
 function UserForgotPassword() {
   const navigate = useNavigate();
-  const {
-    setUniqueToken,
-    uniqueToken,
-    errorMsg,
-    setErrorMsg,
-    errorStatus,
-    setErrorStatus,
-  } = useContext(UserDataContext);
+  const { setUniqueToken, uniqueToken } = useContext(UserDataContext);
   const [isSending, setIsSending] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
+  const [errorMsg, setErrorMsg] = useState(false);
+  const [errorStatus, setErrorStatus] = useState(false);
 
   async function submitHandler(e) {
     e.preventDefault();

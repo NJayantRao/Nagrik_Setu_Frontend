@@ -19,14 +19,12 @@ function UserSignUpPage() {
     password,
     address,
     phone,
-    errorMsg,
-    setErrorMsg,
-    errorStatus,
-    setErrorStatus,
   } = useContext(UserDataContext);
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
+  const [errorMsg, setErrorMsg] = useState(false);
+  const [errorStatus, setErrorStatus] = useState(false);
 
   const navigate = useNavigate();
 

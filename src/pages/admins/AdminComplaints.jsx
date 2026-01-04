@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import {
   ChevronLeft,
@@ -10,7 +10,6 @@ import {
   Search,
 } from "lucide-react";
 import axios from "axios";
-import { AdminDataContext } from "../../context/AdminContext";
 import { notify } from "../../utils/notify";
 import { formatDateIST } from "../../utils/formatTime";
 
@@ -25,9 +24,6 @@ import Loader from "../../components/common/Loaders";
 import Errors from "../../components/common/Errors";
 
 function AdminComplaints() {
-  const { errorStatus, setErrorStatus, errorMsg, setErrorMsg } =
-    useContext(AdminDataContext);
-
   const [search, setSearch] = useState("");
   const [countInProgress, setCountInProgress] = useState(0);
   const [countResolved, setCountResolved] = useState(0);
@@ -38,6 +34,8 @@ function AdminComplaints() {
   const [currIndex, setCurrIndex] = useState(1);
   const [selectedComplaint, setSelectedComplaint] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [errorMsg, setErrorMsg] = useState(false);
+  const [errorStatus, setErrorStatus] = useState(false);
 
   const rowsPerPage = 10;
   const startIndex = (currIndex - 1) * rowsPerPage;

@@ -18,15 +18,13 @@ function AdminSignUpPage() {
     setAdminAddress,
     adminPhone,
     setAdminPhone,
-    setErrorMsg,
-    errorMsg,
-    setErrorStatus,
-    errorStatus,
   } = useContext(AdminDataContext);
 
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
+  const [errorMsg, setErrorMsg] = useState(false);
+  const [errorStatus, setErrorStatus] = useState(false);
 
   const navigate = useNavigate();
 

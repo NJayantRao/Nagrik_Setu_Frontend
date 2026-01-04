@@ -7,16 +7,11 @@ import Errors from "../../components/common/Errors";
 
 function AdminForgotPassword() {
   const navigate = useNavigate();
-  const {
-    adminUniqueId,
-    setAdminUniqueId,
-    setErrorMsg,
-    errorMsg,
-    setErrorStatus,
-    errorStatus,
-  } = useContext(AdminDataContext);
+  const { adminUniqueId, setAdminUniqueId } = useContext(AdminDataContext);
   const [isLoading, setIsLoading] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
+  const [errorMsg, setErrorMsg] = useState(false);
+  const [errorStatus, setErrorStatus] = useState(false);
 
   async function submitHandler(e) {
     e.preventDefault();

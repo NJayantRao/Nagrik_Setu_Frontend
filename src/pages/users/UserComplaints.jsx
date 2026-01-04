@@ -18,10 +18,6 @@ function UserComplaints() {
     email,
     uniqueToken,
     setId,
-    errorMsg,
-    setErrorMsg,
-    errorStatus,
-    setErrorStatus,
   } = useContext(UserDataContext);
   const [countFiled, setCountFiled] = useState(0);
   const [countInProgress, setCountInProgress] = useState(0);
@@ -29,6 +25,9 @@ function UserComplaints() {
   const [countRejected, setCountRejected] = useState(0);
   const [complaintList, setComplaintList] = useState([]);
   const [currIndex, setCurrIndex] = useState(1);
+  const [errorMsg, setErrorMsg] = useState(false);
+  const [errorStatus, setErrorStatus] = useState(false);
+
   // const [refreshKey,setRefreshKey]= useState(false)
 
   useEffect(() => {

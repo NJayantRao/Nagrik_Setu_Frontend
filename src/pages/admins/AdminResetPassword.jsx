@@ -10,20 +10,14 @@ import Errors from "../../components/common/Errors";
 function AdminResetPassword() {
   const navigate = useNavigate();
   const location = useLocation();
-  const {
-    setAdminUniqueId,
-    adminUniqueId,
-    adminPassword,
-    setAdminPassword,
-    setErrorMsg,
-    errorMsg,
-    setErrorStatus,
-    errorStatus,
-  } = useContext(AdminDataContext);
+  const { setAdminUniqueId, adminUniqueId, adminPassword, setAdminPassword } =
+    useContext(AdminDataContext);
   const [isLoading, setIsLoading] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
   const [otp, setOtp] = useState("");
   const [showPassword, setShowPassword] = useState(false);
+  const [errorMsg, setErrorMsg] = useState(false);
+  const [errorStatus, setErrorStatus] = useState(false);
 
   async function submitHandler(e) {
     e.preventDefault();

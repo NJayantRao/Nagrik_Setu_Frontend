@@ -17,14 +17,7 @@ import Errors from "../../components/common/Errors";
 function AdminDashboard() {
   const navigate = useNavigate();
 
-  const {
-    adminName,
-    setAdminName,
-    errorStatus,
-    setErrorStatus,
-    errorMsg,
-    setErrorMsg,
-  } = useContext(AdminDataContext);
+  const { adminName, setAdminName } = useContext(AdminDataContext);
 
   const [isLoading, setIsLoading] = useState(false);
   const [countFiled, setCountFiled] = useState(0);
@@ -33,6 +26,8 @@ function AdminDashboard() {
   const [countRejected, setCountRejected] = useState(0);
   const [totalComplaints, seTotalComplaints] = useState(0);
   const [complaintsList, setcomplaintsList] = useState([]);
+  const [errorMsg, setErrorMsg] = useState(false);
+  const [errorStatus, setErrorStatus] = useState(false);
 
   const statCardInfo = [
     {
@@ -90,7 +85,8 @@ function AdminDashboard() {
             headers: { Authorization: `Bearer ${token}` },
           }
         );
-        setAdminName(response.data.name);
+        const name = response.data.name;
+        setAdminName(name);
         setIsLoading(false);
         localStorage.setItem("adminName", JSON.stringify(adminName));
       } catch (error) {

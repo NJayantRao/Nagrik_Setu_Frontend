@@ -1,9 +1,8 @@
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Building2, Search } from "lucide-react";
 import axios from "axios";
 import { notify } from "../../utils/notify";
-import { AdminDataContext } from "../../context/AdminContext";
 import AdminSidebar from "../../components/admins/layout/AdminSidebar";
 import SearchBar from "../../components/admins/layout/SearchBar";
 import DepartmentCard from "../../components/ui/cards/DepartmentCard";
@@ -12,15 +11,14 @@ import Loader from "../../components/common/Loaders";
 import Errors from "../../components/common/Errors";
 
 function AdminDepartments() {
-  const { errorStatus, setErrorStatus, errorMsg, setErrorMsg } =
-    useContext(AdminDataContext);
-
   const adminName = JSON.parse(localStorage.getItem("adminName"));
   const [isLoading, setIsLoading] = useState(false);
   const [deparmentList, setDeparmentList] = useState([]);
   const [selectedDepartment, setSelectedDepartment] = useState("");
   const [refreshKey, setRefreshKey] = useState(false);
   const [search, setSearch] = useState("");
+  const [errorMsg, setErrorMsg] = useState(false);
+  const [errorStatus, setErrorStatus] = useState(false);
 
   const searchData = deparmentList.filter(
     (curData) =>

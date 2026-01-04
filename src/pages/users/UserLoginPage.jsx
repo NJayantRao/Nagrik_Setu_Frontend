@@ -9,19 +9,13 @@ import Errors from "../../components/common/Errors";
 
 function UserLoginPage() {
   const navigate = useNavigate();
-  const {
-    password,
-    setPassword,
-    uniqueToken,
-    setUniqueToken,
-    errorMsg,
-    setErrorMsg,
-    errorStatus,
-    setErrorStatus,
-  } = useContext(UserDataContext);
+  const { password, setPassword, uniqueToken, setUniqueToken } =
+    useContext(UserDataContext);
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
+  const [errorMsg, setErrorMsg] = useState(false);
+  const [errorStatus, setErrorStatus] = useState(false);
 
   async function submitHandler(e) {
     e.preventDefault();

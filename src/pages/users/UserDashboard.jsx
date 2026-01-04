@@ -8,11 +8,6 @@ import UserMain from "../../components/users/layout/UserMain";
 import Errors from "../../components/common/Errors";
 
 function UserDashboard() {
-  const [countFiled, setCountFiled] = useState(0);
-  const [countInProgress, setCountInProgress] = useState(0);
-  const [countResolved, setCountResolved] = useState(0);
-  const [countRejected, setCountRejected] = useState(0);
-  const [complaintList, setComplaintList] = useState([]);
   const {
     setName,
     setEmail,
@@ -23,11 +18,15 @@ function UserDashboard() {
     email,
     uniqueToken,
     setId,
-    errorMsg,
-    setErrorMsg,
-    errorStatus,
-    setErrorStatus,
   } = useContext(UserDataContext);
+  const [countFiled, setCountFiled] = useState(0);
+  const [countInProgress, setCountInProgress] = useState(0);
+  const [countResolved, setCountResolved] = useState(0);
+  const [countRejected, setCountRejected] = useState(0);
+  const [complaintList, setComplaintList] = useState([]);
+  const [errorMsg, setErrorMsg] = useState(false);
+  const [errorStatus, setErrorStatus] = useState(false);
+
   useEffect(() => {
     async function fetchUserInfo() {
       try {

@@ -9,19 +9,14 @@ import Errors from "../../components/common/Errors";
 
 function AdminLoginPage() {
   const navigate = useNavigate();
-  const {
-    adminPassword,
-    setAdminPassword,
-    adminUniqueId,
-    setAdminUniqueId,
-    setErrorMsg,
-    errorMsg,
-    setErrorStatus,
-    errorStatus,
-  } = useContext(AdminDataContext);
+  const { adminPassword, setAdminPassword, adminUniqueId, setAdminUniqueId } =
+    useContext(AdminDataContext);
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [isDisabled, setIsDisabled] = useState(false);
+  const [errorMsg, setErrorMsg] = useState(false);
+  const [errorStatus, setErrorStatus] = useState(false);
+
   async function submitHandler(e) {
     e.preventDefault();
     // console.log(adminUniqueId, adminPassword);
