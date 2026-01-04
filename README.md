@@ -216,3 +216,7 @@ If you’d like to improve the frontend:
 4. Submit a pull request with a clear description
 
 All UI/UX, performance, and accessibility improvements are highly appreciated.
+
+## LICENSE
+
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
